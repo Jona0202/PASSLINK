@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — PassLink LATAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter']},colors:{navy:'#0f1b3d',accent:'#6366f1'}}}}</script>
+<style>
+body{font-family:'Inter',sans-serif;background:#f1f5f9;}
+.sidebar{width:240px;min-height:100vh;background:linear-gradient(180deg,#0f1b3d 0%,#1e3a6e 100%);}
+.nav-link{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;color:rgba(255,255,255,0.6);font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;}
+.nav-link:hover,.nav-link.active{background:rgba(99,102,241,0.25);color:#fff;}
+.nav-link.active{background:rgba(99,102,241,0.35);}
+.card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.btn-primary{background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;font-weight:700;padding:10px 20px;border-radius:10px;border:none;cursor:pointer;font-size:14px;transition:all .2s;}
+.btn-primary:hover{opacity:.9;transform:scale(1.02);}
+.btn-danger{background:#fee2e2;color:#dc2626;font-weight:600;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-size:13px;}
+.btn-edit{background:#ede9fe;color:#6366f1;font-weight:600;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;font-size:13px;}
+.form-input{width:100%;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 12px;font-size:14px;font-family:'Inter';outline:none;transition:border .2s;}
+.form-input:focus{border-color:#6366f1;}
+.form-label{font-size:13px;font-weight:600;color:#374151;margin-bottom:4px;display:block;}
+#login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0f1b3d,#1e3a6e);display:flex;align-items:center;justify-content:center;z-index:999;}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fff;border-radius:20px;padding:28px;max-width:560px;width:94%;max-height:90vh;overflow-y:auto;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
+.stock-available{background:#dcfce7;color:#16a34a;}
+.stock-low{background:#fef9c3;color:#ca8a04;}
+.stock-out{background:#fee2e2;color:#dc2626;}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.15);border-radius:24px;padding:40px;width:340px;text-align:center;">
+    <div style="width:52px;height:52px;background:linear-gradient(135deg,#6366f1,#a855f7);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px;color:#fff;font-weight:900;">P</div>
+    <h1 style="color:#fff;font-size:20px;font-weight:800;margin-bottom:4px;">Panel Admin</h1>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:28px;">PassLink LATAM</p>
+    <input id="pw-input" type="password" placeholder="Contraseña de acceso" style="width:100%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px 14px;color:#fff;font-size:14px;font-family:'Inter';outline:none;box-sizing:border-box;margin-bottom:12px;" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()" style="width:100%;background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;font-weight:700;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:14px;">Ingresar</button>
+    <p id="login-err" style="color:#f87171;font-size:12px;margin-top:10px;display:none;">Contraseña incorrecta</p>
+    <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:16px;">Default: passlink2026</p>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div id="main-app" style="display:none;" class="min-h-screen flex flex-col md:flex-row">
+  
+  <!-- Mobile Header -->
+  <header class="md:hidden bg-navy text-white px-4 py-3 flex items-center justify-between sticky top-0 z-20 shadow-md">
+    <div class="flex items-center gap-2">
+      <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-black text-xs">P</div>
+      <span class="font-extrabold text-sm tracking-tight">PassLink Admin</span>
+    </div>
+    <button onclick="toggleMobileSidebar()" class="w-9 h-9 flex items-center justify-center rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
+      <i class="fa-solid fa-bars text-lg"></i>
+    </button>
+  </header>
+
+  <!-- Sidebar Mobile Backdrop -->
+  <div id="sidebar-backdrop" onclick="toggleMobileSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-20 hidden md:hidden"></div>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar flex flex-col p-4 gap-1 fixed top-0 left-0 h-full z-30 transition-transform duration-300 -translate-x-full md:translate-x-0">
+    <div class="flex items-center justify-between mb-6 px-2 pt-2">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-black text-sm">P</div>
+        <span class="text-white font-extrabold text-sm">PassLink <span style="color:#818cf8">Admin</span></span>
+      </div>
+      <!-- Close button mobile only -->
+      <button onclick="toggleMobileSidebar()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="nav-link active" onclick="selectSection('dashboard')" id="nav-dashboard"><i class="fa-solid fa-chart-pie w-4"></i> Dashboard</div>
+    <div class="nav-link" onclick="selectSection('products')" id="nav-products"><i class="fa-solid fa-box w-4"></i> Productos</div>
+    <div class="nav-link" onclick="selectSection('config')" id="nav-config"><i class="fa-solid fa-gear w-4"></i> Configuración</div>
+    <div class="mt-auto">
+      <a href="index.html" target="_blank" class="nav-link"><i class="fa-solid fa-eye w-4"></i> Ver Tienda</a>
+      <div class="nav-link" onclick="doLogout()"><i class="fa-solid fa-right-from-bracket w-4"></i> Cerrar sesión</div>
+    </div>
+  </aside>
+
+  <!-- Content Area -->
+  <main class="flex-1 md:ml-[240px] p-4 md:p-8" id="main-content">
+    
+    <!-- DASHBOARD -->
+    <div id="section-dashboard">
+      <h2 class="text-2xl font-black text-navy mb-6">Dashboard</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6" id="stats-grid"></div>
+      <div class="card" id="recent-table"></div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div id="section-products" style="display:none;">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <h2 class="text-2xl font-black text-navy">Productos</h2>
+        <button class="btn-primary flex items-center justify-center gap-2 self-start sm:self-auto" onclick="openForm()">
+          <i class="fa-solid fa-plus"></i> Nuevo Producto
+        </button>
+      </div>
+      <div class="card overflow-hidden">
+        <div id="product-table"></div>
+      </div>
+    </div>
+
+    <!-- CONFIG -->
+    <div id="section-config" style="display:none;">
+      <h2 class="text-2xl font-black text-navy mb-6">Configuración</h2>
+      <div class="card max-w-lg">
+        <h3 class="font-bold text-navy mb-4">Número de WhatsApp</h3>
+        <label class="form-label">Número (con código de país, sin +)</label>
+        <input class="form-input mb-4" id="cfg-wa" placeholder="51900000000">
+        <h3 class="font-bold text-navy mb-4 mt-4">Cambiar Contraseña Admin</h3>
+        <label class="form-label">Nueva contraseña</label>
+        <input class="form-input mb-2" id="cfg-pw" type="password" placeholder="Nueva contraseña">
+        <label class="form-label">Confirmar contraseña</label>
+        <input class="form-input mb-4" id="cfg-pw2" type="password" placeholder="Repetir contraseña">
+        <button class="btn-primary" onclick="saveConfig()"><i class="fa-solid fa-floppy-disk mr-1"></i> Guardar Cambios</button>
+        <p id="cfg-msg" class="text-sm text-green-600 font-semibold mt-3" style="display:none;"></p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- PRODUCT FORM MODAL -->
+<div class="modal-overlay" id="form-modal">
+  <div class="modal-box">
+    <div class="flex items-center justify-between mb-5">
+      <h3 class="text-lg font-extrabold text-navy" id="form-title">Nuevo Producto</h3>
+      <button onclick="closeForm()" class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"><i class="fa-solid fa-xmark text-sm"></i></button>
+    </div>
+    <div class="grid grid-cols-2 gap-3">
+      <div class="col-span-2"><label class="form-label">Nombre del Producto *</label><input class="form-input" id="f-name" placeholder="ej. Netflix Premium"></div>
+      <div><label class="form-label">Subtítulo</label><input class="form-input" id="f-subtitle" placeholder="1 Perfil · 4K"></div>
+      <div>
+        <label class="form-label">Categoría *</label>
+        <select class="form-input" id="f-cat">
+          <option value="ai">Inteligencia Artificial</option>
+          <option value="streaming">Streaming</option>
+          <option value="software">Software</option>
+        </select>
+      </div>
+      <div><label class="form-label">Precio S/. *</label><input class="form-input" id="f-pen" type="number" step="0.01" placeholder="18.00"></div>
+      <div><label class="form-label">Precio US$ *</label><input class="form-input" id="f-usd" type="number" step="0.01" placeholder="5.20"></div>
+      <div class="col-span-2"><label class="form-label">URL de Imagen</label><input class="form-input" id="f-img" placeholder="https://... o assets/mi-imagen.png"></div>
+      <div><label class="form-label">Badge Text</label><input class="form-input" id="f-badge" placeholder="Popular"></div>
+      <div>
+        <label class="form-label">Stock</label>
+        <select class="form-input" id="f-stock">
+          <option value="available">Disponible</option>
+          <option value="low">Últimas unidades</option>
+          <option value="out">Agotado</option>
+        </select>
+      </div>
+      <div><label class="form-label">Ícono FA</label><input class="form-input" id="f-icon" placeholder="fa-solid fa-film"></div>
+      <div>
+        <label class="form-label">Gradiente</label>
+        <select class="form-input" id="f-grad">
+          <option value="from-blue-500 to-cyan-400">Azul → Cyan</option>
+          <option value="from-emerald-500 to-teal-400">Verde → Teal</option>
+          <option value="from-red-500 to-rose-400">Rojo → Rosa</option>
+          <option value="from-indigo-500 to-blue-400">Índigo → Azul</option>
+          <option value="from-purple-500 to-pink-400">Morado → Rosa</option>
+          <option value="from-orange-500 to-yellow-400">Naranja → Amarillo</option>
+        </select>
+      </div>
+      <div class="col-span-2"><label class="form-label">Descripción</label><textarea class="form-input" id="f-desc" rows="3" placeholder="Descripción detallada del producto..."></textarea></div>
+      <div class="col-span-2">
+        <label class="form-label">Características (una por línea)</label>
+        <textarea class="form-input" id="f-feats" rows="4" placeholder="Característica 1&#10;Característica 2&#10;Característica 3"></textarea>
+      </div>
+      <div class="col-span-2 flex items-center gap-2">
+        <input type="checkbox" id="f-highlight" class="w-4 h-4 accent-indigo-500">
+        <label for="f-highlight" class="form-label mb-0">Marcar como Destacado</label>
+      </div>
+    </div>
+    <div class="flex gap-3 mt-6">
+      <button class="btn-primary flex-1" onclick="saveProduct()"><i class="fa-solid fa-floppy-disk mr-1"></i> Guardar</button>
+      <button onclick="closeForm()" style="flex:1;background:#f1f5f9;color:#374151;font-weight:600;padding:10px;border-radius:10px;border:none;cursor:pointer;font-size:14px;">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ADMIN_PW_KEY='passlink_admin_pw';
+const PRODUCTS_KEY='passlink_products';
+const CONFIG_KEY='passlink_config';
+
+const DEFAULT_PRODUCTS=[
+  {id:"gemini-pro",category:"ai",name:"Gemini Pro 3.5",subtitle:"18 Meses · Cuenta Personal",description:"Obtén acceso completo a Gemini Pro 3.5 directamente en tu cuenta personal de Google. Sin invitaciones, sin cuentas compartidas. 5 TB de almacenamiento y Workspace por 18 meses.",imageUrl:"assets/gemini.png",features:["100% Cuenta Personal (No invitación)","18 Meses de acceso continuo","5 TB Cloud Storage incluido","Workspace Integration completa"],pricePEN:45,priceUSD:13.00,badgeText:"Popular",iconClass:"fa-solid fa-wand-magic-sparkles",gradient:"from-blue-500 to-cyan-400",stock:"available",highlighted:true},
+  {id:"chatgpt-plus",category:"ai",name:"ChatGPT Plus",subtitle:"Perfil Privado · Acceso Total",description:"Accede a ChatGPT Plus mediante perfil privado. GPT-4o, DALL-E 3 y acceso ilimitado 24/7.",imageUrl:"assets/chatgpt.png",features:["Perfil Privado exclusivo","GPT-4o completo sin límites","DALL-E 3 integrado","Acceso ilimitado 24/7"],pricePEN:40,priceUSD:11.50,badgeText:"Top IA",iconClass:"fa-solid fa-robot",gradient:"from-emerald-500 to-teal-400",stock:"available",highlighted:false},
+  {id:"netflix-premium",category:"streaming",name:"Netflix Premium",subtitle:"1 Perfil · Ultra HD 4K",description:"Netflix 4K en perfil privado y personalizado. Catálogo completo sin restricciones.",imageUrl:"assets/netflix.png",features:["1 Perfil 4K UHD privado","Calidad Ultra HD garantizada","Perfil Personalizado","Catálogo completo sin restricción"],pricePEN:18,priceUSD:5.20,badgeText:"Oferta",iconClass:"fa-solid fa-film",gradient:"from-red-500 to-rose-400",stock:"available",highlighted:false},
+  {id:"disney-star",category:"streaming",name:"Disney+ & Star+",subtitle:"1 Perfil Combo · Ilimitado",description:"Combo Disney+ y Star+. Series, películas y deportes en vivo en un solo perfil privado.",imageUrl:"assets/disney.png",features:["1 Perfil Combo completo","Acceso ilimitado al catálogo","Series y Deportes en vivo","Contenido exclusivo Star+"],pricePEN:15,priceUSD:4.30,badgeText:"Combo",iconClass:"fa-solid fa-hat-wizard",gradient:"from-indigo-500 to-blue-400",stock:"low",highlighted:false}
+];
+
+function getProducts(){try{const s=localStorage.getItem(PRODUCTS_KEY);return s?JSON.parse(s):DEFAULT_PRODUCTS;}catch{return DEFAULT_PRODUCTS;}}
+function saveProducts(p){localStorage.setItem(PRODUCTS_KEY,JSON.stringify(p));}
+function getConfig(){try{const c=localStorage.getItem(CONFIG_KEY);return c?JSON.parse(c):{whatsapp:'51900000000'};}catch{return {whatsapp:'51900000000'};}}
+function saveConfigData(c){localStorage.setItem(CONFIG_KEY,JSON.stringify(c));}
+function getPwHash(){return localStorage.getItem(ADMIN_PW_KEY)||'00ae1654e5e0c926e7be8a7e414291b6194873c085079006ee3d2a88c90f1b68';}
+
+async function sha256(msg){
+  const b=new TextEncoder().encode(msg);
+  const h=await crypto.subtle.digest('SHA-256',b);
+  return Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin(){
+  const pw=document.getElementById('pw-input').value;
+  const h=await sha256(pw);
+  if(h===getPwHash()){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('main-app').style.display='flex';
+    renderDashboard();
+  } else {
+    document.getElementById('login-err').style.display='block';
+  }
+}
+
+function doLogout(){
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('pw-input').value='';
+  // Asegurar cerrar sidebar móvil al salir
+  const sb = document.getElementById('sidebar');
+  const bd = document.getElementById('sidebar-backdrop');
+  sb.classList.add('-translate-x-full');
+  bd.classList.add('hidden');
+}
+
+// Sidebar móvil toggle
+function toggleMobileSidebar() {
+  const sb = document.getElementById('sidebar');
+  const bd = document.getElementById('sidebar-backdrop');
+  const isHidden = sb.classList.contains('-translate-x-full');
+  if (isHidden) {
+    sb.classList.remove('-translate-x-full');
+    bd.classList.remove('hidden');
+  } else {
+    sb.classList.add('-translate-x-full');
+    bd.classList.add('hidden');
+  }
+}
+
+function selectSection(name){
+  showSection(name);
+  // Cerrar sidebar móvil después de seleccionar una sección
+  const sb = document.getElementById('sidebar');
+  const bd = document.getElementById('sidebar-backdrop');
+  sb.classList.add('-translate-x-full');
+  bd.classList.add('hidden');
+}
+
+function showSection(name){
+  ['dashboard','products','config'].forEach(s=>{
+    document.getElementById('section-'+s).style.display=s===name?'block':'none';
+    const n=document.getElementById('nav-'+s);
+    if(n){n.classList.toggle('active',s===name);}
+  });
+  if(name==='products')renderProductTable();
+  if(name==='dashboard')renderDashboard();
+  if(name==='config')loadConfig();
+}
+
+function renderDashboard(){
+  const p=getProducts();
+  const ai=p.filter(x=>x.category==='ai').length;
+  const st=p.filter(x=>x.category==='streaming').length;
+  const avail=p.filter(x=>x.stock==='available').length;
+  document.getElementById('stats-grid').innerHTML=`
+    <div class="card text-center"><div class="text-3xl font-black text-accent mb-1">${p.length}</div><div class="text-sm text-gray-500 font-semibold">Total Productos</div></div>
+    <div class="card text-center"><div class="text-3xl font-black text-blue-500 mb-1">${ai}</div><div class="text-sm text-gray-500 font-semibold">Productos IA</div></div>
+    <div class="card text-center"><div class="text-3xl font-black text-green-500 mb-1">${avail}</div><div class="text-sm text-gray-500 font-semibold">Disponibles</div></div>`;
+  document.getElementById('recent-table').innerHTML=`
+    <h3 class="font-bold text-navy mb-4">Resumen de Productos</h3>
+    <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-2">Producto</th><th class="pb-2">Cat.</th><th class="pb-2">S/.</th><th class="pb-2">US$</th><th class="pb-2">Stock</th></tr></thead><tbody>${p.map(x=>`<tr class="border-b border-gray-50"><td class="py-2 font-semibold text-navy">${x.name}</td><td class="py-2 text-gray-400">${x.category}</td><td class="py-2 font-bold">S/. ${x.pricePEN}</td><td class="py-2 text-gray-500">$${x.priceUSD}</td><td class="py-2"><span class="badge ${x.stock==='available'?'stock-available':x.stock==='low'?'stock-low':'stock-out'}">${x.stock}</span></td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function renderProductTable(){
+  const p=getProducts();
+  document.getElementById('product-table').innerHTML=`
+    <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-3 pr-4">Imagen</th><th class="pb-3 pr-4">Producto</th><th class="pb-3 pr-4">Precio</th><th class="pb-3 pr-4">Stock</th><th class="pb-3">Acciones</th></tr></thead><tbody>${p.map((x,i)=>`
+    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+      <td class="py-3 pr-4"><img src="${x.imageUrl}" alt="${x.name}" class="w-14 h-10 object-cover rounded-lg" onerror="this.style.display='none'"></td>
+      <td class="py-3 pr-4"><div class="font-bold text-navy">${x.name}</div><div class="text-xs text-gray-400">${x.subtitle}</div></td>
+      <td class="py-3 pr-4"><div class="font-bold">S/. ${x.pricePEN}</div><div class="text-xs text-gray-400">US$ ${x.priceUSD}</div></td>
+      <td class="py-3 pr-4">
+        <select class="text-xs border border-gray-200 rounded-lg px-2 py-1" onchange="updateStock('${x.id}',this.value)">
+          <option value="available" ${x.stock==='available'?'selected':''}>Disponible</option>
+          <option value="low" ${x.stock==='low'?'selected':''}>Últimas</option>
+          <option value="out" ${x.stock==='out'?'selected':''}>Agotado</option>
+        </select>
+      </td>
+      <td class="py-3">
+        <button class="btn-edit mr-2" onclick="openForm('${x.id}')"><i class="fa-solid fa-pen"></i> Editar</button>
+        <button class="btn-danger" onclick="deleteProduct('${x.id}')"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('')}</tbody></table></div>`;
+}
+
+function updateStock(id,val){
+  const p=getProducts();
+  const idx=p.findIndex(x=>x.id===id);
+  if(idx>=0){p[idx].stock=val;saveProducts(p);}
+}
+
+function deleteProduct(id){
+  if(!confirm('¿Eliminar este producto?'))return;
+  const p=getProducts().filter(x=>x.id!==id);
+  saveProducts(p);
+  renderProductTable();
+  renderDashboard();
+}
+
+let editId=null;
+function openForm(id){
+  editId=id||null;
+  document.getElementById('form-title').textContent=id?'Editar Producto':'Nuevo Producto';
+  if(id){
+    const p=getProducts().find(x=>x.id===id);
+    if(p){
+      document.getElementById('f-name').value=p.name||'';
+      document.getElementById('f-subtitle').value=p.subtitle||'';
+      document.getElementById('f-cat').value=p.category||'ai';
+      document.getElementById('f-pen').value=p.pricePEN||'';
+      document.getElementById('f-usd').value=p.priceUSD||'';
+      document.getElementById('f-img').value=p.imageUrl||'';
+      document.getElementById('f-badge').value=p.badgeText||'';
+      document.getElementById('f-stock').value=p.stock||'available';
+      document.getElementById('f-icon').value=p.iconClass||'';
+      document.getElementById('f-grad').value=p.gradient||'from-blue-500 to-cyan-400';
+      document.getElementById('f-desc').value=p.description||'';
+      document.getElementById('f-feats').value=(p.features||[]).join('\n');
+      document.getElementById('f-highlight').checked=!!p.highlighted;
+    }
+  } else {
+    ['f-name','f-subtitle','f-pen','f-usd','f-img','f-badge','f-icon','f-desc','f-feats'].forEach(id=>document.getElementById(id).value='');
+    document.getElementById('f-cat').value='ai';
+    document.getElementById('f-stock').value='available';
+    document.getElementById('f-grad').value='from-blue-500 to-cyan-400';
+    document.getElementById('f-highlight').checked=false;
+  }
+  document.getElementById('form-modal').classList.add('open');
+}
+function closeModal(){document.getElementById('form-modal').classList.remove('open');}
+
+function saveProduct(){
+  const name=document.getElementById('f-name').value.trim();
+  const pen=parseFloat(document.getElementById('f-pen').value);
+  const usd=parseFloat(document.getElementById('f-usd').value);
+  if(!name||isNaN(pen)||isNaN(usd)){alert('Completa los campos obligatorios.');return;}
+  const feats=document.getElementById('f-feats').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const obj={
+    id:editId||(name.toLowerCase().replace(/\s+/g,'-')+'-'+Date.now()),
+    category:document.getElementById('f-cat').value,
+    name, subtitle:document.getElementById('f-subtitle').value,
+    description:document.getElementById('f-desc').value,
+    imageUrl:document.getElementById('f-img').value,
+    features:feats, pricePEN:pen, priceUSD:usd,
+    badgeText:document.getElementById('f-badge').value||'Nuevo',
+    iconClass:document.getElementById('f-icon').value||'fa-solid fa-box',
+    gradient:document.getElementById('f-grad').value,
+    stock:document.getElementById('f-stock').value,
+    highlighted:document.getElementById('f-highlight').checked
+  };
+  const p=getProducts();
+  if(editId){const i=p.findIndex(x=>x.id===editId);if(i>=0)p[i]=obj;else p.push(obj);}
+  else{p.push(obj);}
+  saveProducts(p);
+  closeForm();
+  renderProductTable();
+  renderDashboard();
+}
+
+function loadConfig(){
+  const c=getConfig();
+  document.getElementById('cfg-wa').value=c.whatsapp||'51900000000';
+}
+
+async function saveConfig(){
+  const wa=document.getElementById('cfg-wa').value.trim();
+  const pw=document.getElementById('cfg-pw').value;
+  const pw2=document.getElementById('cfg-pw2').value;
+  const c=getConfig();
+  if(wa)c.whatsapp=wa;
+  if(pw){
+    if(pw!==pw2){alert('Las contraseñas no coinciden.');return;}
+    const h=await sha256(pw);
+    localStorage.setItem(ADMIN_PW_KEY,h);
+  }
+  saveConfigData(c);
+  const msg=document.getElementById('cfg-msg');
+  msg.textContent='✓ Cambios guardados correctamente';
+  msg.style.display='block';
+  setTimeout(()=>msg.style.display='none',3000);
+}
+
+document.getElementById('form-modal').addEventListener('click',e=>{if(e.target===document.getElementById('form-modal'))closeForm();});
+</script>
+</body>
+</html>

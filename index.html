@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PassLink LATAM — Cuentas Premium de IA y Streaming</title>
+<meta name="description" content="Tu pase directo a las mejores cuentas premium de Inteligencia Artificial y Streaming en América Latina. ChatGPT Plus, Gemini Pro 3.5, Netflix Ultra HD y Disney+. Activación inmediata, soporte 24/7 y garantía total.">
+<meta name="keywords" content="passlink, passlink latam, cuentas premium peru, chatgpt plus peru, gemini pro peru, netflix barato peru, disney combo, cuentas streaming peru, cuentas de inteligencia artificial">
+<meta name="robots" content="index, follow">
+
+<!-- Canonical Link -->
+<link rel="canonical" href="https://passlink.latam/">
+
+<!-- Open Graph / Facebook / WhatsApp Preview (Altamente optimizado para conversiones en chats) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://passlink.latam/">
+<meta property="og:title" content="PassLink LATAM — Cuentas Premium de IA y Streaming">
+<meta property="og:description" content="Desbloquea el poder de la Inteligencia Artificial y el Streaming. ChatGPT Plus, Gemini Pro 3.5, Netflix y Disney+ con activación inmediata. 100% Seguro.">
+<meta property="og:image" content="assets/gemini.png">
+<meta property="og:locale" content="es_PE">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://passlink.latam/">
+<meta name="twitter:title" content="PassLink LATAM — Cuentas Premium de IA y Streaming">
+<meta name="twitter:description" content="Tus cuentas premium favoritas de Inteligencia Artificial y Streaming con activación inmediata. Garantizado.">
+<meta name="twitter:image" content="assets/gemini.png">
+
+<!-- Google Structured Data (JSON-LD Schema para posicionar en Google Shopper / Búsquedas ricas) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "PassLink LATAM",
+  "image": "assets/gemini.png",
+  "description": "Tu pase directo a las mejores cuentas premium de Inteligencia Artificial y Streaming. ChatGPT Plus, Gemini Pro, Netflix, Disney+ con activación inmediata.",
+  "priceRange": "$$",
+  "telephone": "+51900000000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "PE",
+    "addressRegion": "Lima"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "priceCurrency": "PEN",
+    "lowPrice": "15",
+    "highPrice": "45",
+    "offerCount": "4"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script>
+tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']},colors:{navy:'#0f1b3d','navy-light':'#1e3a6e',accent:'#6366f1','accent-light':'#818cf8',whatsapp:'#25D366'}}}}
+</script>
+<style>
+body{font-family:'Inter',sans-serif;}
+.bg-hero{background:linear-gradient(135deg,#f0f9ff 0%,#ede9fe 35%,#faf5ff 65%,#ecfeff 100%);}
+.card-shine{background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,255,255,0.75));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.6);}
+.card-shine:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(99,102,241,0.15);border-color:rgba(99,102,241,0.3);}
+.pulse-wa{animation:pulseWA 2s infinite;}
+@keyframes pulseWA{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}70%{box-shadow:0 0 0 18px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
+.fade-in{animation:fadeIn 0.45s ease-out forwards;opacity:0;transform:translateY(18px);}
+@keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
+.badge-glow{animation:badgeGlow 3s ease-in-out infinite;}
+@keyframes badgeGlow{0%,100%{box-shadow:0 0 8px rgba(34,197,94,0.4);}50%{box-shadow:0 0 18px rgba(34,197,94,0.7);}}
+.filter-btn.active{background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;box-shadow:0 4px 15px rgba(99,102,241,0.35);}
+html{scroll-behavior:smooth;}
+/* Modal */
+#modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(15,27,61,0.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;}
+#modal-overlay.open{display:flex;}
+#modal-box{background:#fff;border-radius:1.5rem;max-width:580px;width:94%;max-height:90vh;overflow-y:auto;animation:slideUp 0.35s cubic-bezier(.22,.68,0,1.2);}
+@keyframes slideUp{from{opacity:0;transform:translateY(40px) scale(0.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+.stock-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
+.stock-available{background:#dcfce7;color:#16a34a;}
+.stock-low{background:#fef9c3;color:#ca8a04;}
+.stock-out{background:#fee2e2;color:#dc2626;}
+.card-img{width:100%;height:160px;object-fit:cover;border-radius:1rem 1rem 0 0;}
+
+/* Nav styles */
+.nav-menu-link{font-size:14px;font-weight:600;color:#0f1b3d;opacity:0.75;transition:all 0.25s;}
+.nav-menu-link:hover{opacity:1;color:#6366f1;}
+</style>
+</head>
+<body class="bg-hero min-h-screen text-navy antialiased">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/40 shadow-sm">
+  <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+    <!-- Brand Logo -->
+    <a href="#inicio" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-black text-sm shadow-md">P</div>
+      <span class="text-lg font-extrabold tracking-tight text-navy">Pass<span class="text-accent">Link</span> <span class="text-xs font-semibold text-navy/50 ml-0.5">LATAM</span></span>
+    </a>
+    
+    <!-- Desktop Navigation Menu -->
+    <nav class="hidden md:flex items-center gap-6">
+      <a href="#inicio" class="nav-menu-link">Inicio</a>
+      <a href="#productos" class="nav-menu-link">Catálogo</a>
+      <a href="#beneficios" class="nav-menu-link">Beneficios</a>
+      <a href="#contacto" class="nav-menu-link">Contacto</a>
+    </nav>
+    
+    <!-- Right Actions Desktop -->
+    <div class="hidden md:flex items-center gap-3">
+      <div class="badge-glow flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-700 text-[11px] font-semibold px-3 py-1.5 rounded-full">
+        <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+        Activación Inmediata
+      </div>
+      <a href="#contacto" class="bg-navy text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-accent transition-colors shadow">Soporte</a>
+    </div>
+
+    <!-- Mobile Navigation Toggle Button -->
+    <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 flex items-center justify-center rounded-lg bg-navy/5 text-navy hover:bg-navy/10 transition-colors">
+      <i class="fa-solid fa-bars text-lg" id="mobile-nav-icon"></i>
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown Nav Menu -->
+  <div id="mobile-nav-dropdown" class="hidden md:hidden border-t border-white/40 bg-white/95 backdrop-blur-xl absolute top-full left-0 w-full shadow-lg z-40 transition-all duration-300">
+    <div class="flex flex-col p-4 gap-3">
+      <a href="#inicio" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">Inicio</a>
+      <a href="#productos" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">Catálogo de Productos</a>
+      <a href="#beneficios" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">¿Por qué PassLink?</a>
+      <a href="#contacto" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">Canales de Contacto</a>
+      
+      <div class="border-t border-navy/5 pt-3 flex flex-col gap-2">
+        <div class="flex items-center gap-1.5 px-4 text-green-700 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+          Activación garantizada en minutos
+        </div>
+        <a id="wa-mobile-btn" href="#" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-bold text-xs py-3 rounded-xl shadow mt-1">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Chatear por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="inicio" class="pt-16 pb-12 px-4 text-center max-w-3xl mx-auto">
+  <div class="inline-flex items-center gap-2 bg-accent/10 text-accent text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
+    <i class="fa-solid fa-bolt"></i> Ofertas Junio 2026
+  </div>
+  <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight text-navy mb-4">
+    DESBLOQUEA EL PODER DE LA <span class="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">IA</span> Y EL <span class="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">STREAMING</span>
+  </h1>
+  <p class="text-sm sm:text-base text-navy/60 max-w-xl mx-auto leading-relaxed mb-7">
+    Tu Pase Directo a las mejores cuentas premium. Activación inmediata en tu cuenta de Google o por perfiles privados. <strong class="text-navy/80">100% Seguro y Garantizado.</strong>
+  </p>
+  <a href="#productos" class="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-purple-500 text-white font-bold px-7 py-3 rounded-full shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all hover:scale-105 text-sm">
+    <i class="fa-solid fa-arrow-down"></i> Ver Productos
+  </a>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="max-w-3xl mx-auto px-4 pb-12">
+  <div class="grid grid-cols-3 gap-3 text-center">
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-4 border border-white/50 shadow-sm">
+      <div class="text-accent text-xl mb-1"><i class="fa-solid fa-shield-halved"></i></div>
+      <p class="text-[11px] font-bold text-navy">100% Seguro</p>
+      <p class="text-[9px] text-navy/50 mt-0.5 hidden sm:block">Transacciones protegidas</p>
+    </div>
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-4 border border-white/50 shadow-sm">
+      <div class="text-accent text-xl mb-1"><i class="fa-solid fa-bolt"></i></div>
+      <p class="text-[11px] font-bold text-navy">Entrega Veloz</p>
+      <p class="text-[9px] text-navy/50 mt-0.5 hidden sm:block">Activación en minutos</p>
+    </div>
+    <div class="bg-white/60 backdrop-blur rounded-2xl p-4 border border-white/50 shadow-sm">
+      <div class="text-accent text-xl mb-1"><i class="fa-solid fa-headset"></i></div>
+      <p class="text-[11px] font-bold text-navy">Soporte 24/7</p>
+      <p class="text-[9px] text-navy/50 mt-0.5 hidden sm:block">Atención preferencial</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS (CATALOGUE) -->
+<section id="productos" class="max-w-6xl mx-auto px-4 pb-20 scroll-mt-20">
+  <div class="text-center mb-8">
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Catálogo de Suscripciones</h2>
+    <p class="text-xs sm:text-sm text-navy/50 mt-1.5">Elige tu plan favorito y empieza a disfrutar hoy mismo.</p>
+  </div>
+  
+  <div class="flex justify-center gap-2 mb-8 flex-wrap" id="filters">
+    <button class="filter-btn active px-5 py-2.5 rounded-full text-sm font-semibold border border-transparent transition-all duration-300 cursor-pointer" data-cat="all"><i class="fa-solid fa-grid-2 mr-1"></i> Todos</button>
+    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="ai"><i class="fa-solid fa-microchip mr-1"></i> Inteligencia Artificial</button>
+    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="streaming"><i class="fa-solid fa-tv mr-1"></i> Streaming</button>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="product-grid"></div>
+</section>
+
+<!-- BENEFITS (BENEFICIOS) -->
+<section id="beneficios" class="bg-navy text-white py-16 px-4 scroll-mt-20">
+  <div class="max-w-5xl mx-auto">
+    <div class="text-center mb-12">
+      <span class="text-xs font-bold uppercase tracking-wider text-accent-light bg-accent/20 px-3.5 py-1.5 rounded-full">¿Por qué elegir PassLink?</span>
+      <h2 class="text-2xl sm:text-4xl font-black mt-4">La diferencia de adquirir con un Partner de confianza</h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+        <div class="w-12 h-12 rounded-xl bg-accent flex items-center justify-center text-white text-xl mb-4"><i class="fa-solid fa-user-shield"></i></div>
+        <h3 class="text-lg font-bold mb-2">Cuentas Propias</h3>
+        <p class="text-sm text-white/70 leading-relaxed">No vendemos métodos fraudulentos ni caídas semanales. El acceso se activa de forma directa, permitiendo configurar perfiles a tu nombre.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+        <div class="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center text-white text-xl mb-4"><i class="fa-solid fa-arrows-spin"></i></div>
+        <h3 class="text-lg font-bold mb-2">Garantía Ininterrumpida</h3>
+        <p class="text-sm text-white/70 leading-relaxed">Cada día contratado está respaldado por garantía del 100%. Si surge un detalle técnico, nuestro soporte responde y soluciona de inmediato.</p>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+        <div class="w-12 h-12 rounded-xl bg-cyan-500 flex items-center justify-center text-white text-xl mb-4"><i class="fa-solid fa-wallet"></i></div>
+        <h3 class="text-lg font-bold mb-2">Ahorro Inteligente</h3>
+        <p class="text-sm text-white/70 leading-relaxed">Accede a las tarifas más competitivas de toda la región LATAM, optimizadas con planes combinados y acuerdos corporativos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT & PAYMENTS (CONTACTO & METODOS DE PAGO) -->
+<section id="contacto" class="max-w-5xl mx-auto px-4 py-16 scroll-mt-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    
+    <!-- Info & WhatsApp Contact -->
+    <div class="space-y-6">
+      <div>
+        <span class="text-xs font-bold text-accent uppercase tracking-wide">Ponte en contacto</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-navy mt-2">¿Tienes dudas? Platica con un Asesor en Vivo</h2>
+        <p class="text-sm text-navy/60 leading-relaxed mt-3">Estamos listos para atenderte, brindarte información detallada de cada servicio o guiarte a realizar tu recarga y pago.</p>
+      </div>
+      
+      <div class="space-y-3">
+        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
+          <div class="text-whatsapp text-2xl"><i class="fa-brands fa-whatsapp"></i></div>
+          <div>
+            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Atención de Ventas</p>
+            <a id="contacto-wa-link" href="#" target="_blank" class="text-sm font-bold text-navy hover:text-accent transition-colors">+51 900 000 000</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
+          <div class="text-accent text-2xl"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Correo Electrónico</p>
+            <p class="text-sm font-bold text-navy">soporte@passlink.latam</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
+          <div class="text-purple-500 text-2xl"><i class="fa-solid fa-clock"></i></div>
+          <div>
+            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Horario de Operaciones</p>
+            <p class="text-sm font-semibold text-navy/80">Lunes a Domingo — 8:00 AM a 11:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Payment Methods card -->
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-navy/5 shadow-md space-y-6">
+      <h3 class="text-lg font-extrabold text-navy">💳 Medios de Pago Aceptados</h3>
+      <p class="text-xs text-navy/60 leading-relaxed">Procesamos activaciones inmediatas aceptando los medios de pago más populares del mercado peruano y latinoamericano:</p>
+      
+      <div class="grid grid-cols-2 gap-3">
+        <div class="bg-sky-50 border border-sky-100 rounded-xl p-3.5 flex flex-col justify-between">
+          <span class="text-xs font-bold text-sky-700">Yape / Plin</span>
+          <span class="text-[9px] text-sky-600 mt-1">Código QR y transferencias a número telefónico.</span>
+        </div>
+        <div class="bg-violet-50 border border-violet-100 rounded-xl p-3.5 flex flex-col justify-between">
+          <span class="text-xs font-bold text-violet-700">Banca Móvil</span>
+          <span class="text-[9px] text-violet-600 mt-1">BCP, BBVA, Interbank y Scotiabank.</span>
+        </div>
+      </div>
+
+      <div class="border-t border-navy/5 pt-5 space-y-3">
+        <h4 class="text-xs font-bold text-navy/70 uppercase tracking-wider">🔒 Activación 100% Protegida</h4>
+        <p class="text-[11px] text-navy/50 leading-relaxed">Tus pagos están seguros. Tras realizar la transferencia o yapeo, nos envías el comprobante e inmediatamente validamos y habilitamos el servicio premium en tu cuenta.</p>
+      </div>
+
+      <!-- Quick action inside payment card -->
+      <a id="wa-contacto-checkout" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full bg-whatsapp text-white font-bold text-sm py-3.5 rounded-2xl shadow-md hover:scale-[1.01] transition-transform">
+        <i class="fa-brands fa-whatsapp text-lg"></i> Iniciar Pedido Directo
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FLOATING WA -->
+<a id="wa-float" href="#" target="_blank" rel="noopener" class="pulse-wa fixed bottom-6 right-6 z-50 w-14 h-14 bg-whatsapp rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:scale-110 transition-transform">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<!-- MODAL -->
+<div id="modal-overlay" role="dialog" aria-modal="true">
+  <div id="modal-box" class="shadow-2xl">
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="bg-navy text-white/50 text-[11px] leading-relaxed py-10 px-4">
+  <div class="max-w-3xl mx-auto text-center space-y-4">
+    <div class="flex items-center justify-center gap-2 mb-3">
+      <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-black text-xs">P</div>
+      <span class="text-sm font-bold text-white/80">PassLink <span class="text-accent-light">LATAM</span></span>
+    </div>
+    <p>PassLink LATAM es un revendedor independiente de servicios digitales. No estamos afiliados, asociados ni respaldados por Google LLC, OpenAI Inc., Netflix Inc., The Walt Disney Company ni ninguna de sus subsidiarias. Todas las marcas registradas, logotipos y nombres de productos mencionados pertenecen a sus respectivos propietarios.</p>
+    <p class="text-white/30">&copy; 2026 PassLink LATAM. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────
+const WHATSAPP_NUMBER = "51900000000";
+
+// ── FEATURE FLAGS (activar en v3) ───────────────────────────
+const FEATURES = { cart: false, yapeQR: false, userBalance: false };
+
+// ── PRODUCTOS DEFAULT ───────────────────────────────────────
+const DEFAULT_PRODUCTS = [
+  {
+    id:"gemini-pro", category:"ai",
+    name:"Gemini Pro 3.5", subtitle:"18 Meses · Cuenta Personal",
+    description:"Obtén acceso completo a Gemini Pro 3.5 directamente en tu cuenta personal de Google. Sin invitaciones, sin cuentas compartidas. Disfruta de la IA más avanzada de Google con 5 TB de almacenamiento en la nube y integración total con Google Workspace durante 18 meses continuos.",
+    imageUrl:"assets/gemini.png",
+    features:["100% Cuenta Personal (No invitación)","18 Meses de acceso continuo","5 TB Cloud Storage incluido","Workspace Integration completa"],
+    pricePEN:45, priceUSD:13.00,
+    badgeText:"Popular", iconClass:"fa-solid fa-wand-magic-sparkles",
+    gradient:"from-blue-500 to-cyan-400", stock:"available", highlighted:true
+  },
+  {
+    id:"chatgpt-plus", category:"ai",
+    name:"ChatGPT Plus", subtitle:"Perfil Privado · Acceso Total",
+    description:"Accede a ChatGPT Plus mediante un perfil privado y exclusivo. Usa el poder de GPT-4o para redacción, análisis y resolución de problemas. Genera imágenes con DALL-E 3 sin límites. Acceso ilimitado las 24 horas, todos los días.",
+    imageUrl:"assets/chatgpt.png",
+    features:["Perfil Privado exclusivo","GPT-4o completo sin límites","DALL-E 3 integrado","Acceso ilimitado 24/7"],
+    pricePEN:40, priceUSD:11.50,
+    badgeText:"Top IA", iconClass:"fa-solid fa-robot",
+    gradient:"from-emerald-500 to-teal-400", stock:"available", highlighted:false
+  },
+  {
+    id:"netflix-premium", category:"streaming",
+    name:"Netflix Premium", subtitle:"1 Perfil · Ultra HD 4K",
+    description:"Disfruta de Netflix con calidad Ultra HD 4K en un perfil 100% privado y personalizado a tu nombre. Acceso al catálogo completo sin restricciones geográficas. Transmisión estable y de alta calidad en todos tus dispositivos.",
+    imageUrl:"assets/netflix.png",
+    features:["1 Perfil 4K UHD privado","Calidad Ultra HD garantizada","Perfil Personalizado","Catálogo completo sin restricción"],
+    pricePEN:18, priceUSD:5.20,
+    badgeText:"Oferta", iconClass:"fa-solid fa-film",
+    gradient:"from-red-500 to-rose-400", stock:"available", highlighted:false
+  },
+  {
+    id:"disney-star", category:"streaming",
+    name:"Disney+ & Star+", subtitle:"1 Perfil Combo · Ilimitado",
+    description:"El combo perfecto: Disney+ y Star+ en un solo perfil privado. Accede a todo el contenido de Disney, Marvel, Star Wars, Pixar y el catálogo deportivo y de series de Star+. Transmisión en vivo de deportes incluida.",
+    imageUrl:"assets/disney.png",
+    features:["1 Perfil Combo completo","Acceso ilimitado al catálogo","Series y Deportes en vivo","Contenido exclusivo Star+"],
+    pricePEN:15, priceUSD:4.30,
+    badgeText:"Combo", iconClass:"fa-solid fa-hat-wizard",
+    gradient:"from-indigo-500 to-blue-400", stock:"low", highlighted:false
+  }
+];
+
+// ── DATA LAYER (localStorage first) ────────────────────────
+function getProducts(){
+  try{
+    const saved=localStorage.getItem('passlink_products');
+    return saved?JSON.parse(saved):DEFAULT_PRODUCTS;
+  }catch{return DEFAULT_PRODUCTS;}
+}
+function getConfig(){
+  try{
+    const c=localStorage.getItem('passlink_config');
+    return c?JSON.parse(c):{whatsapp:WHATSAPP_NUMBER};
+  }catch{return {whatsapp:WHATSAPP_NUMBER};}
+}
+
+let PRODUCTS=getProducts();
+const CONFIG=getConfig();
+const WA=CONFIG.whatsapp||WHATSAPP_NUMBER;
+
+// ── MOBILE NAVIGATION ───────────────────────────────────────
+function toggleMobileNav() {
+  const dropdown = document.getElementById('mobile-nav-dropdown');
+  const icon = document.getElementById('mobile-nav-icon');
+  const isHidden = dropdown.classList.contains('hidden');
+  
+  if(isHidden) {
+    dropdown.classList.remove('hidden');
+    icon.classList.remove('fa-bars');
+    icon.classList.add('fa-xmark');
+  } else {
+    dropdown.classList.add('hidden');
+    icon.classList.remove('fa-xmark');
+    icon.classList.add('fa-bars');
+  }
+}
+
+// ── MODAL ───────────────────────────────────────────────────
+const overlay=document.getElementById('modal-overlay');
+const modalContent=document.getElementById('modal-content');
+
+function openModal(id){
+  const p=PRODUCTS.find(x=>x.id===id); if(!p)return;
+  const stockMap={available:['stock-available','<i class="fa-solid fa-circle-dot"></i> Disponible'],low:['stock-low','<i class="fa-solid fa-triangle-exclamation"></i> Últimas unidades'],out:['stock-out','<i class="fa-solid fa-ban"></i> Agotado']};
+  const [sc,sl]=stockMap[p.stock]||stockMap['available'];
+  const waText=encodeURIComponent(`¡Hola PassLink LATAM! 👋 Quiero adquirir *${p.name}* por S/. ${p.pricePEN.toFixed(2)} (US$ ${p.priceUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
+  const waURL=`https://wa.me/${WA}?text=${waText}`;
+  modalContent.innerHTML=`
+    <div class="relative">
+      <img src="${p.imageUrl}" alt="${p.name}" class="w-full h-52 object-cover rounded-t-3xl">
+      <button onclick="closeModal()" class="absolute top-3 right-3 w-9 h-9 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark"></i></button>
+      <span class="absolute bottom-3 left-3 stock-badge ${sc}">${sl}</span>
+    </div>
+    <div class="p-6">
+      <div class="flex items-start justify-between mb-1">
+        <h2 class="text-2xl font-black text-navy">${p.name}</h2>
+        <span class="text-[11px] font-bold uppercase tracking-wider bg-accent/10 text-accent px-2.5 py-1 rounded-full ml-2 whitespace-nowrap">${p.badgeText}</span>
+      </div>
+      <p class="text-xs text-navy/50 font-medium mb-4">${p.subtitle}</p>
+      <p class="text-sm text-navy/70 leading-relaxed mb-5">${p.description}</p>
+      <ul class="space-y-2 mb-6">
+        ${p.features.map(f=>`<li class="flex items-center gap-2 text-sm text-navy/75"><i class="fa-solid fa-circle-check text-accent text-xs"></i>${f}</li>`).join('')}
+      </ul>
+      <div class="flex items-baseline gap-2 mb-5">
+        <span class="text-3xl font-black text-navy">S/. ${p.pricePEN}</span>
+        <span class="text-sm text-navy/40 font-semibold">/ US$ ${p.priceUSD.toFixed(2)}</span>
+      </div>
+      <a href="${waURL}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full bg-whatsapp text-white font-bold text-sm py-3.5 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 mb-3">
+        <i class="fa-brands fa-whatsapp text-lg"></i> Comprar por WhatsApp
+      </a>
+      <a href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Quiero más info sobre ${p.name}.`)}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full bg-navy/5 text-navy/70 font-semibold text-sm py-3 rounded-2xl hover:bg-navy/10 transition-all duration-200">
+        <i class="fa-solid fa-circle-info"></i> Consultar antes de comprar
+      </a>
+    </div>`;
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  overlay.classList.remove('open');
+  document.body.style.overflow='';
+}
+overlay.addEventListener('click',e=>{if(e.target===overlay)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// ── RENDER CARDS ────────────────────────────────────────────
+const grid=document.getElementById('product-grid');
+let activeFilter='all';
+
+function renderProducts(filter){
+  activeFilter=filter;
+  const list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===filter);
+  grid.innerHTML='';
+  list.forEach((p,i)=>{
+    const waText=encodeURIComponent(`¡Hola PassLink LATAM! 👋 Me interesa adquirir *${p.name}* por S/. ${p.pricePEN.toFixed(2)} (US$ ${p.priceUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
+    const waURL=`https://wa.me/${WA}?text=${waText}`;
+    const stockColors={available:'text-green-600',low:'text-yellow-600',out:'text-red-500'};
+    const stockLabels={available:'Disponible',low:'Últimas unidades',out:'Agotado'};
+    const card=document.createElement('div');
+    card.className='card-shine rounded-2xl flex flex-col transition-all duration-300 fade-in cursor-pointer overflow-hidden';
+    card.style.animationDelay=`${i*0.08}s`;
+    card.onclick=()=>openModal(p.id);
+    card.innerHTML=`
+      <div class="relative">
+        <img src="${p.imageUrl}" alt="${p.name}" class="w-full h-40 object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="w-full h-40 bg-gradient-to-br ${p.gradient} items-center justify-center text-white text-4xl" style="display:none"><i class="${p.iconClass}"></i></div>
+        <span class="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-accent px-2 py-0.5 rounded-full shadow">${p.badgeText}</span>
+        ${p.highlighted?'<span class="absolute top-2 left-2 text-[10px] font-bold bg-gradient-to-r from-accent to-purple-500 text-white px-2 py-0.5 rounded-full">⭐ Destacado</span>':''}
+      </div>
+      <div class="p-4 flex flex-col flex-1">
+        <h3 class="text-sm font-extrabold text-navy leading-snug">${p.name}</h3>
+        <p class="text-[11px] text-navy/50 font-medium mb-2">${p.subtitle}</p>
+        <p class="text-[11px] text-navy/60 leading-relaxed mb-3 line-clamp-2">${p.description}</p>
+        <ul class="space-y-1 mb-4 flex-1">
+          ${p.features.slice(0,3).map(f=>`<li class="flex items-start gap-1.5 text-[11px] text-navy/65"><i class="fa-solid fa-circle-check text-accent mt-0.5 text-[9px]"></i><span>${f}</span></li>`).join('')}
+          ${p.features.length>3?`<li class="text-[11px] text-accent font-semibold">+${p.features.length-3} más →</li>`:''}
+        </ul>
+        <div class="border-t border-navy/5 pt-3">
+          <div class="flex items-center justify-between mb-2">
+            <div>
+              <span class="text-xl font-black text-navy">S/. ${p.pricePEN}</span>
+              <span class="text-[11px] text-navy/40 font-semibold ml-1">/ US$ ${p.priceUSD.toFixed(2)}</span>
+            </div>
+            <span class="text-[10px] font-semibold ${stockColors[p.stock]||'text-green-600'}">${stockLabels[p.stock]||'Disponible'}</span>
+          </div>
+          <button onclick="event.stopPropagation();window.open('${waURL}','_blank')"
+            class="flex items-center justify-center gap-1.5 w-full bg-gradient-to-r ${p.gradient} text-white font-bold text-xs py-2.5 rounded-xl shadow hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+            <i class="fa-brands fa-whatsapp"></i> Comprar Ahora
+          </button>
+          <button onclick="openModal('${p.id}')"
+            class="w-full text-center text-[11px] text-accent font-semibold mt-1.5 py-1 hover:underline">
+            Ver más detalles →
+          </button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+// ── FILTERS ─────────────────────────────────────────────────
+document.getElementById('filters').addEventListener('click',e=>{
+  const btn=e.target.closest('.filter-btn'); if(!btn)return;
+  document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.classList.add('bg-white/70','text-navy/70','border-navy/10');});
+  btn.classList.add('active');
+  btn.classList.remove('bg-white/70','text-navy/70','border-navy/10');
+  renderProducts(btn.dataset.cat);
+});
+
+// ── SET WHATSAPP LINKS DYNAMICALLY ──────────────────────────
+const globalWAText = encodeURIComponent('¡Hola PassLink LATAM! 👋 Quisiera solicitar más información sobre sus servicios premium de IA y Streaming.');
+const globalWAUrl = `https://wa.me/${WA}?text=${globalWAText}`;
+
+document.getElementById('wa-float').href = globalWAUrl;
+document.getElementById('contacto-wa-link').href = `https://wa.me/${WA}`;
+document.getElementById('contacto-wa-link').textContent = `+${WA.slice(0,2)} ${WA.slice(2,5)} ${WA.slice(5,8)} ${WA.slice(8)}`;
+document.getElementById('wa-contacto-checkout').href = globalWAUrl;
+document.getElementById('wa-mobile-btn').href = globalWAUrl;
+
+renderProducts('all');
+</script>
+</body>
+</html>
