@@ -72,15 +72,25 @@ body{font-family:'Inter',sans-serif;}
 .filter-btn.active{background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;box-shadow:0 4px 15px rgba(99,102,241,0.35);}
 html{scroll-behavior:smooth;}
 /* Modal */
-#modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(15,27,61,0.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;}
+#modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(15,27,61,0.65);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;}
 #modal-overlay.open{display:flex;}
-#modal-box{background:#fff;border-radius:1.5rem;max-width:580px;width:94%;max-height:90vh;overflow-y:auto;animation:slideUp 0.35s cubic-bezier(.22,.68,0,1.2);}
+#modal-box{background:#fff;border-radius:1.75rem;max-width:820px;width:100%;max-height:92vh;overflow:hidden;animation:slideUp 0.38s cubic-bezier(.22,.68,0,1.2);display:flex;flex-direction:column;}
+@media(min-width:700px){#modal-box{flex-direction:row;}}
+.modal-img-col{flex-shrink:0;width:100%;position:relative;}
+@media(min-width:700px){.modal-img-col{width:320px;}}
+.modal-img-col img{width:100%;height:240px;object-fit:cover;display:block;border-radius:1.75rem 1.75rem 0 0;}
+@media(min-width:700px){.modal-img-col img{height:100%;min-height:480px;border-radius:1.75rem 0 0 1.75rem;}}
+.modal-detail-col{flex:1;padding:28px;overflow-y:auto;max-height:92vh;}
 @keyframes slideUp{from{opacity:0;transform:translateY(40px) scale(0.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .stock-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
 .stock-available{background:#dcfce7;color:#16a34a;}
 .stock-low{background:#fef9c3;color:#ca8a04;}
 .stock-out{background:#fee2e2;color:#dc2626;}
-.card-img{width:100%;height:160px;object-fit:cover;border-radius:1rem 1rem 0 0;}
+/* Card image overlay — dark enough to fully hide baked-in AI text */
+.card-img-wrap{position:relative;height:160px;overflow:hidden;border-radius:1rem 1rem 0 0;}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+.card-img-wrap .img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(10,18,50,0.82) 100%);}
+.card-img-fallback{width:100%;height:160px;display:none;align-items:center;justify-content:center;font-size:2.5rem;color:white;border-radius:1rem 1rem 0 0;}
 
 /* Nav styles */
 .nav-menu-link{font-size:14px;font-weight:600;color:#0f1b3d;opacity:0.75;transition:all 0.25s;}
@@ -405,35 +415,64 @@ const modalContent=document.getElementById('modal-content');
 
 function openModal(id){
   const p=PRODUCTS.find(x=>x.id===id); if(!p)return;
-  const stockMap={available:['stock-available','<i class="fa-solid fa-circle-dot"></i> Disponible'],low:['stock-low','<i class="fa-solid fa-triangle-exclamation"></i> Últimas unidades'],out:['stock-out','<i class="fa-solid fa-ban"></i> Agotado']};
+  const stockMap={
+    available:['stock-available','<i class="fa-solid fa-circle-dot"></i> Disponible'],
+    low:['stock-low','<i class="fa-solid fa-triangle-exclamation"></i> Últimas unidades'],
+    out:['stock-out','<i class="fa-solid fa-ban"></i> Agotado']
+  };
   const [sc,sl]=stockMap[p.stock]||stockMap['available'];
   const waText=encodeURIComponent(`¡Hola PassLink LATAM! 👋 Quiero adquirir *${p.name}* por S/. ${p.pricePEN.toFixed(2)} (US$ ${p.priceUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
   const waURL=`https://wa.me/${WA}?text=${waText}`;
+  const infoURL=`https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Quiero más información sobre *${p.name}* antes de comprarlo.`)}`;
+  const catLabel={ai:'Inteligencia Artificial',streaming:'Streaming',software:'Software'}[p.category]||p.category;
   modalContent.innerHTML=`
-    <div class="relative">
-      <img src="${p.imageUrl}" alt="${p.name}" class="w-full h-52 object-cover rounded-t-3xl">
-      <button onclick="closeModal()" class="absolute top-3 right-3 w-9 h-9 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center transition-colors"><i class="fa-solid fa-xmark"></i></button>
-      <span class="absolute bottom-3 left-3 stock-badge ${sc}">${sl}</span>
+    <!-- Image column -->
+    <div class="modal-img-col relative">
+      <img src="${p.imageUrl}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div style="display:none;width:100%;height:260px;align-items:center;justify-content:center;font-size:3rem;color:white;" class="bg-gradient-to-br ${p.gradient}"><i class="${p.iconClass}"></i></div>
+      <!-- Overlay gradient so the image looks clean -->
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(15,27,61,0.7) 100%);border-radius:1.75rem 1.75rem 0 0;pointer-events:none;"></div>
+      <!-- Badges over image -->
+      <div style="position:absolute;top:14px;left:14px;display:flex;flex-direction:column;gap:6px;">
+        <span class="stock-badge ${sc}" style="font-size:11px;font-weight:700;">${sl}</span>
+        ${p.highlighted?'<span style="background:linear-gradient(135deg,#6366f1,#a855f7);color:white;font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;">⭐ Destacado</span>':''}
+      </div>
+      <!-- Category tag -->
+      <span style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.92);color:#6366f1;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:999px;">${catLabel}</span>
+      <!-- Price watermark over image bottom -->
+      <div style="position:absolute;bottom:14px;left:14px;">
+        <span style="font-size:28px;font-weight:900;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.5);">S/. ${p.pricePEN}</span>
+        <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);margin-left:6px;">/ US$ ${p.priceUSD.toFixed(2)}</span>
+      </div>
+      <!-- Close button -->
+      <button onclick="closeModal()" style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(0,0,0,0.45);color:white;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:32px;"><i class="fa-solid fa-xmark"></i></button>
     </div>
-    <div class="p-6">
-      <div class="flex items-start justify-between mb-1">
-        <h2 class="text-2xl font-black text-navy">${p.name}</h2>
-        <span class="text-[11px] font-bold uppercase tracking-wider bg-accent/10 text-accent px-2.5 py-1 rounded-full ml-2 whitespace-nowrap">${p.badgeText}</span>
+    <!-- Detail column -->
+    <div class="modal-detail-col">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
+        <h2 style="font-size:22px;font-weight:900;color:#0f1b3d;line-height:1.2;">${p.name}</h2>
+        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:#ede9fe;color:#6366f1;padding:4px 10px;border-radius:999px;margin-left:8px;white-space:nowrap;">${p.badgeText}</span>
       </div>
-      <p class="text-xs text-navy/50 font-medium mb-4">${p.subtitle}</p>
-      <p class="text-sm text-navy/70 leading-relaxed mb-5">${p.description}</p>
-      <ul class="space-y-2 mb-6">
-        ${p.features.map(f=>`<li class="flex items-center gap-2 text-sm text-navy/75"><i class="fa-solid fa-circle-check text-accent text-xs"></i>${f}</li>`).join('')}
-      </ul>
-      <div class="flex items-baseline gap-2 mb-5">
-        <span class="text-3xl font-black text-navy">S/. ${p.pricePEN}</span>
-        <span class="text-sm text-navy/40 font-semibold">/ US$ ${p.priceUSD.toFixed(2)}</span>
+      <p style="font-size:12px;color:rgba(15,27,61,0.5);font-weight:600;margin-bottom:14px;">${p.subtitle}</p>
+      <p style="font-size:13px;color:rgba(15,27,61,0.72);line-height:1.7;margin-bottom:18px;">${p.description}</p>
+      <div style="background:#f8faff;border-radius:14px;padding:16px;margin-bottom:18px;">
+        <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(15,27,61,0.4);margin-bottom:10px;">✅ Lo que incluye</p>
+        <ul style="display:flex;flex-direction:column;gap:8px;">
+          ${p.features.map(f=>`
+          <li style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(15,27,61,0.78);">
+            <i class="fa-solid fa-circle-check" style="color:#6366f1;font-size:11px;flex-shrink:0;"></i>${f}
+          </li>`).join('')}
+        </ul>
       </div>
-      <a href="${waURL}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full bg-whatsapp text-white font-bold text-sm py-3.5 rounded-2xl shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-200 mb-3">
-        <i class="fa-brands fa-whatsapp text-lg"></i> Comprar por WhatsApp
+      <div style="display:flex;align-items:center;gap:8px;padding:12px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;margin-bottom:18px;">
+        <i class="fa-solid fa-shield-halved" style="color:#16a34a;"></i>
+        <span style="font-size:12px;color:#15803d;font-weight:600;">Garantía de activación inmediata. Si hay algún problema, lo resolvemos en minutos.</span>
+      </div>
+      <a href="${waURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#25D366;color:white;font-weight:800;font-size:14px;padding:14px;border-radius:14px;text-decoration:none;margin-bottom:10px;transition:opacity .2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+        <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> Comprar Ahora — S/. ${p.pricePEN}
       </a>
-      <a href="https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Quiero más info sobre ${p.name}.`)}" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full bg-navy/5 text-navy/70 font-semibold text-sm py-3 rounded-2xl hover:bg-navy/10 transition-all duration-200">
-        <i class="fa-solid fa-circle-info"></i> Consultar antes de comprar
+      <a href="${infoURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:rgba(15,27,61,0.06);color:rgba(15,27,61,0.65);font-weight:600;font-size:13px;padding:11px;border-radius:14px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(15,27,61,0.1)'" onmouseout="this.style.background='rgba(15,27,61,0.06)'">
+        <i class="fa-solid fa-comment-dots"></i> Quiero más información primero
       </a>
     </div>`;
   overlay.classList.add('open');
@@ -464,37 +503,31 @@ function renderProducts(filter){
     card.style.animationDelay=`${i*0.08}s`;
     card.onclick=()=>openModal(p.id);
     card.innerHTML=`
-      <div class="relative">
-        <img src="${p.imageUrl}" alt="${p.name}" class="w-full h-40 object-cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="w-full h-40 bg-gradient-to-br ${p.gradient} items-center justify-center text-white text-4xl" style="display:none"><i class="${p.iconClass}"></i></div>
-        <span class="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider bg-white/90 text-accent px-2 py-0.5 rounded-full shadow">${p.badgeText}</span>
-        ${p.highlighted?'<span class="absolute top-2 left-2 text-[10px] font-bold bg-gradient-to-r from-accent to-purple-500 text-white px-2 py-0.5 rounded-full">⭐ Destacado</span>':''}
+      <!-- Card image with overlay to hide AI-generated text -->
+      <div class="card-img-wrap">
+        <img src="${p.imageUrl}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="card-img-fallback bg-gradient-to-br ${p.gradient}"><i class="${p.iconClass}"></i></div>
+        <div class="img-overlay"></div>
+        <span style="position:absolute;top:8px;right:8px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;background:rgba(255,255,255,0.92);color:#6366f1;padding:2px 8px;border-radius:999px;">${p.badgeText}</span>
+        ${p.highlighted?'<span style="position:absolute;top:8px;left:8px;font-size:9px;font-weight:800;background:linear-gradient(135deg,#6366f1,#a855f7);color:white;padding:2px 8px;border-radius:999px;">⭐ Destacado</span>':''}
+        <div style="position:absolute;bottom:8px;left:10px;">
+          <span style="font-size:17px;font-weight:900;color:white;text-shadow:0 1px 6px rgba(0,0,0,0.5);">S/. ${p.pricePEN}</span>
+          <span style="font-size:10px;color:rgba(255,255,255,0.75);margin-left:4px;">/ US$${p.priceUSD.toFixed(2)}</span>
+        </div>
+        <span style="position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:700;" class="${stockColors[p.stock]||'text-green-400'}" style="color:white;text-shadow:0 1px 4px rgba(0,0,0,0.6);">${stockLabels[p.stock]}</span>
       </div>
+      <!-- Card body -->
       <div class="p-4 flex flex-col flex-1">
         <h3 class="text-sm font-extrabold text-navy leading-snug">${p.name}</h3>
         <p class="text-[11px] text-navy/50 font-medium mb-2">${p.subtitle}</p>
-        <p class="text-[11px] text-navy/60 leading-relaxed mb-3 line-clamp-2">${p.description}</p>
         <ul class="space-y-1 mb-4 flex-1">
           ${p.features.slice(0,3).map(f=>`<li class="flex items-start gap-1.5 text-[11px] text-navy/65"><i class="fa-solid fa-circle-check text-accent mt-0.5 text-[9px]"></i><span>${f}</span></li>`).join('')}
-          ${p.features.length>3?`<li class="text-[11px] text-accent font-semibold">+${p.features.length-3} más →</li>`:''}
+          ${p.features.length>3?`<li class="text-[11px] text-accent font-semibold">+${p.features.length-3} beneficios más...</li>`:''}
         </ul>
-        <div class="border-t border-navy/5 pt-3">
-          <div class="flex items-center justify-between mb-2">
-            <div>
-              <span class="text-xl font-black text-navy">S/. ${p.pricePEN}</span>
-              <span class="text-[11px] text-navy/40 font-semibold ml-1">/ US$ ${p.priceUSD.toFixed(2)}</span>
-            </div>
-            <span class="text-[10px] font-semibold ${stockColors[p.stock]||'text-green-600'}">${stockLabels[p.stock]||'Disponible'}</span>
-          </div>
-          <button onclick="event.stopPropagation();window.open('${waURL}','_blank')"
-            class="flex items-center justify-center gap-1.5 w-full bg-gradient-to-r ${p.gradient} text-white font-bold text-xs py-2.5 rounded-xl shadow hover:shadow-md hover:scale-[1.02] transition-all duration-200">
-            <i class="fa-brands fa-whatsapp"></i> Comprar Ahora
-          </button>
-          <button onclick="openModal('${p.id}')"
-            class="w-full text-center text-[11px] text-accent font-semibold mt-1.5 py-1 hover:underline">
-            Ver más detalles →
-          </button>
-        </div>
+        <button onclick="openModal('${p.id}')"
+          class="flex items-center justify-center gap-1.5 w-full bg-gradient-to-r ${p.gradient} text-white font-bold text-xs py-2.5 rounded-xl shadow hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+          <i class="fa-solid fa-eye"></i> Ver detalles y Comprar
+        </button>
       </div>`;
     grid.appendChild(card);
   });
