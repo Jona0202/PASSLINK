@@ -8,6 +8,9 @@
 <meta name="keywords" content="passlink, passlink latam, cuentas premium peru, chatgpt plus peru, gemini pro peru, netflix barato peru, disney combo, cuentas streaming peru, cuentas de inteligencia artificial">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="oloz1rOh4obgXgdNUOv4t-qdUCUTbaZps2IdJaI5vdo" />
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 
 <!-- Canonical Link -->
 <link rel="canonical" href="https://www.passlinklatam.app/">
@@ -17,7 +20,7 @@
 <meta property="og:url" content="https://www.passlinklatam.app/">
 <meta property="og:title" content="PassLink LATAM — Cuentas Premium de IA y Streaming">
 <meta property="og:description" content="Desbloquea el poder de la Inteligencia Artificial y el Streaming. ChatGPT Plus, Gemini Pro 3.5, Netflix y Disney+ con activación inmediata. 100% Seguro.">
-<meta property="og:image" content="assets/gemini.png">
+<meta property="og:image" content="https://www.passlinklatam.app/assets/gemini.png">
 <meta property="og:locale" content="es_PE">
 
 <!-- Twitter Card -->
@@ -25,7 +28,7 @@
 <meta name="twitter:url" content="https://www.passlinklatam.app/">
 <meta name="twitter:title" content="PassLink LATAM — Cuentas Premium de IA y Streaming">
 <meta name="twitter:description" content="Tus cuentas premium favoritas de Inteligencia Artificial y Streaming con activación inmediata. Garantizado.">
-<meta name="twitter:image" content="assets/gemini.png">
+<meta name="twitter:image" content="https://www.passlinklatam.app/assets/gemini.png">
 
 <!-- Google Structured Data (JSON-LD Schema para posicionar en Google Shopper / Búsquedas ricas) -->
 <script type="application/ld+json">
@@ -96,6 +99,29 @@ html{scroll-behavior:smooth;}
 /* Nav styles */
 .nav-menu-link{font-size:14px;font-weight:600;color:#0f1b3d;opacity:0.75;transition:all 0.25s;}
 .nav-menu-link:hover{opacity:1;color:#6366f1;}
+/* Carousel */
+.carousel-wrap{position:relative;overflow:hidden;border-radius:1.5rem;}
+.carousel-track{display:flex;transition:transform 0.55s cubic-bezier(.4,0,.2,1);}
+.carousel-slide{min-width:100%;position:relative;height:200px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px 40px;}
+@media(min-width:640px){.carousel-slide{height:230px;}}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.25);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.4);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:background .2s;font-size:14px;}
+.carousel-btn:hover{background:rgba(255,255,255,0.45);}
+.carousel-btn-prev{left:12px;}
+.carousel-btn-next{right:12px;}
+.carousel-dots{display:flex;gap:6px;justify-content:center;margin-top:10px;}
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(99,102,241,0.25);cursor:pointer;transition:all .3s;}
+.carousel-dot.active{background:#6366f1;width:20px;border-radius:4px;}
+/* Search */
+.search-wrap{position:relative;max-width:460px;margin:0 auto 20px;}
+.search-wrap input{width:100%;padding:12px 16px 12px 44px;background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border:1.5px solid rgba(99,102,241,0.15);border-radius:999px;font-size:14px;font-family:'Inter',sans-serif;color:#0f1b3d;outline:none;box-sizing:border-box;transition:border .2s,box-shadow .2s;}
+.search-wrap input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.12);}
+.search-wrap .search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#6366f1;font-size:14px;pointer-events:none;}
+/* Toast social proof */
+#toast-proof{position:fixed;bottom:24px;left:20px;z-index:200;max-width:290px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 8px 32px rgba(15,27,61,0.18);border:1px solid rgba(99,102,241,0.12);display:flex;align-items:flex-start;gap:10px;transform:translateY(120%);opacity:0;transition:transform 0.45s cubic-bezier(.4,0,.2,1),opacity 0.45s;pointer-events:none;}
+#toast-proof.show{transform:translateY(0);opacity:1;}
+/* Card image hover zoom */
+.card-img-wrap img{transition:transform 0.4s cubic-bezier(.4,0,.2,1);}
+.card-img-wrap:hover img{transform:scale(1.08);}
 </style>
 </head>
 <body class="bg-hero min-h-screen text-navy antialiased">
@@ -104,9 +130,9 @@ html{scroll-behavior:smooth;}
 <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/40 shadow-sm">
   <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
     <!-- Brand Logo -->
-    <a href="#inicio" class="flex items-center gap-2">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-black text-sm shadow-md">P</div>
-      <span class="text-lg font-extrabold tracking-tight text-navy">Pass<span class="text-accent">Link</span> <span class="text-xs font-semibold text-navy/50 ml-0.5">LATAM</span></span>
+    <a href="#inicio" class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-accent to-purple-500 flex items-center justify-center text-white font-black text-base shadow-md">P</div>
+      <span class="text-xl font-extrabold tracking-tight text-navy">Pass<span class="text-accent">Link</span> <span class="text-sm font-bold bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent ml-0.5">LATAM</span></span>
     </a>
     
     <!-- Desktop Navigation Menu -->
@@ -154,19 +180,55 @@ html{scroll-behavior:smooth;}
 </header>
 
 <!-- HERO -->
-<section id="inicio" class="pt-16 pb-12 px-4 text-center max-w-3xl mx-auto">
+<section id="inicio" class="pt-16 pb-10 px-4 text-center max-w-3xl mx-auto">
   <div class="inline-flex items-center gap-2 bg-accent/10 text-accent text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
-    <i class="fa-solid fa-bolt"></i> Ofertas Junio 2026
+    <i class="fa-solid fa-bolt"></i> Ofertas Junio 2026 · Solo Perú 🇵🇪
   </div>
   <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight text-navy mb-4">
-    DESBLOQUEA EL PODER DE LA <span class="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">IA</span> Y EL <span class="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">STREAMING</span>
+    Tus cuentas premium de <span class="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">IA</span> y <span class="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">Streaming</span>, listas en minutos
   </h1>
   <p class="text-sm sm:text-base text-navy/60 max-w-xl mx-auto leading-relaxed mb-7">
-    Tu Pase Directo a las mejores cuentas premium. Activación inmediata en tu cuenta de Google o por perfiles privados. <strong class="text-navy/80">100% Seguro y Garantizado.</strong>
+    Sin complicaciones. Te activamos tu cuenta directamente, con soporte real y garantía total. <strong class="text-navy/80">Pagás con Yape, Plin o tu banco.</strong>
   </p>
   <a href="#productos" class="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-purple-500 text-white font-bold px-7 py-3 rounded-full shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all hover:scale-105 text-sm">
     <i class="fa-solid fa-arrow-down"></i> Ver Productos
   </a>
+</section>
+
+<!-- CARRUSEL DE OFERTAS -->
+<section class="max-w-5xl mx-auto px-4 pb-10">
+  <div class="carousel-wrap shadow-xl">
+    <div class="carousel-track" id="carousel-track">
+      <!-- Slide 1 -->
+      <div class="carousel-slide" style="background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 60%,#9333ea 100%);">
+        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">🔥 Más vendido del mes</span>
+        <h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">5 TB Cloud · Workspace incluido · Sin invitación</p>
+        <span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">S/. 45 <span style="font-size:13px;opacity:.7">/ US$ 13.00</span></span>
+      </div>
+      <!-- Slide 2 -->
+      <div class="carousel-slide" style="background:linear-gradient(135deg,#059669 0%,#0891b2 100%);">
+        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">🤖 Top Inteligencia Artificial</span>
+        <h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">ChatGPT Plus — Perfil privado,<br>sin límites, todo el día</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">GPT-4o · DALL-E 3 · Acceso ilimitado 24/7</p>
+        <span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">S/. 40 <span style="font-size:13px;opacity:.7">/ US$ 11.50</span></span>
+      </div>
+      <!-- Slide 3 -->
+      <div class="carousel-slide" style="background:linear-gradient(135deg,#dc2626 0%,#ea580c 100%);">
+        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">🎬 Combo Streaming</span>
+        <h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">Netflix + Disney+ & Star+<br>desde S/. 15</h3>
+        <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">Perfiles 100% privados · Ultra HD 4K · Activación hoy</p>
+        <span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">Desde S/. 15</span>
+      </div>
+    </div>
+    <button class="carousel-btn carousel-btn-prev" onclick="carouselMove(-1)" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="carousel-btn carousel-btn-next" onclick="carouselMove(1)" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+  </div>
+  <div class="carousel-dots" id="carousel-dots">
+    <div class="carousel-dot active" onclick="carouselGo(0)"></div>
+    <div class="carousel-dot" onclick="carouselGo(1)"></div>
+    <div class="carousel-dot" onclick="carouselGo(2)"></div>
+  </div>
 </section>
 
 <!-- TRUST BADGES -->
@@ -192,9 +254,15 @@ html{scroll-behavior:smooth;}
 
 <!-- PRODUCTS (CATALOGUE) -->
 <section id="productos" class="max-w-6xl mx-auto px-4 pb-20 scroll-mt-20">
-  <div class="text-center mb-8">
+  <div class="text-center mb-6">
     <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Catálogo de Suscripciones</h2>
     <p class="text-xs sm:text-sm text-navy/50 mt-1.5">Elige tu plan favorito y empieza a disfrutar hoy mismo.</p>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="search-wrap">
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+    <input type="search" id="search-input" placeholder="Buscar producto, servicio o plan..." autocomplete="off" aria-label="Buscar productos">
   </div>
   
   <div class="flex justify-center gap-2 mb-8 flex-wrap" id="filters">
@@ -257,7 +325,7 @@ html{scroll-behavior:smooth;}
           <div class="text-accent text-2xl"><i class="fa-solid fa-envelope"></i></div>
           <div>
             <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Correo Electrónico</p>
-            <p class="text-sm font-bold text-navy">soporte@passlink.latam</p>
+            <p class="text-sm font-bold text-navy">soporte@passlinklatam.app</p>
           </div>
         </div>
         <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
@@ -299,6 +367,17 @@ html{scroll-behavior:smooth;}
 
   </div>
 </section>
+
+<!-- SOCIAL PROOF TOAST -->
+<div id="toast-proof" role="alert" aria-live="polite">
+  <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#9333ea);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+    <i class="fa-solid fa-circle-check" style="color:#fff;font-size:16px;"></i>
+  </div>
+  <div>
+    <p id="toast-name" style="font-size:13px;font-weight:700;color:#0f1b3d;margin:0 0 2px;"></p>
+    <p id="toast-detail" style="font-size:12px;color:rgba(15,27,61,0.6);margin:0;"></p>
+  </div>
+</div>
 
 <!-- FLOATING WA -->
 <a id="wa-float" href="#" target="_blank" rel="noopener" class="pulse-wa fixed bottom-6 right-6 z-50 w-14 h-14 bg-whatsapp rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:scale-110 transition-transform">
@@ -489,11 +568,19 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 // ── RENDER CARDS ────────────────────────────────────────────
 const grid=document.getElementById('product-grid');
 let activeFilter='all';
+let activeSearch='';
 
-function renderProducts(filter){
-  activeFilter=filter;
-  const list=filter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===filter);
+function renderProducts(filter, search){
+  activeFilter=filter!==undefined?filter:activeFilter;
+  activeSearch=search!==undefined?search:activeSearch;
+  const q=activeSearch.toLowerCase().trim();
+  let list=activeFilter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===activeFilter);
+  if(q) list=list.filter(p=>(p.name+p.subtitle+(p.features||[]).join(' ')).toLowerCase().includes(q));
   grid.innerHTML='';
+  if(!list.length){
+    grid.innerHTML='<p class="col-span-4 text-center text-navy/40 py-12 text-sm">No se encontraron productos para tu búsqueda.</p>';
+    return;
+  }
   list.forEach((p,i)=>{
     const waText=encodeURIComponent(`¡Hola PassLink LATAM! 👋 Me interesa adquirir *${p.name}* por S/. ${p.pricePEN.toFixed(2)} (US$ ${p.priceUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
     const waURL=`https://wa.me/${WA}?text=${waText}`;
@@ -504,7 +591,6 @@ function renderProducts(filter){
     card.style.animationDelay=`${i*0.08}s`;
     card.onclick=()=>openModal(p.id);
     card.innerHTML=`
-      <!-- Card image with overlay to hide AI-generated text -->
       <div class="card-img-wrap">
         <img src="${p.imageUrl}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="card-img-fallback bg-gradient-to-br ${p.gradient}"><i class="${p.iconClass}"></i></div>
@@ -515,9 +601,8 @@ function renderProducts(filter){
           <span style="font-size:17px;font-weight:900;color:white;text-shadow:0 1px 6px rgba(0,0,0,0.5);">S/. ${p.pricePEN}</span>
           <span style="font-size:10px;color:rgba(255,255,255,0.75);margin-left:4px;">/ US$${p.priceUSD.toFixed(2)}</span>
         </div>
-        <span style="position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:700;" class="${stockColors[p.stock]||'text-green-400'}" style="color:white;text-shadow:0 1px 4px rgba(0,0,0,0.6);">${stockLabels[p.stock]}</span>
+        <span style="position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:700;" class="${stockColors[p.stock]||'text-green-400'}">${stockLabels[p.stock]}</span>
       </div>
-      <!-- Card body -->
       <div class="p-4 flex flex-col flex-1">
         <h3 class="text-sm font-extrabold text-navy leading-snug">${p.name}</h3>
         <p class="text-[11px] text-navy/50 font-medium mb-2">${p.subtitle}</p>
@@ -543,6 +628,70 @@ document.getElementById('filters').addEventListener('click',e=>{
   renderProducts(btn.dataset.cat);
 });
 
+// ── SEARCH ──────────────────────────────────────────────────
+document.getElementById('search-input').addEventListener('input',e=>{
+  renderProducts(undefined, e.target.value);
+});
+
+// ── CAROUSEL ────────────────────────────────────────────────
+let carouselIdx=0;
+const totalSlides=3;
+let carouselTimer;
+function carouselUpdate(){
+  document.getElementById('carousel-track').style.transform=`translateX(-${carouselIdx*100}%)`;
+  document.querySelectorAll('.carousel-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===carouselIdx);
+  });
+}
+function carouselMove(dir){
+  carouselIdx=(carouselIdx+dir+totalSlides)%totalSlides;
+  carouselUpdate();
+  resetCarouselTimer();
+}
+function carouselGo(i){
+  carouselIdx=i;
+  carouselUpdate();
+  resetCarouselTimer();
+}
+function resetCarouselTimer(){
+  clearInterval(carouselTimer);
+  carouselTimer=setInterval(()=>carouselMove(1),5000);
+}
+carouselTimer=setInterval(()=>carouselMove(1),5000);
+
+// ── SOCIAL PROOF TOAST ───────────────────────────────────────
+const PROOF_DATA=[
+  {n:'C**los',c:'Lima',p:'Gemini Pro 3.5',t:3},
+  {n:'M**ía',c:'Arequipa',p:'ChatGPT Plus',t:8},
+  {n:'J**n',c:'Trujillo',p:'Netflix Premium',t:12},
+  {n:'L**ra',c:'Cusco',p:'Disney+ & Star+',t:5},
+  {n:'R**el',c:'Piura',p:'Gemini Pro 3.5',t:19},
+  {n:'A**ra',c:'Chiclayo',p:'ChatGPT Plus',t:2},
+  {n:'D**go',c:'Huancayo',p:'Netflix Premium',t:25},
+  {n:'S**ra',c:'Ica',p:'Gemini Pro 3.5',t:7},
+  {n:'F**pe',c:'Tacna',p:'Disney+ & Star+',t:31},
+  {n:'V**ria',c:'Lima',p:'ChatGPT Plus',t:14},
+  {n:'E**que',c:'Cajamarca',p:'Netflix Premium',t:6},
+  {n:'P**lo',c:'Lima',p:'Gemini Pro 3.5',t:22},
+  {n:'N**tia',c:'Arequipa',p:'Disney+ & Star+',t:9},
+  {n:'G**lo',c:'Trujillo',p:'ChatGPT Plus',t:17},
+  {n:'Y**sa',c:'Lima',p:'Netflix Premium',t:4}
+];
+let proofIdx=0;
+function showToast(){
+  const d=PROOF_DATA[proofIdx%PROOF_DATA.length];
+  proofIdx++;
+  document.getElementById('toast-name').textContent=`${d.n} de ${d.c}`;
+  document.getElementById('toast-detail').textContent=`compró ${d.p} · hace ${d.t} min`;
+  const t=document.getElementById('toast-proof');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),5000);
+}
+setTimeout(()=>{
+  showToast();
+  setInterval(showToast, Math.random()*15000+25000);
+},15000);
+
 // ── SET WHATSAPP LINKS DYNAMICALLY ──────────────────────────
 const globalWAText = encodeURIComponent('¡Hola PassLink LATAM! 👋 Quisiera solicitar más información sobre sus servicios premium de IA y Streaming.');
 const globalWAUrl = `https://wa.me/${WA}?text=${globalWAText}`;
@@ -553,7 +702,7 @@ document.getElementById('contacto-wa-link').textContent = `+${WA.slice(0,2)} ${W
 document.getElementById('wa-contacto-checkout').href = globalWAUrl;
 document.getElementById('wa-mobile-btn').href = globalWAUrl;
 
-renderProducts('all');
+renderProducts('all','');
 </script>
 </body>
 </html>
