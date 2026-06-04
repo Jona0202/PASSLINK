@@ -663,37 +663,57 @@ function resetCarouselTimer(){
 carouselTimer=setInterval(()=>carouselMove(1),5000);
 
 // ── SOCIAL PROOF TOAST ───────────────────────────────────────
-const PROOF_DATA=[
-  {n:'C**los',c:'Lima',p:'Gemini Pro 3.5',t:3},
-  {n:'M**ía',c:'Arequipa',p:'ChatGPT Plus',t:8},
-  {n:'J**n',c:'Trujillo',p:'Netflix Premium',t:12},
-  {n:'L**ra',c:'Cusco',p:'Disney+ & Star+',t:5},
-  {n:'R**el',c:'Piura',p:'Gemini Pro 3.5',t:19},
-  {n:'A**ra',c:'Chiclayo',p:'ChatGPT Plus',t:2},
-  {n:'D**go',c:'Huancayo',p:'Netflix Premium',t:25},
-  {n:'S**ra',c:'Ica',p:'Gemini Pro 3.5',t:7},
-  {n:'F**pe',c:'Tacna',p:'Disney+ & Star+',t:31},
-  {n:'V**ria',c:'Lima',p:'ChatGPT Plus',t:14},
-  {n:'E**que',c:'Cajamarca',p:'Netflix Premium',t:6},
-  {n:'P**lo',c:'Lima',p:'Gemini Pro 3.5',t:22},
-  {n:'N**tia',c:'Arequipa',p:'Disney+ & Star+',t:9},
-  {n:'G**lo',c:'Trujillo',p:'ChatGPT Plus',t:17},
-  {n:'Y**sa',c:'Lima',p:'Netflix Premium',t:4}
+const _FIRST_NAMES = [
+  'Carlos','María','Juan','Laura','Rafael','Andrea','Diego','Sara','Felipe',
+  'Victoria','Enrique','Pablo','Natalia','Gonzalo','Yessica','Camila','Luis',
+  'Patricia','Jorge','Valeria','Daniel','Claudia','Marco','Fernanda','Héctor',
+  'Milagros','Ricardo','Paola','Sebastián','Lucía','Rodrigo','Katherine',
+  'Alejandro','Roxana','Eduardo','Mariela','Fernando','Ximena','Miguel','Silvia'
 ];
-let proofIdx=0;
-function showToast(){
-  const d=PROOF_DATA[proofIdx%PROOF_DATA.length];
-  proofIdx++;
-  document.getElementById('toast-name').textContent=`${d.n} de ${d.c}`;
-  document.getElementById('toast-detail').textContent=`compró ${d.p} · hace ${d.t} min`;
-  const t=document.getElementById('toast-proof');
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),5000);
+const _LAST_NAMES = [
+  'Quispe','García','Mamani','Torres','López','Flores','Huamán','Chávez',
+  'Vargas','Castro','Rojas','Ramírez','Mendoza','Cruz','Reyes','Sánchez',
+  'Herrera','Morales','Ortiz','Paredes','Salinas','Cárdenas','Medina','Vega',
+  'Ramos','Benítez','Cabrera','Gutiérrez','Lara','Molina','Núñez','Peña'
+];
+const _CITIES  = ['Lima','Arequipa','Trujillo','Cusco','Piura','Chiclayo','Huancayo','Ica','Tacna','Cajamarca','Puno','Ayacucho'];
+const _PRODUCTS = ['Gemini Pro 3.5','ChatGPT Plus','Netflix Premium','Disney+ & Star+'];
+
+function _mask(name) {
+  // Keep first letter + number of asterisks based on name length, then last initial
+  if (name.length <= 2) return name[0] + '*';
+  const visible = name[0];
+  const stars = '*'.repeat(Math.max(2, name.length - 2));
+  // 50% chance: show last letter too
+  return Math.random() > 0.5
+    ? visible + stars + name[name.length - 1] + '.'
+    : visible + stars + '.';
 }
-setTimeout(()=>{
+
+function _buildName() {
+  const first = _FIRST_NAMES[Math.floor(Math.random() * _FIRST_NAMES.length)];
+  // ~55% chance of showing a surname
+  if (Math.random() < 0.55) {
+    const last = _LAST_NAMES[Math.floor(Math.random() * _LAST_NAMES.length)];
+    return _mask(first) + ' ' + _mask(last);
+  }
+  return _mask(first);
+}
+
+function showToast(){
+  const city    = _CITIES[Math.floor(Math.random() * _CITIES.length)];
+  const product = _PRODUCTS[Math.floor(Math.random() * _PRODUCTS.length)];
+  const mins    = Math.floor(Math.random() * 28) + 1;
+  document.getElementById('toast-name').textContent   = `${_buildName()} — ${city}`;
+  document.getElementById('toast-detail').textContent = `acaba de adquirir ${product} · hace ${mins} min`;
+  const t = document.getElementById('toast-proof');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 5500);
+}
+setTimeout(() => {
   showToast();
-  setInterval(showToast, Math.random()*15000+25000);
-},15000);
+  setInterval(showToast, Math.random() * 15000 + 28000);
+}, 18000);
 
 // ── SET WHATSAPP LINKS DYNAMICALLY ──────────────────────────
 function formatPhoneNumber(num) {
