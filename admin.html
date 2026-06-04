@@ -349,7 +349,8 @@ function openForm(id){
   }
   document.getElementById('form-modal').classList.add('open');
 }
-function closeModal(){document.getElementById('form-modal').classList.remove('open');}
+function closeForm(){document.getElementById('form-modal').classList.remove('open');}
+function closeModal(){closeForm();}
 
 function saveProduct(){
   const name=document.getElementById('f-name').value.trim();
