@@ -42,7 +42,7 @@
   "image": "assets/logo.jpg?v=2",
   "description": "Tu pase directo a las mejores cuentas premium de Inteligencia Artificial y Streaming. ChatGPT Plus, Gemini Pro, Netflix, Disney+ con activación inmediata.",
   "priceRange": "$$",
-  "telephone": "+51900000000",
+  "telephone": "+17279103889",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "PE",
@@ -408,7 +408,7 @@ html{scroll-behavior:smooth;}
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────────
-const WHATSAPP_NUMBER = "51900000000";
+const WHATSAPP_NUMBER = "17279103889";
 
 // ── FEATURE FLAGS (activar en v3) ───────────────────────────
 const FEATURES = { cart: false, yapeQR: false, userBalance: false };
@@ -696,12 +696,19 @@ setTimeout(()=>{
 },15000);
 
 // ── SET WHATSAPP LINKS DYNAMICALLY ──────────────────────────
+function formatPhoneNumber(num) {
+  if (num.startsWith('1') && num.length === 11) {
+    return `+1 (${num.slice(1,4)}) ${num.slice(4,7)}-${num.slice(7)}`;
+  }
+  return `+${num.slice(0,2)} ${num.slice(2,5)} ${num.slice(5,8)} ${num.slice(8)}`;
+}
+
 const globalWAText = encodeURIComponent('¡Hola PassLink LATAM! 👋 Quisiera solicitar más información sobre sus servicios premium de IA y Streaming.');
 const globalWAUrl = `https://wa.me/${WA}?text=${globalWAText}`;
 
 document.getElementById('wa-float').href = globalWAUrl;
 document.getElementById('contacto-wa-link').href = `https://wa.me/${WA}`;
-document.getElementById('contacto-wa-link').textContent = `+${WA.slice(0,2)} ${WA.slice(2,5)} ${WA.slice(5,8)} ${WA.slice(8)}`;
+document.getElementById('contacto-wa-link').textContent = formatPhoneNumber(WA);
 document.getElementById('wa-contacto-checkout').href = globalWAUrl;
 document.getElementById('wa-mobile-btn').href = globalWAUrl;
 

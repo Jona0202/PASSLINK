@@ -116,7 +116,7 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
       <div class="card max-w-lg">
         <h3 class="font-bold text-navy mb-4">Número de WhatsApp</h3>
         <label class="form-label">Número (con código de país, sin +)</label>
-        <input class="form-input mb-4" id="cfg-wa" placeholder="51900000000">
+        <input class="form-input mb-4" id="cfg-wa" placeholder="17279103889">
         <h3 class="font-bold text-navy mb-4 mt-4">Cambiar Contraseña Admin</h3>
         <label class="form-label">Nueva contraseña</label>
         <input class="form-input mb-2" id="cfg-pw" type="password" placeholder="Nueva contraseña">
@@ -202,7 +202,7 @@ const DEFAULT_PRODUCTS=[
 
 function getProducts(){try{const s=localStorage.getItem(PRODUCTS_KEY);return s?JSON.parse(s):DEFAULT_PRODUCTS;}catch{return DEFAULT_PRODUCTS;}}
 function saveProducts(p){localStorage.setItem(PRODUCTS_KEY,JSON.stringify(p));}
-function getConfig(){try{const c=localStorage.getItem(CONFIG_KEY);return c?JSON.parse(c):{whatsapp:'51900000000'};}catch{return {whatsapp:'51900000000'};}}
+function getConfig(){try{const c=localStorage.getItem(CONFIG_KEY);return c?JSON.parse(c):{whatsapp:'17279103889'};}catch{return {whatsapp:'17279103889'};}}
 function saveConfigData(c){localStorage.setItem(CONFIG_KEY,JSON.stringify(c));}
 function getPwHash(){return localStorage.getItem(ADMIN_PW_KEY)||'00ae1654e5e0c926e7be8a7e414291b6194873c085079006ee3d2a88c90f1b68';}
 
@@ -381,7 +381,7 @@ function saveProduct(){
 
 function loadConfig(){
   const c=getConfig();
-  document.getElementById('cfg-wa').value=c.whatsapp||'51900000000';
+  document.getElementById('cfg-wa').value=c.whatsapp||'17279103889';
 }
 
 async function saveConfig(){
