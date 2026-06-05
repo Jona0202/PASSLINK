@@ -191,7 +191,7 @@ html{scroll-behavior:smooth;}
     Tus cuentas premium de <span class="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">IA</span> y <span class="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">Streaming</span>, listas en minutos
   </h1>
   <p class="text-sm sm:text-base text-navy/60 max-w-xl mx-auto leading-relaxed mb-7">
-    Sin complicaciones. Te activamos tu cuenta directamente, con soporte real y garantía total. <strong class="text-navy/80">Pagás con Yape, Plin o tu banco.</strong>
+    Sin complicaciones. Te activamos tu cuenta directamente, con soporte real y garantía total. <strong class="text-navy/80">Pagás con Yape, Binance o PayPal.</strong>
   </p>
   <a href="#productos" class="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-purple-500 text-white font-bold px-7 py-3 rounded-full shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all hover:scale-105 text-sm">
     <i class="fa-solid fa-arrow-down"></i> Ver Productos
@@ -343,23 +343,58 @@ html{scroll-behavior:smooth;}
     
     <!-- Payment Methods card -->
     <div class="bg-white rounded-3xl p-6 sm:p-8 border border-navy/5 shadow-md space-y-6">
-      <h3 class="text-lg font-extrabold text-navy">💳 Medios de Pago Aceptados</h3>
-      <p class="text-xs text-navy/60 leading-relaxed">Procesamos activaciones inmediatas aceptando los medios de pago más populares del mercado peruano y latinoamericano:</p>
+      <h3 class="text-lg font-extrabold text-navy">💳 Medios de Pago Destacados</h3>
+      <p class="text-xs text-navy/60 leading-relaxed">Aceptamos activaciones rápidas e inmediatas a través de los canales de pago más seguros y preferidos:</p>
       
-      <div class="grid grid-cols-2 gap-3">
-        <div class="bg-sky-50 border border-sky-100 rounded-xl p-3.5 flex flex-col justify-between">
-          <span class="text-xs font-bold text-sky-700">Yape / Plin</span>
-          <span class="text-[9px] text-sky-600 mt-1">Código QR y transferencias a número telefónico.</span>
+      <div class="space-y-3">
+        <!-- Yape -->
+        <div class="flex items-center gap-3.5 bg-purple-50/50 border border-purple-100/70 rounded-2xl p-3.5 transition-all hover:bg-purple-50">
+          <div class="w-10 h-10 rounded-xl bg-[#7D2D8A] flex items-center justify-center text-white text-[10px] font-black shadow-sm shrink-0">
+            YAPE
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-purple-950">Yape / Plin</span>
+              <span class="text-[9px] font-bold bg-purple-200/50 text-[#7D2D8A] px-2 py-0.5 rounded-full">Soles 🇵🇪</span>
+            </div>
+            <p class="text-[10px] text-purple-900/60 mt-0.5">Transferencia rápida a celular o código QR.</p>
+          </div>
         </div>
-        <div class="bg-violet-50 border border-violet-100 rounded-xl p-3.5 flex flex-col justify-between">
-          <span class="text-xs font-bold text-violet-700">Banca Móvil</span>
-          <span class="text-[9px] text-violet-600 mt-1">BCP, BBVA, Interbank y Scotiabank.</span>
+
+        <!-- Binance -->
+        <div class="flex items-center gap-3.5 bg-amber-50/50 border border-amber-100/70 rounded-2xl p-3.5 transition-all hover:bg-amber-50">
+          <div class="w-10 h-10 rounded-xl bg-[#F0B90B] flex items-center justify-center text-amber-950 text-base shadow-sm shrink-0">
+            <i class="fa-solid fa-coins"></i>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-amber-950">Binance Pay</span>
+              <span class="text-[9px] font-bold bg-amber-200/50 text-amber-800 px-2 py-0.5 rounded-full">Cripto ⚡</span>
+            </div>
+            <p class="text-[10px] text-amber-900/60 mt-0.5">Sin comisión. Aceptamos USDT y criptomonedas.</p>
+          </div>
+        </div>
+
+        <!-- PayPal -->
+        <div class="flex items-center gap-3.5 bg-blue-50/50 border border-blue-100/70 rounded-2xl p-3.5 transition-all hover:bg-blue-50">
+          <div class="w-10 h-10 rounded-xl bg-[#0079C1] flex items-center justify-center text-white text-base shadow-sm shrink-0">
+            <i class="fa-brands fa-paypal"></i>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-extrabold text-blue-950">PayPal</span>
+              <span class="text-[9px] font-bold bg-blue-200/50 text-blue-800 px-2 py-0.5 rounded-full">Tarjetas 💳</span>
+            </div>
+            <p class="text-[10px] text-blue-900/60 mt-0.5">Tarjetas de crédito o débito internacionales.</p>
+          </div>
         </div>
       </div>
 
+      <p class="text-[10px] text-navy/40 text-center italic mt-2">* También aceptamos transferencias interbancarias tradicionales.</p>
+
       <div class="border-t border-navy/5 pt-5 space-y-3">
         <h4 class="text-xs font-bold text-navy/70 uppercase tracking-wider">🔒 Activación 100% Protegida</h4>
-        <p class="text-[11px] text-navy/50 leading-relaxed">Tus pagos están seguros. Tras realizar la transferencia o yapeo, nos envías el comprobante e inmediatamente validamos y habilitamos el servicio premium en tu cuenta.</p>
+        <p class="text-[11px] text-navy/50 leading-relaxed">Tus pagos están seguros. Tras realizar la transferencia, yapeo o envío de cripto/PayPal, nos envías el comprobante e inmediatamente validamos y habilitamos el servicio.</p>
       </div>
 
       <!-- Quick action inside payment card -->
