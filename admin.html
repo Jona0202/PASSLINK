@@ -183,9 +183,15 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
         <label class="form-label">Características (una por línea)</label>
         <textarea class="form-input" id="f-feats" rows="4" placeholder="Característica 1&#10;Característica 2&#10;Característica 3"></textarea>
       </div>
-      <div class="col-span-2 flex items-center gap-2">
-        <input type="checkbox" id="f-highlight" class="w-4 h-4 accent-indigo-500">
-        <label for="f-highlight" class="form-label mb-0">Marcar como Destacado</label>
+      <div class="col-span-2 flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <input type="checkbox" id="f-highlight" class="w-4 h-4 accent-indigo-500">
+          <label for="f-highlight" class="form-label mb-0">Marcar como Destacado</label>
+        </div>
+        <div class="flex items-center gap-2 mt-1">
+          <input type="checkbox" id="f-hidden" class="w-4 h-4 accent-indigo-500">
+          <label for="f-hidden" class="form-label mb-0 text-red-600">Ocultar de la tienda (Borrador)</label>
+        </div>
       </div>
     </div>
     <div class="flex gap-3 mt-6">
@@ -379,9 +385,15 @@ function renderProductTable(){
   const p=getProducts();
   document.getElementById('product-table').innerHTML=`
     <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-3 pr-4">Imagen</th><th class="pb-3 pr-4">Producto</th><th class="pb-3 pr-4">Precio</th><th class="pb-3 pr-4">Stock</th><th class="pb-3">Acciones</th></tr></thead><tbody>${p.map((x,i)=>`
-    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors ${x.hidden ? 'opacity-50 bg-slate-50' : ''}">
       <td class="py-3 pr-4"><img src="${esc(x.imageUrl)}" alt="${esc(x.name)}" class="w-14 h-10 object-cover rounded-lg" onerror="this.style.display='none'"></td>
-      <td class="py-3 pr-4"><div class="font-bold text-navy">${esc(x.name)}</div><div class="text-xs text-gray-400">${esc(x.subtitle)}</div></td>
+      <td class="py-3 pr-4">
+        <div class="font-bold text-navy flex items-center gap-1.5">
+          ${esc(x.name)}
+          ${x.hidden ? '<span class="text-[10px] bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded font-bold">Oculto</span>' : ''}
+        </div>
+        <div class="text-xs text-gray-400">${esc(x.subtitle)}</div>
+      </td>
       <td class="py-3 pr-4"><div class="font-bold">S/. ${esc(x.pricePEN)}</div><div class="text-xs text-gray-400">US$ ${esc(x.priceUSD)}</div></td>
       <td class="py-3 pr-4">
         <select class="text-xs border border-gray-200 rounded-lg px-2 py-1" onchange="updateStock('${x.id}',this.value)">
@@ -391,6 +403,9 @@ function renderProductTable(){
         </select>
       </td>
       <td class="py-3">
+        <button class="mr-2 ${x.hidden ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-indigo-50 text-indigo-700 hover:bg-indigo-100'} font-semibold px-3 py-1.5 rounded-lg text-xs transition-colors" onclick="toggleVisibility('${x.id}')" title="${x.hidden ? 'Mostrar en la tienda' : 'Ocultar de la tienda'}">
+          <i class="fa-solid ${x.hidden ? 'fa-eye-slash' : 'fa-eye'} mr-1"></i> ${x.hidden ? 'Mostrar' : 'Ocultar'}
+        </button>
         <button class="btn-edit mr-2" onclick="openForm('${x.id}')"><i class="fa-solid fa-pen"></i> Editar</button>
         <button class="btn-danger" onclick="deleteProduct('${x.id}')"><i class="fa-solid fa-trash"></i></button>
       </td>
@@ -409,6 +424,17 @@ function deleteProduct(id){
   saveProducts(p);
   renderProductTable();
   renderDashboard();
+}
+
+function toggleVisibility(id){
+  const p=getProducts();
+  const idx=p.findIndex(x=>x.id===id);
+  if(idx>=0){
+    p[idx].hidden=!p[idx].hidden;
+    saveProducts(p);
+    renderProductTable();
+    renderDashboard();
+  }
 }
 
 let editId=null;
@@ -431,6 +457,7 @@ function openForm(id){
       document.getElementById('f-desc').value=p.description||'';
       document.getElementById('f-feats').value=(p.features||[]).join('\n');
       document.getElementById('f-highlight').checked=!!p.highlighted;
+      document.getElementById('f-hidden').checked=!!p.hidden;
     }
   } else {
     ['f-name','f-subtitle','f-pen','f-usd','f-img','f-badge','f-icon','f-desc','f-feats'].forEach(id=>document.getElementById(id).value='');
@@ -438,6 +465,7 @@ function openForm(id){
     document.getElementById('f-stock').value='available';
     document.getElementById('f-grad').value='from-blue-500 to-cyan-400';
     document.getElementById('f-highlight').checked=false;
+    document.getElementById('f-hidden').checked=false;
   }
   document.getElementById('form-modal').classList.add('open');
 }
@@ -461,7 +489,8 @@ function saveProduct(){
     iconClass:document.getElementById('f-icon').value||'fa-solid fa-box',
     gradient:document.getElementById('f-grad').value,
     stock:document.getElementById('f-stock').value,
-    highlighted:document.getElementById('f-highlight').checked
+    highlighted:document.getElementById('f-highlight').checked,
+    hidden:document.getElementById('f-hidden').checked
   };
   const p=getProducts();
   if(editId){const i=p.findIndex(x=>x.id===editId);if(i>=0)p[i]=obj;else p.push(obj);}

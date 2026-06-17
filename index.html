@@ -716,7 +716,8 @@ function renderProducts(filter, search){
   activeFilter=filter!==undefined?filter:activeFilter;
   activeSearch=search!==undefined?search:activeSearch;
   const q=activeSearch.toLowerCase().trim();
-  let list=activeFilter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===activeFilter);
+  let list=PRODUCTS.filter(p=>!p.hidden);
+  if(activeFilter!=='all') list=list.filter(p=>p.category===activeFilter);
   if(q) list=list.filter(p=>(p.name+p.subtitle+(p.features||[]).join(' ')).toLowerCase().includes(q));
   grid.innerHTML='';
   if(!list.length){
