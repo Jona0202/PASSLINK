@@ -334,6 +334,13 @@ html{scroll-behavior:smooth;}
           </div>
         </div>
         <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
+          <div class="text-[#1877F2] text-2xl"><i class="fa-brands fa-facebook"></i></div>
+          <div>
+            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Síguenos en Facebook</p>
+            <a href="https://www.facebook.com/profile.php?id=61590628588518" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-navy hover:text-accent transition-colors">PassLink LATAM</a>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
           <div class="text-purple-500 text-2xl"><i class="fa-solid fa-clock"></i></div>
           <div>
             <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Horario de Operaciones</p>
@@ -434,9 +441,18 @@ html{scroll-behavior:smooth;}
 <!-- FOOTER -->
 <footer class="bg-navy text-white/50 text-[11px] leading-relaxed py-10 px-4">
   <div class="max-w-3xl mx-auto text-center space-y-4">
-    <div class="flex items-center justify-center gap-2 mb-3">
+    <div class="flex items-center justify-center gap-2 mb-2">
       <img src="assets/logo.png?v=4" alt="PassLink LATAM Logo" class="w-7 h-7 rounded-full object-cover shadow border border-white/10">
       <span class="text-sm font-bold text-white/80">PassLink <span class="text-accent-light">LATAM</span></span>
+    </div>
+    <!-- Social Links -->
+    <div class="flex justify-center gap-4 text-lg text-white/60 mb-3">
+      <a href="https://www.facebook.com/profile.php?id=61590628588518" target="_blank" rel="noopener noreferrer" class="hover:text-[#1877F2] transition-colors" aria-label="Facebook">
+        <i class="fa-brands fa-facebook"></i>
+      </a>
+      <a id="footer-wa-link" href="#" target="_blank" rel="noopener noreferrer" class="hover:text-[#25D366] transition-colors" aria-label="WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
     </div>
     <p>PassLink LATAM es un revendedor independiente de servicios digitales. No estamos afiliados, asociados ni respaldados por Google LLC, OpenAI Inc., Netflix Inc., The Walt Disney Company ni ninguna de sus subsidiarias. Todas las marcas registradas, logotipos y nombres de productos mencionados pertenecen a sus respectivos propietarios.</p>
     <p class="text-white/30">&copy; 2026 PassLink LATAM. Todos los derechos reservados.</p>
@@ -838,6 +854,7 @@ document.getElementById('contacto-wa-link').href = `https://wa.me/${WA}`;
 document.getElementById('contacto-wa-link').textContent = formatPhoneNumber(WA);
 document.getElementById('wa-contacto-checkout').href = globalWAUrl;
 document.getElementById('wa-mobile-btn').href = globalWAUrl;
+document.getElementById('footer-wa-link').href = globalWAUrl;
 
 renderProducts('all','');
 </script>
