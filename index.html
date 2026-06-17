@@ -592,8 +592,15 @@ const DEFAULT_PRODUCTS = [
 // ── DATA LAYER (localStorage first) ────────────────────────
 function getProducts(){
   try{
-    const saved=localStorage.getItem('passlink_products');
-    return saved?JSON.parse(saved):DEFAULT_PRODUCTS;
+    const savedVersion = localStorage.getItem('passlink_products_version');
+    const saved = localStorage.getItem('passlink_products');
+    // Si la version no coincide, limpiar cache obsoleto y usar defaults frescos
+    if(!saved || savedVersion !== 'v3'){
+      localStorage.removeItem('passlink_products');
+      localStorage.setItem('passlink_products_version', 'v3');
+      return DEFAULT_PRODUCTS;
+    }
+    return JSON.parse(saved);
   }catch{return DEFAULT_PRODUCTS;}
 }
 function getConfig(){

@@ -44,7 +44,12 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
     <img src="assets/logo.png?v=4" alt="PassLink LATAM Logo" style="width:52px;height:52px;border-radius:50%;object-fit:cover;margin:0 auto 16px;box-shadow:0 4px 12px rgba(0,0,0,0.15);border:2px solid rgba(255,255,255,0.2);">
     <h1 style="color:#fff;font-size:20px;font-weight:800;margin-bottom:4px;">Panel Admin</h1>
     <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:28px;">PassLink LATAM</p>
-    <input id="pw-input" type="password" placeholder="Contraseña de acceso" autocomplete="current-password" style="width:100%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px 14px;color:#fff;font-size:14px;font-family:'Inter';outline:none;box-sizing:border-box;margin-bottom:12px;" onkeydown="if(event.key==='Enter')doLogin()">
+    <div style="position:relative;margin-bottom:12px;">
+      <input id="pw-input" type="password" placeholder="Contraseña de acceso" autocomplete="current-password" style="width:100%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px 44px 12px 14px;color:#fff;font-size:14px;font-family:'Inter';outline:none;box-sizing:border-box;" onkeydown="if(event.key==='Enter')doLogin()">
+      <button type="button" onclick="togglePwVisibility()" id="eye-btn" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:rgba(255,255,255,0.5);font-size:16px;padding:4px;line-height:1;" title="Mostrar/ocultar contraseña">
+        <i class="fa-solid fa-eye" id="eye-icon"></i>
+      </button>
+    </div>
     <button id="login-btn" onclick="doLogin()" style="width:100%;background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;font-weight:700;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:14px;">Ingresar</button>
     <p id="login-err" style="color:#f87171;font-size:12px;margin-top:10px;display:none;"></p>
     <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:16px;">Acceso restringido</p>
@@ -206,6 +211,19 @@ function getProducts(){try{const s=localStorage.getItem(PRODUCTS_KEY);return s?J
 function saveProducts(p){localStorage.setItem(PRODUCTS_KEY,JSON.stringify(p));}
 function getConfig(){try{const c=localStorage.getItem(CONFIG_KEY);return c?JSON.parse(c):{whatsapp:'17279103889'};}catch{return {whatsapp:'17279103889'};}}
 function saveConfigData(c){localStorage.setItem(CONFIG_KEY,JSON.stringify(c));}
+// ── MOSTRAR / OCULTAR CONTRASEÑA ────────────────────────────
+function togglePwVisibility(){
+  const inp=document.getElementById('pw-input');
+  const icon=document.getElementById('eye-icon');
+  if(inp.type==='password'){
+    inp.type='text';
+    icon.classList.replace('fa-eye','fa-eye-slash');
+  } else {
+    inp.type='password';
+    icon.classList.replace('fa-eye-slash','fa-eye');
+  }
+}
+
 // ── SEGURIDAD: hash ofuscado en base64, sin texto plano visible ──
 function _h(){return atob('ZWM4NWY5ZjQyZDI3YmJmNjBkMjFmZmVkMWIxMjA1NGE2ZGUyNDIwNWViYjc5ZjcyNmFhZWM0NjRiNWIzNzAyZQ==');}
 function getPwHash(){return localStorage.getItem(ADMIN_PW_KEY)||_h();}
