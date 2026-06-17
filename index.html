@@ -273,6 +273,7 @@ html{scroll-behavior:smooth;}
     <button class="filter-btn active px-5 py-2.5 rounded-full text-sm font-semibold border border-transparent transition-all duration-300 cursor-pointer" data-cat="all"><i class="fa-solid fa-grid-2 mr-1"></i> Todos</button>
     <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="ai"><i class="fa-solid fa-microchip mr-1"></i> Inteligencia Artificial</button>
     <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="streaming"><i class="fa-solid fa-tv mr-1"></i> Streaming</button>
+    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="software"><i class="fa-solid fa-scissors mr-1"></i> Software Creativo</button>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="product-grid"></div>
 </section>
@@ -490,6 +491,76 @@ const DEFAULT_PRODUCTS = [
     pricePEN:15, priceUSD:4.30,
     badgeText:"Combo", iconClass:"fa-solid fa-hat-wizard",
     gradient:"from-indigo-500 to-blue-400", stock:"low", highlighted:false
+  },
+  {
+    id:"perplexity-pro-1y", category:"ai",
+    name:"Perplexity PRO", subtitle:"1 Año · Búsqueda IA Avanzada",
+    description:"Perplexity PRO es el buscador con inteligencia artificial más preciso del mundo. Accede a respuestas con fuentes verificadas en tiempo real, sin alucinaciones. Ideal para investigadores, estudiantes y profesionales que necesitan información confiable al instante. Plan anual completo en tu cuenta personal.",
+    imageUrl:"assets/perplexity.png",
+    features:["1 Año de acceso PRO completo","Búsqueda IA con fuentes verificadas","Modelos GPT-4o, Claude y Sonar Pro","Sin límite de consultas diarias","Modo Focus para búsquedas especializadas"],
+    pricePEN:143, priceUSD:39.00,
+    badgeText:"Nuevo", iconClass:"fa-solid fa-magnifying-glass-chart",
+    gradient:"from-teal-500 to-cyan-400", stock:"low", highlighted:false
+  },
+  {
+    id:"gemini-pro-18m", category:"ai",
+    name:"Gemini Pro 18 Meses", subtitle:"18 Meses · Cuenta Directa",
+    description:"Accede a Gemini Pro durante 18 meses continuos directamente en tu cuenta de Google. Potencia todas tus tareas con el modelo de IA multimodal de Google: genera textos, analiza imágenes, crea código y mucho más. Compatible con Google Workspace, Gmail y Google Docs de forma nativa.",
+    imageUrl:"assets/gemini.png",
+    features:["18 Meses de acceso ininterrumpido","Cuenta personal directa","IA multimodal (texto, imágenes, código)","Integración nativa con Google Workspace","Prioridad en nuevos modelos Gemini"],
+    pricePEN:29, priceUSD:7.80,
+    badgeText:"Oferta", iconClass:"fa-solid fa-wand-magic-sparkles",
+    gradient:"from-blue-600 to-indigo-400", stock:"available", highlighted:false
+  },
+  {
+    id:"capcut-6m-individual", category:"software",
+    name:"CapCut 6 Meses", subtitle:"Individual · Pro · 6 Meses",
+    description:"CapCut Pro Individual durante 6 meses: el editor de video con IA más popular del mundo. Elimina fondos automáticamente, genera subtítulos con IA, accede a templates premium y exporta en 4K sin marcas de agua. Perfecto para creadores de contenido y marketers.",
+    imageUrl:"assets/capcut.png",
+    features:["6 Meses de acceso Pro Individual","Exportación 4K sin marcas de agua","Eliminación de fondo con IA","Subtítulos automáticos por IA","Templates y efectos premium ilimitados"],
+    pricePEN:75, priceUSD:20.50,
+    badgeText:"Limitado", iconClass:"fa-solid fa-scissors",
+    gradient:"from-rose-500 to-pink-400", stock:"low", highlighted:false
+  },
+  {
+    id:"capcut-1m-pro-fw", category:"software",
+    name:"CapCut 1 Mes Pro FW", subtitle:"1 Mes · Individual Pro · Full Warranty",
+    description:"CapCut Pro Individual por 1 mes con garantía completa (Full Warranty). Disfruta de todas las herramientas de edición con IA a un precio accesible. Si ocurre cualquier inconveniente durante el período de vigencia, lo reponemos sin costo adicional. Ideal para proyectos puntuales o para probar el plan Pro.",
+    imageUrl:"assets/capcut.png",
+    features:["1 Mes Pro Individual con garantía total","Reposición gratuita ante cualquier falla","Exportación 4K sin marca de agua","Acceso a todas las herramientas IA","Activación inmediata en tu cuenta"],
+    pricePEN:35, priceUSD:9.50,
+    badgeText:"Garantía", iconClass:"fa-solid fa-scissors",
+    gradient:"from-pink-500 to-fuchsia-400", stock:"low", highlighted:false
+  },
+  {
+    id:"supergrok-3m", category:"ai",
+    name:"SuperGrok 3 Meses", subtitle:"3 Meses · Full Warranty · xAI",
+    description:"SuperGrok es el plan premium de Grok, la IA de xAI creada por Elon Musk. Accede a los modelos más avanzados de razonamiento, análisis de datos en tiempo real con integración a X (Twitter), generación de imágenes y capacidades de pensamiento profundo. 3 meses con garantía completa incluida.",
+    imageUrl:"assets/grok.png",
+    features:["3 Meses SuperGrok con garantía completa","Acceso a Grok 3 y modelos de razonamiento","Datos en tiempo real de X (Twitter)","Generación de imágenes Aurora","Modo Think para análisis profundo"],
+    pricePEN:69, priceUSD:19.00,
+    badgeText:"Exclusivo", iconClass:"fa-brands fa-x-twitter",
+    gradient:"from-slate-700 to-gray-500", stock:"low", highlighted:false
+  },
+  {
+    id:"gamma-1m-ultra", category:"ai",
+    name:"Gamma Ultra Plan", subtitle:"1 Mes · Plan Ultra · IA para Presentaciones",
+    description:"Gamma es la herramienta de IA líder para crear presentaciones, documentos y páginas web de forma instantánea. Con el Plan Ultra, genera presentaciones profesionales con un solo prompt, personaliza diseños con IA, exporta a PowerPoint y PDF, y elimina toda marca de agua. Ideal para emprendedores y equipos de ventas.",
+    imageUrl:"assets/gamma.png",
+    features:["1 Mes de acceso Plan Ultra completo","Presentaciones profesionales con IA","Exportación a PowerPoint y PDF","Sin marca de agua en todas las creaciones","Diseños personalizables e ilimitados"],
+    pricePEN:57, priceUSD:15.50,
+    badgeText:"Agotándose", iconClass:"fa-solid fa-person-chalkboard",
+    gradient:"from-violet-600 to-purple-400", stock:"low", highlighted:false
+  },
+  {
+    id:"spotify-3m", category:"streaming",
+    name:"Spotify Premium", subtitle:"3 Meses · Individual · Sin Anuncios",
+    description:"Disfruta de Spotify Premium durante 3 meses en tu cuenta personal: música sin interrupciones, sin anuncios y con la máxima calidad de audio. Descarga tus canciones y podcasts favoritos para escucharlos sin conexión a internet. Funciona en todos tus dispositivos simultáneamente.",
+    imageUrl:"assets/spotify.png",
+    features:["3 Meses de Premium Individual","Música sin anuncios en alta calidad","Descargas offline ilimitadas","Reproducción sin restricciones geográficas","Calidad Very High (320kbps)"],
+    pricePEN:40, priceUSD:11.00,
+    badgeText:"Disponible", iconClass:"fa-brands fa-spotify",
+    gradient:"from-green-500 to-emerald-400", stock:"low", highlighted:false
   }
 ];
 
@@ -543,7 +614,7 @@ function openModal(id){
   const waText=encodeURIComponent(`¡Hola PassLink LATAM! 👋 Quiero adquirir *${p.name}* por S/. ${p.pricePEN.toFixed(2)} (US$ ${p.priceUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
   const waURL=`https://wa.me/${WA}?text=${waText}`;
   const infoURL=`https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Quiero más información sobre *${p.name}* antes de comprarlo.`)}`;
-  const catLabel={ai:'Inteligencia Artificial',streaming:'Streaming',software:'Software'}[p.category]||p.category;
+  const catLabel={ai:'Inteligencia Artificial',streaming:'Streaming',software:'Software Creativo'}[p.category]||p.category;
   modalContent.innerHTML=`
     <!-- Image column -->
     <div class="modal-img-col relative">
@@ -713,7 +784,7 @@ const _LAST_NAMES = [
   'Ramos','Benítez','Cabrera','Gutiérrez','Lara','Molina','Núñez','Peña'
 ];
 const _CITIES  = ['Lima','Arequipa','Trujillo','Cusco','Piura','Chiclayo','Huancayo','Ica','Tacna','Cajamarca','Puno','Ayacucho'];
-const _PRODUCTS = ['Gemini Pro 3.5','ChatGPT Plus','Netflix Premium','Disney+ & Star+'];
+const _PRODUCTS = ['Gemini Pro 3.5','ChatGPT Plus','Netflix Premium','Disney+ & Star+','Perplexity PRO','Gemini Pro 18 Meses','CapCut Pro 6 Meses','SuperGrok','Gamma Ultra','Spotify Premium 3 Meses'];
 
 function _mask(name) {
   // Keep first letter + number of asterisks based on name length, then last initial
