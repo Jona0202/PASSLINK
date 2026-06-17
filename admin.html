@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="no-referrer">
 <title>Admin — PassLink LATAM</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -42,11 +44,10 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
     <img src="assets/logo.png?v=4" alt="PassLink LATAM Logo" style="width:52px;height:52px;border-radius:50%;object-fit:cover;margin:0 auto 16px;box-shadow:0 4px 12px rgba(0,0,0,0.15);border:2px solid rgba(255,255,255,0.2);">
     <h1 style="color:#fff;font-size:20px;font-weight:800;margin-bottom:4px;">Panel Admin</h1>
     <p style="color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:28px;">PassLink LATAM</p>
-    <input id="pw-input" type="password" placeholder="Contraseña de acceso" style="width:100%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px 14px;color:#fff;font-size:14px;font-family:'Inter';outline:none;box-sizing:border-box;margin-bottom:12px;" onkeydown="if(event.key==='Enter')doLogin()">
-    <button onclick="doLogin()" style="width:100%;background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;font-weight:700;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:14px;">Ingresar</button>
-    <p id="login-err" style="color:#f87171;font-size:12px;margin-top:10px;display:none;">Contraseña incorrecta. Usa la clave actual o restablece el acceso.</p>
-    <button onclick="resetAccess()" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.5);font-size:12px;padding:9px;border-radius:10px;cursor:pointer;margin-top:10px;font-family:'Inter';">🔑 Restablecer contraseña a la por defecto</button>
-    <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:12px;">Acceso restringido</p>
+    <input id="pw-input" type="password" placeholder="Contraseña de acceso" autocomplete="current-password" style="width:100%;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:10px;padding:12px 14px;color:#fff;font-size:14px;font-family:'Inter';outline:none;box-sizing:border-box;margin-bottom:12px;" onkeydown="if(event.key==='Enter')doLogin()">
+    <button id="login-btn" onclick="doLogin()" style="width:100%;background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;font-weight:700;padding:12px;border-radius:10px;border:none;cursor:pointer;font-size:14px;">Ingresar</button>
+    <p id="login-err" style="color:#f87171;font-size:12px;margin-top:10px;display:none;"></p>
+    <p style="color:rgba(255,255,255,0.3);font-size:11px;margin-top:16px;">Acceso restringido</p>
   </div>
 </div>
 
@@ -205,12 +206,32 @@ function getProducts(){try{const s=localStorage.getItem(PRODUCTS_KEY);return s?J
 function saveProducts(p){localStorage.setItem(PRODUCTS_KEY,JSON.stringify(p));}
 function getConfig(){try{const c=localStorage.getItem(CONFIG_KEY);return c?JSON.parse(c):{whatsapp:'17279103889'};}catch{return {whatsapp:'17279103889'};}}
 function saveConfigData(c){localStorage.setItem(CONFIG_KEY,JSON.stringify(c));}
-// Hash por defecto de: PassLink2026Secure
-const DEFAULT_PW_HASH='ec85f9f42d27bbf60d21ffed1b12054a6de24205ebb79f726aaec464b5b3702e';
+// ── SEGURIDAD: hash ofuscado en base64, sin texto plano visible ──
+function _h(){return atob('ZWM4NWY5ZjQyZDI3YmJmNjBkMjFmZmVkMWIxMjA1NGE2ZGUyNDIwNWViYjc5ZjcyNmFhZWM0NjRiNWIzNzAyZQ==');}
+function getPwHash(){return localStorage.getItem(ADMIN_PW_KEY)||_h();}
 
-function getPwHash(){
-  return localStorage.getItem(ADMIN_PW_KEY)||DEFAULT_PW_HASH;
+// ── ANTI BRUTE-FORCE: bloqueo tras 5 intentos fallidos ──
+const _LOCK_KEY='passlink_lockout';
+const _ATT_KEY='passlink_attempts';
+const MAX_ATTEMPTS=5;
+const LOCKOUT_MS=10*60*1000; // 10 minutos
+
+function _isLocked(){
+  const lock=parseInt(localStorage.getItem(_LOCK_KEY)||'0');
+  if(lock&&Date.now()<lock){return true;}
+  if(lock&&Date.now()>=lock){localStorage.removeItem(_LOCK_KEY);localStorage.removeItem(_ATT_KEY);}
+  return false;
 }
+function _registerFailedAttempt(){
+  let att=parseInt(localStorage.getItem(_ATT_KEY)||'0')+1;
+  localStorage.setItem(_ATT_KEY,att);
+  if(att>=MAX_ATTEMPTS){
+    localStorage.setItem(_LOCK_KEY,Date.now()+LOCKOUT_MS);
+    return true;
+  }
+  return false;
+}
+function _clearAttempts(){localStorage.removeItem(_ATT_KEY);localStorage.removeItem(_LOCK_KEY);}
 
 async function sha256(msg){
   const b=new TextEncoder().encode(msg);
@@ -218,24 +239,40 @@ async function sha256(msg){
   return Array.from(new Uint8Array(h)).map(x=>x.toString(16).padStart(2,'0')).join('');
 }
 
+// ── SANITIZADOR XSS: escapa caracteres peligrosos en innerHTML ──
+function esc(str){
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+}
+
 async function doLogin(){
+  const errEl=document.getElementById('login-err');
+  const btn=document.getElementById('login-btn');
+  if(_isLocked()){
+    const rem=Math.ceil((parseInt(localStorage.getItem(_LOCK_KEY))-Date.now())/60000);
+    errEl.textContent=`Demasiados intentos. Espera ${rem} min.`;
+    errEl.style.display='block';
+    btn.disabled=true;
+    btn.style.opacity='0.5';
+    return;
+  }
   const pw=document.getElementById('pw-input').value;
+  if(!pw){errEl.textContent='Ingresa una contraseña.';errEl.style.display='block';return;}
   const h=await sha256(pw);
   if(h===getPwHash()){
+    _clearAttempts();
     document.getElementById('login-screen').style.display='none';
     document.getElementById('main-app').style.display='flex';
     renderDashboard();
   } else {
-    document.getElementById('login-err').style.display='block';
-  }
-}
-
-function resetAccess(){
-  if(confirm('¿Deseas restablecer la contraseña del admin a la por defecto?\n\nNueva contraseña: PassLink2026Secure')){
-    localStorage.removeItem(ADMIN_PW_KEY);
-    alert('✅ Contraseña restablecida. Ahora ingresa con: PassLink2026Secure');
-    document.getElementById('pw-input').value='';
-    document.getElementById('login-err').style.display='none';
+    const locked=_registerFailedAttempt();
+    const att=parseInt(localStorage.getItem(_ATT_KEY)||'0');
+    if(locked){
+      errEl.textContent='Acceso bloqueado 10 minutos por demasiados intentos.';
+      btn.disabled=true;btn.style.opacity='0.5';
+    } else {
+      errEl.textContent=`Contraseña incorrecta. Intento ${att}/${MAX_ATTEMPTS}.`;
+    }
+    errEl.style.display='block';
   }
 }
 
@@ -290,12 +327,12 @@ function renderDashboard(){
   const st=p.filter(x=>x.category==='streaming').length;
   const avail=p.filter(x=>x.stock==='available').length;
   document.getElementById('stats-grid').innerHTML=`
-    <div class="card text-center"><div class="text-3xl font-black text-accent mb-1">${p.length}</div><div class="text-sm text-gray-500 font-semibold">Total Productos</div></div>
-    <div class="card text-center"><div class="text-3xl font-black text-blue-500 mb-1">${ai}</div><div class="text-sm text-gray-500 font-semibold">Productos IA</div></div>
-    <div class="card text-center"><div class="text-3xl font-black text-green-500 mb-1">${avail}</div><div class="text-sm text-gray-500 font-semibold">Disponibles</div></div>`;
+    <div class="card text-center"><div class="text-3xl font-black text-accent mb-1">${esc(p.length)}</div><div class="text-sm text-gray-500 font-semibold">Total Productos</div></div>
+    <div class="card text-center"><div class="text-3xl font-black text-blue-500 mb-1">${esc(ai)}</div><div class="text-sm text-gray-500 font-semibold">Productos IA</div></div>
+    <div class="card text-center"><div class="text-3xl font-black text-green-500 mb-1">${esc(avail)}</div><div class="text-sm text-gray-500 font-semibold">Disponibles</div></div>`;
   document.getElementById('recent-table').innerHTML=`
     <h3 class="font-bold text-navy mb-4">Resumen de Productos</h3>
-    <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-2">Producto</th><th class="pb-2">Cat.</th><th class="pb-2">S/.</th><th class="pb-2">US$</th><th class="pb-2">Stock</th></tr></thead><tbody>${p.map(x=>`<tr class="border-b border-gray-50"><td class="py-2 font-semibold text-navy">${x.name}</td><td class="py-2 text-gray-400">${x.category}</td><td class="py-2 font-bold">S/. ${x.pricePEN}</td><td class="py-2 text-gray-500">$${x.priceUSD}</td><td class="py-2"><span class="badge ${x.stock==='available'?'stock-available':x.stock==='low'?'stock-low':'stock-out'}">${x.stock}</span></td></tr>`).join('')}</tbody></table></div>`;
+    <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-2">Producto</th><th class="pb-2">Cat.</th><th class="pb-2">S/.</th><th class="pb-2">US$</th><th class="pb-2">Stock</th></tr></thead><tbody>${p.map(x=>`<tr class="border-b border-gray-50"><td class="py-2 font-semibold text-navy">${esc(x.name)}</td><td class="py-2 text-gray-400">${esc(x.category)}</td><td class="py-2 font-bold">S/. ${esc(x.pricePEN)}</td><td class="py-2 text-gray-500">$${esc(x.priceUSD)}</td><td class="py-2"><span class="badge ${x.stock==='available'?'stock-available':x.stock==='low'?'stock-low':'stock-out'}">${esc(x.stock)}</span></td></tr>`).join('')}</tbody></table></div>`;
 }
 
 function renderProductTable(){
@@ -303,9 +340,9 @@ function renderProductTable(){
   document.getElementById('product-table').innerHTML=`
     <div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-3 pr-4">Imagen</th><th class="pb-3 pr-4">Producto</th><th class="pb-3 pr-4">Precio</th><th class="pb-3 pr-4">Stock</th><th class="pb-3">Acciones</th></tr></thead><tbody>${p.map((x,i)=>`
     <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
-      <td class="py-3 pr-4"><img src="${x.imageUrl}" alt="${x.name}" class="w-14 h-10 object-cover rounded-lg" onerror="this.style.display='none'"></td>
-      <td class="py-3 pr-4"><div class="font-bold text-navy">${x.name}</div><div class="text-xs text-gray-400">${x.subtitle}</div></td>
-      <td class="py-3 pr-4"><div class="font-bold">S/. ${x.pricePEN}</div><div class="text-xs text-gray-400">US$ ${x.priceUSD}</div></td>
+      <td class="py-3 pr-4"><img src="${esc(x.imageUrl)}" alt="${esc(x.name)}" class="w-14 h-10 object-cover rounded-lg" onerror="this.style.display='none'"></td>
+      <td class="py-3 pr-4"><div class="font-bold text-navy">${esc(x.name)}</div><div class="text-xs text-gray-400">${esc(x.subtitle)}</div></td>
+      <td class="py-3 pr-4"><div class="font-bold">S/. ${esc(x.pricePEN)}</div><div class="text-xs text-gray-400">US$ ${esc(x.priceUSD)}</div></td>
       <td class="py-3 pr-4">
         <select class="text-xs border border-gray-200 rounded-lg px-2 py-1" onchange="updateStock('${x.id}',this.value)">
           <option value="available" ${x.stock==='available'?'selected':''}>Disponible</option>
