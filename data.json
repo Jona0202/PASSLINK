@@ -59,13 +59,14 @@
         "Perfil Personalizado",
         "Catálogo completo sin restricción"
       ],
-      "pricePEN": 18,
-      "priceUSD": 5.2,
+      "pricePEN": 15,
+      "priceUSD": 4.2,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-film",
       "gradient": "from-red-500 to-rose-400",
       "stock": "available",
-      "highlighted": false
+      "highlighted": true,
+      "hidden": false
     },
     {
       "id": "disney-star",
