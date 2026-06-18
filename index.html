@@ -120,8 +120,7 @@ html{scroll-behavior:smooth;}
 .search-wrap input{width:100%;padding:12px 16px 12px 44px;background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border:1.5px solid rgba(99,102,241,0.15);border-radius:999px;font-size:14px;font-family:'Inter',sans-serif;color:#0f1b3d;outline:none;box-sizing:border-box;transition:border .2s,box-shadow .2s;}
 .search-wrap input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.12);}
 .search-wrap .search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#6366f1;font-size:14px;pointer-events:none;}
-/* Toast social proof */
-#toast-proof{position:fixed;bottom:24px;left:20px;z-index:200;max-width:290px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 8px 32px rgba(15,27,61,0.18);border:1px solid rgba(99,102,241,0.12);display:flex;align-items:flex-start;gap:10px;transform:translateY(120%);opacity:0;transition:transform 0.45s cubic-bezier(.4,0,.2,1),opacity 0.45s;pointer-events:none;}
+#toast-proof{position:fixed;bottom:24px;left:20px;z-index:200;max-width:290px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 8px 32px rgba(15,27,61,0.18);border:1px solid rgba(99,102,241,0.12);display:flex;align-items:flex-start;gap:10px;transform:translateY(120%);opacity:0;transition:transform 0.45s cubic-bezier(.4,0,.2,1),opacity 0.45s;pointer-events:auto;cursor:pointer;}
 #toast-proof.show{transform:translateY(0);opacity:1;}
 /* Card image hover zoom */
 .card-img-wrap img{transition:transform 0.4s cubic-bezier(.4,0,.2,1);}
@@ -414,8 +413,9 @@ html{scroll-behavior:smooth;}
 
 <!-- SOCIAL PROOF TOAST -->
 <div id="toast-proof" role="alert" aria-live="polite">
-  <div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#9333ea);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-    <i class="fa-solid fa-circle-check" style="color:#fff;font-size:16px;"></i>
+  <div id="toast-icon-wrap" style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#9333ea);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;">
+    <i id="toast-icon-check" class="fa-solid fa-circle-check" style="color:#fff;font-size:16px;"></i>
+    <img id="toast-icon-img" src="" style="width:100%;height:100%;object-fit:cover;display:none;">
   </div>
   <div>
     <p id="toast-name" style="font-size:13px;font-weight:700;color:#0f1b3d;margin:0 0 2px;"></p>
@@ -914,14 +914,44 @@ function _buildName() {
 }
 
 function showToast(){
-  const city    = _CITIES[Math.floor(Math.random() * _CITIES.length)];
-  const product = _PRODUCTS[Math.floor(Math.random() * _PRODUCTS.length)];
-  const mins    = Math.floor(Math.random() * 28) + 1;
-  document.getElementById('toast-name').textContent   = `${_buildName()} — ${city}`;
-  document.getElementById('toast-detail').textContent = `acaba de adquirir ${product} · hace ${mins} min`;
+  const refs = getReferences();
+  const checkIcon = document.getElementById('toast-icon-check');
+  const imgThumb = document.getElementById('toast-icon-img');
   const t = document.getElementById('toast-proof');
+
+  if (refs && refs.length > 0) {
+    const ref = refs[Math.floor(Math.random() * refs.length)];
+    document.getElementById('toast-name').textContent = ref.title;
+    
+    let shortDesc = ref.description || 'Entrega exitosa';
+    if (shortDesc.length > 55) {
+      shortDesc = shortDesc.slice(0, 52) + '...';
+    }
+    document.getElementById('toast-detail').textContent = `${shortDesc} · ${ref.date}`;
+    
+    if (ref.imageUrl) {
+      imgThumb.src = ref.imageUrl;
+      imgThumb.style.display = 'block';
+      checkIcon.style.display = 'none';
+    } else {
+      imgThumb.style.display = 'none';
+      checkIcon.style.display = 'block';
+    }
+    
+    t.onclick = () => openRefModal(ref.id);
+  } else {
+    const city    = _CITIES[Math.floor(Math.random() * _CITIES.length)];
+    const product = _PRODUCTS[Math.floor(Math.random() * _PRODUCTS.length)];
+    const mins    = Math.floor(Math.random() * 28) + 1;
+    document.getElementById('toast-name').textContent   = `${_buildName()} — ${city}`;
+    document.getElementById('toast-detail').textContent = `acaba de adquirir ${product} · hace ${mins} min`;
+    imgThumb.style.display = 'none';
+    checkIcon.style.display = 'block';
+    t.onclick = null;
+  }
+  
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 5500);
+  setTimeout(() => t.classList.remove('show'), 6500);
 }
 setTimeout(() => {
   showToast();
