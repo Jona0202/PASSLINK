@@ -43,7 +43,7 @@
       "badgeText": "Top IA",
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
-      "stock": "available",
+      "stock": "out",
       "highlighted": false
     },
     {
