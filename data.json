@@ -196,13 +196,14 @@
         "Generación de imágenes Aurora",
         "Modo Think para análisis profundo"
       ],
-      "pricePEN": 69,
+      "pricePEN": 65,
       "priceUSD": 19,
       "badgeText": "Exclusivo",
       "iconClass": "fa-brands fa-x-twitter",
-      "gradient": "from-slate-700 to-gray-500",
+      "gradient": "",
       "stock": "low",
-      "highlighted": false
+      "highlighted": false,
+      "hidden": false
     },
     {
       "id": "gamma-1m-ultra",
