@@ -150,13 +150,14 @@
         "Subtítulos automáticos por IA",
         "Templates y efectos premium ilimitados"
       ],
-      "pricePEN": 75,
-      "priceUSD": 20.5,
+      "pricePEN": 68,
+      "priceUSD": 20,
       "badgeText": "Limitado",
       "iconClass": "fa-solid fa-scissors",
-      "gradient": "from-rose-500 to-pink-400",
+      "gradient": "",
       "stock": "low",
-      "highlighted": false
+      "highlighted": false,
+      "hidden": false
     },
     {
       "id": "capcut-1m-pro-fw",
