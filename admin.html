@@ -89,6 +89,8 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
     <div class="nav-link" onclick="selectSection('products')" id="nav-products"><i class="fa-solid fa-box w-4"></i> Productos</div>
     <div class="nav-link" onclick="selectSection('referencias')" id="nav-referencias"><i class="fa-solid fa-certificate w-4"></i> Referencias</div>
     <div class="nav-link" onclick="selectSection('config')" id="nav-config"><i class="fa-solid fa-gear w-4"></i> Configuración</div>
+    <!-- Publish status badge -->
+    <div id="publish-status" style="display:none;margin:8px 16px 0;font-size:11px;font-weight:700;padding:6px 10px;border-radius:8px;text-align:center;"></div>
     <div class="mt-auto">
       <a href="index.html" target="_blank" class="nav-link"><i class="fa-solid fa-eye w-4"></i> Ver Tienda</a>
       <div class="nav-link" onclick="doLogout()"><i class="fa-solid fa-right-from-bracket w-4"></i> Cerrar sesión</div>
@@ -132,6 +134,21 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
         <input class="form-input mb-4" id="cfg-pw2" type="password" placeholder="Repetir contraseña">
         <button class="btn-primary" onclick="saveConfig()"><i class="fa-solid fa-floppy-disk mr-1"></i> Guardar Cambios</button>
         <p id="cfg-msg" class="text-sm text-green-600 font-semibold mt-3" style="display:none;"></p>
+      </div>
+      <!-- GitHub Token para publicar cambios en todos los dispositivos -->
+      <div class="card max-w-lg mt-4 border-2 border-indigo-100">
+        <div class="flex items-center gap-2 mb-3">
+          <i class="fa-brands fa-github text-navy text-lg"></i>
+          <h3 class="font-bold text-navy">Publicar en todos los dispositivos</h3>
+        </div>
+        <p class="text-xs text-gray-500 mb-3 leading-relaxed">
+          Para que los cambios (ocultar productos, stock, precios, referencias) se vean en todos los dispositivos de tus clientes, debes conectar tu cuenta de GitHub con un Token de acceso personal.
+        </p>
+        <label class="form-label">GitHub Personal Access Token</label>
+        <input class="form-input mb-2" id="cfg-gh-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+        <p class="text-[10px] text-gray-400 mb-3">Crea un token en github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens. Permiso requerido: <strong>Contents: Read and Write</strong> sobre el repo PASSLINK.</p>
+        <button class="btn-primary w-full" onclick="saveGitHubToken()"><i class="fa-brands fa-github mr-1"></i> Guardar Token</button>
+        <p id="gh-token-msg" class="text-sm font-semibold mt-2" style="display:none;"></p>
       </div>
     </div>
 
@@ -296,12 +313,109 @@ function getProducts(){
     return JSON.parse(saved);
   }catch{return DEFAULT_PRODUCTS;}
 }
+// saveProducts is defined below with publishToGitHub()
+function getConfig(){try{const c=localStorage.getItem(CONFIG_KEY);return c?JSON.parse(c):{whatsapp:'17279103889'};}catch{return {whatsapp:'17279103889'};}}
+function saveConfigData(c){
+  localStorage.setItem(CONFIG_KEY,JSON.stringify(c));
+  publishToGitHub();
+}
 function saveProducts(p){
   localStorage.setItem(PRODUCTS_KEY,JSON.stringify(p));
-  localStorage.setItem('passlink_products_version',PRODUCTS_VERSION);
+  publishToGitHub();
 }
-function getConfig(){try{const c=localStorage.getItem(CONFIG_KEY);return c?JSON.parse(c):{whatsapp:'17279103889'};}catch{return {whatsapp:'17279103889'};}}
-function saveConfigData(c){localStorage.setItem(CONFIG_KEY,JSON.stringify(c));}
+function saveReferences(r){
+  localStorage.setItem(REFERENCES_KEY,JSON.stringify(r));
+  publishToGitHub();
+}
+
+// ── GITHUB API: publica data.json para todos los dispositivos ──
+const GH_TOKEN_KEY = 'passlink_gh_token';
+const GH_REPO = 'Jona0202/PASSLINK';
+const GH_FILE = 'data.json';
+
+function showPublishStatus(msg, color) {
+  const el = document.getElementById('publish-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+  el.style.background = color === 'green' ? '#dcfce7' : color === 'red' ? '#fee2e2' : '#fef9c3';
+  el.style.color = color === 'green' ? '#16a34a' : color === 'red' ? '#dc2626' : '#92400e';
+  if (color !== 'yellow') setTimeout(() => { el.style.display = 'none'; }, 4000);
+}
+
+async function publishToGitHub() {
+  const token = localStorage.getItem(GH_TOKEN_KEY);
+  if (!token) {
+    showPublishStatus('⚠️ Token no configurado. Los cambios son solo locales.', 'yellow');
+    return;
+  }
+  showPublishStatus('🔄 Publicando cambios…', 'yellow');
+  try {
+    const data = {
+      version: 'v3',
+      config: getConfig(),
+      products: getProducts(),
+      references: getReferences()
+    };
+    const jsonStr = JSON.stringify(data, null, 2);
+    // Codificar a base64 (UTF-8 seguro)
+    const bytes = new TextEncoder().encode(jsonStr);
+    const b64 = btoa(String.fromCharCode(...bytes));
+    // Obtener SHA actual del archivo
+    const getResp = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    const fileData = await getResp.json();
+    if (!fileData.sha) throw new Error('No se obtuvo el SHA del archivo');
+    // Publicar actualización
+    const putResp = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: 'Admin: update data.json',
+        content: b64,
+        sha: fileData.sha
+      })
+    });
+    if (putResp.ok) {
+      showPublishStatus('✅ Publicado. Visible en ~30 seg.', 'green');
+    } else {
+      const err = await putResp.json();
+      throw new Error(err.message || 'Error al publicar');
+    }
+  } catch(e) {
+    console.error('[PassLink] Error al publicar:', e);
+    showPublishStatus('❌ Error: ' + e.message, 'red');
+  }
+}
+
+function saveGitHubToken() {
+  const token = document.getElementById('cfg-gh-token').value.trim();
+  const msg = document.getElementById('gh-token-msg');
+  if (!token || !token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+    msg.textContent = '❌ El token debe empezar con ghp_ o github_pat_';
+    msg.style.color = '#dc2626';
+    msg.style.display = 'block';
+    return;
+  }
+  localStorage.setItem(GH_TOKEN_KEY, token);
+  msg.textContent = '✅ Token guardado. Los cambios ahora se publicarán globalmente.';
+  msg.style.color = '#16a34a';
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 4000);
+}
+
+// Carga el token guardado en el input al abrir configuración
+function loadConfig(){
+  const c = getConfig();
+  document.getElementById('cfg-wa').value = c.whatsapp || '17279103889';
+  const savedToken = localStorage.getItem(GH_TOKEN_KEY);
+  if (savedToken) document.getElementById('cfg-gh-token').value = savedToken;
+}
 // ── MOSTRAR / OCULTAR CONTRASEÑA ────────────────────────────
 function togglePwVisibility(){
   const inp=document.getElementById('pw-input');
@@ -565,10 +679,7 @@ function saveProduct(){
   renderDashboard();
 }
 
-function loadConfig(){
-  const c=getConfig();
-  document.getElementById('cfg-wa').value=c.whatsapp||'17279103889';
-}
+// loadConfig ahora está definida en la sección de GitHub API arriba
 
 async function saveConfig(){
   const wa=document.getElementById('cfg-wa').value.trim();
@@ -636,10 +747,7 @@ function getReferences(){
   }catch{return DEFAULT_REFERENCES;}
 }
 
-function saveReferences(r){
-  localStorage.setItem(REFERENCES_KEY,JSON.stringify(r));
-  localStorage.setItem('passlink_references_version',REFERENCES_VERSION);
-}
+// saveReferences is defined above with publishToGitHub()
 
 function renderReferencesTable(){
   const refs=getReferences();

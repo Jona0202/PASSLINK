@@ -622,19 +622,19 @@ const DEFAULT_PRODUCTS = [
   }
 ];
 
-// ── DATA LAYER (localStorage first) ────────────────────────
+// ── DATA LAYER — data.json es la fuente de verdad global ──
+// localStorage solo se usa como caché temporal mientras carga
 function getProducts(){
   try{
-    const savedVersion = localStorage.getItem('passlink_products_version');
     const saved = localStorage.getItem('passlink_products');
-    // Si la version no coincide, limpiar cache obsoleto y usar defaults frescos
-    if(!saved || savedVersion !== 'v3'){
-      localStorage.removeItem('passlink_products');
-      localStorage.setItem('passlink_products_version', 'v3');
-      return DEFAULT_PRODUCTS;
-    }
-    return JSON.parse(saved);
-  }catch{return DEFAULT_PRODUCTS;}
+    return saved ? JSON.parse(saved) : DEFAULT_PRODUCTS;
+  }catch{ return DEFAULT_PRODUCTS; }
+}
+function getReferencesLocal(){
+  try{
+    const saved = localStorage.getItem('passlink_references');
+    return saved ? JSON.parse(saved) : [];
+  }catch{ return []; }
 }
 function getConfig(){
   try{
@@ -941,15 +941,9 @@ const DEFAULT_REFERENCES = [
 const REFERENCES_VERSION = 'v3';
 function getReferences(){
   try{
-    const savedVersion = localStorage.getItem('passlink_references_version');
     const saved = localStorage.getItem('passlink_references');
-    if(!saved || savedVersion !== REFERENCES_VERSION){
-      localStorage.removeItem('passlink_references');
-      localStorage.setItem('passlink_references_version', REFERENCES_VERSION);
-      return DEFAULT_REFERENCES;
-    }
-    return JSON.parse(saved);
-  }catch{return DEFAULT_REFERENCES;}
+    return saved ? JSON.parse(saved) : DEFAULT_REFERENCES;
+  }catch{ return DEFAULT_REFERENCES; }
 }
 
 function renderReferences() {
@@ -1009,8 +1003,43 @@ function closeRefModal() {
   document.body.style.overflow = '';
 }
 
-renderProducts('all','');
-renderReferences();
+// ── INIT: carga data.json global y renderiza ────────────────
+async function initApp() {
+  try {
+    // Siempre pedir la versión más fresca con cache-busting
+    const res = await fetch('/data.json?v=' + Date.now(), {cache: 'no-store'});
+    if (res.ok) {
+      const data = await res.json();
+      // Actualizar productos desde el servidor
+      if (Array.isArray(data.products) && data.products.length) {
+        PRODUCTS = data.products;
+        localStorage.setItem('passlink_products', JSON.stringify(data.products));
+      }
+      // Actualizar referencias desde el servidor
+      if (Array.isArray(data.references)) {
+        localStorage.setItem('passlink_references', JSON.stringify(data.references));
+      }
+      // Actualizar config desde el servidor
+      if (data.config && data.config.whatsapp) {
+        localStorage.setItem('passlink_config', JSON.stringify(data.config));
+        // Actualizar links de WhatsApp dinámicamente
+        const freshWA = data.config.whatsapp;
+        const freshWAText = encodeURIComponent('¡Hola PassLink LATAM! 👋 Quisiera solicitar más información sobre sus servicios premium de IA y Streaming.');
+        const freshWAUrl = `https://wa.me/${freshWA}?text=${freshWAText}`;
+        document.querySelectorAll('#wa-float,#wa-mobile-btn,#wa-contacto-checkout,#footer-wa-link').forEach(el=>{ if(el) el.href = freshWAUrl; });
+        const waLinkEl = document.getElementById('contacto-wa-link');
+        if(waLinkEl){ waLinkEl.href = `https://wa.me/${freshWA}`; waLinkEl.textContent = formatPhoneNumber(freshWA); }
+      }
+    }
+  } catch(e) {
+    console.warn('[PassLink] No se pudo cargar data.json, usando datos en caché:', e.message);
+  }
+  // Renderizar con los datos más frescos disponibles
+  renderProducts('all', '');
+  renderReferences();
+}
+
+initApp();
 </script>
 </body>
 </html>
