@@ -82,12 +82,13 @@
         "Contenido exclusivo Star+"
       ],
       "pricePEN": 15,
-      "priceUSD": 4.3,
+      "priceUSD": 4.2,
       "badgeText": "Combo",
       "iconClass": "fa-solid fa-hat-wizard",
       "gradient": "from-indigo-500 to-blue-400",
       "stock": "low",
-      "highlighted": false
+      "highlighted": false,
+      "hidden": false
     },
     {
       "id": "perplexity-pro-1y",
