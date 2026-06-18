@@ -104,13 +104,14 @@
         "Sin límite de consultas diarias",
         "Modo Focus para búsquedas especializadas"
       ],
-      "pricePEN": 143,
+      "pricePEN": 133,
       "priceUSD": 39,
       "badgeText": "Nuevo",
       "iconClass": "fa-solid fa-magnifying-glass-chart",
-      "gradient": "from-teal-500 to-cyan-400",
+      "gradient": "",
       "stock": "low",
-      "highlighted": false
+      "highlighted": true,
+      "hidden": false
     },
     {
       "id": "gemini-pro-18m",
