@@ -173,13 +173,14 @@
         "Acceso a todas las herramientas IA",
         "Activación inmediata en tu cuenta"
       ],
-      "pricePEN": 35,
-      "priceUSD": 9.5,
+      "pricePEN": 22,
+      "priceUSD": 6.5,
       "badgeText": "Garantía",
       "iconClass": "fa-solid fa-scissors",
-      "gradient": "from-pink-500 to-fuchsia-400",
+      "gradient": "",
       "stock": "low",
-      "highlighted": false
+      "highlighted": false,
+      "hidden": false
     },
     {
       "id": "supergrok-3m",
