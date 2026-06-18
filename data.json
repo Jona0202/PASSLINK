@@ -210,7 +210,7 @@
       "category": "ai",
       "name": "Gamma Ultra Plan",
       "subtitle": "1 Mes · Plan Ultra · IA para Presentaciones",
-      "description": "Gamma es la herramienta de IA líder para crear presentaciones, documentos y páginas web de forma instantánea. Con el Plan Ultra, genera presentaciones profesionales con un solo prompt, personaliza diseños con IA, exporta a PowerPoint y PDF, y elimina toda marca de agua. Ideal para emprendedores y equipos de ventas.",
+      "description": "Gamma es la herramienta de IA líder para crear presentaciones, documentos y páginas web de forma instantánea. Con el Plan Ultra, genera presentaciones profesionales con un solo prompt, personaliza designs con IA, exporta a PowerPoint y PDF, y elimina toda marca de agua. Ideal para emprendedores y equipos de ventas.",
       "imageUrl": "assets/gamma.png",
       "features": [
         "1 Mes de acceso Plan Ultra completo",
@@ -278,6 +278,35 @@
       "date": "14 de Junio",
       "description": "Entrega instantánea de credenciales de acceso para combo de entretenimiento. Cliente satisfecho en menos de 4 minutos.",
       "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=60"
+    }
+  ],
+  "slides": [
+    {
+      "id": "sl-1",
+      "type": "gradient",
+      "gradient": "linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%)",
+      "badge": "🔥 Más vendido del mes",
+      "title": "Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal",
+      "subtitle": "5 TB Cloud · Workspace incluido · Sin invitación",
+      "price": "S/. 45 / US$ 13.00"
+    },
+    {
+      "id": "sl-2",
+      "type": "gradient",
+      "gradient": "linear-gradient(135deg,#059669 0%,#0891b2 100%)",
+      "badge": "🤖 Top Inteligencia Artificial",
+      "title": "ChatGPT Plus — Perfil privado,<br>sin límites, todo el día",
+      "subtitle": "GPT-4o · DALL-E 3 · Acceso ilimitado 24/7",
+      "price": "S/. 40 / US$ 11.50"
+    },
+    {
+      "id": "sl-3",
+      "type": "gradient",
+      "gradient": "linear-gradient(135deg,#dc2626 0%,#ea580c 100%)",
+      "badge": "🎬 Combo Streaming LATAM",
+      "title": "Netflix + Disney+ & Star+<br>desde S/. 12",
+      "subtitle": "Perfiles privados · Ultra HD 4K · Para toda LATAM",
+      "price": "Desde S/. 12"
     }
   ]
 }

@@ -188,13 +188,13 @@ html{scroll-behavior:smooth;}
 <!-- HERO -->
 <section id="inicio" class="pt-16 pb-10 px-4 text-center max-w-3xl mx-auto">
   <div class="inline-flex items-center gap-2 bg-accent/10 text-accent text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
-    <i class="fa-solid fa-bolt"></i> Ofertas Junio 2026 · Solo Perú 🇵🇪
+    <i class="fa-solid fa-bolt"></i> Ofertas Junio 2026 &middot; Todo LATAM 🌎
   </div>
   <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight text-navy mb-4">
     Tus cuentas premium de <span class="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">IA</span> y <span class="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">Streaming</span>, listas en minutos
   </h1>
   <p class="text-sm sm:text-base text-navy/60 max-w-xl mx-auto leading-relaxed mb-7">
-    Sin complicaciones. Te activamos tu cuenta directamente, con soporte real y garantía total. <strong class="text-navy/80">Pagás con Yape, Binance o PayPal.</strong>
+    Sin complicaciones. Te activamos tu cuenta directamente, con soporte real y garant&iacute;a total. <strong class="text-navy/80">Pagás con Yape, Binance, PayPal y más &mdash; desde cualquier pa&iacute;s de LATAM.</strong>
   </p>
   <a href="#productos" class="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-purple-500 text-white font-bold px-7 py-3 rounded-full shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all hover:scale-105 text-sm">
     <i class="fa-solid fa-arrow-down"></i> Ver Productos
@@ -204,37 +204,11 @@ html{scroll-behavior:smooth;}
 <!-- CARRUSEL DE OFERTAS -->
 <section class="max-w-5xl mx-auto px-4 pb-10">
   <div class="carousel-wrap shadow-xl">
-    <div class="carousel-track" id="carousel-track">
-      <!-- Slide 1 -->
-      <div class="carousel-slide" style="background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 60%,#9333ea 100%);">
-        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">🔥 Más vendido del mes</span>
-        <h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal</h3>
-        <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">5 TB Cloud · Workspace incluido · Sin invitación</p>
-        <span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">S/. 45 <span style="font-size:13px;opacity:.7">/ US$ 13.00</span></span>
-      </div>
-      <!-- Slide 2 -->
-      <div class="carousel-slide" style="background:linear-gradient(135deg,#059669 0%,#0891b2 100%);">
-        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">🤖 Top Inteligencia Artificial</span>
-        <h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">ChatGPT Plus — Perfil privado,<br>sin límites, todo el día</h3>
-        <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">GPT-4o · DALL-E 3 · Acceso ilimitado 24/7</p>
-        <span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">S/. 40 <span style="font-size:13px;opacity:.7">/ US$ 11.50</span></span>
-      </div>
-      <!-- Slide 3 -->
-      <div class="carousel-slide" style="background:linear-gradient(135deg,#dc2626 0%,#ea580c 100%);">
-        <span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">🎬 Combo Streaming</span>
-        <h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">Netflix + Disney+ & Star+<br>desde S/. 12</h3>
-        <p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">Perfiles 100% privados · Ultra HD 4K · Activación hoy</p>
-        <span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">Desde S/. 12</span>
-      </div>
-    </div>
+    <div class="carousel-track" id="carousel-track"></div>
     <button class="carousel-btn carousel-btn-prev" onclick="carouselMove(-1)" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="carousel-btn carousel-btn-next" onclick="carouselMove(1)" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
   </div>
-  <div class="carousel-dots" id="carousel-dots">
-    <div class="carousel-dot active" onclick="carouselGo(0)"></div>
-    <div class="carousel-dot" onclick="carouselGo(1)"></div>
-    <div class="carousel-dot" onclick="carouselGo(2)"></div>
-  </div>
+  <div class="carousel-dots" id="carousel-dots"></div>
 </section>
 
 <!-- TRUST BADGES -->
@@ -811,8 +785,74 @@ document.getElementById('search-input').addEventListener('input',e=>{
 
 // ── CAROUSEL ────────────────────────────────────────────────
 let carouselIdx=0;
-const totalSlides=3;
+let totalSlides=3;
 let carouselTimer;
+
+// Slides por defecto (si data.json no trae slides)
+const DEFAULT_SLIDES = [
+  {
+    type:'gradient',
+    badge:'🔥 Más vendido del mes',
+    gradient:'linear-gradient(135deg,#4f46e5 0%,#7c3aed 60%,#9333ea 100%)',
+    title:'Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal',
+    subtitle:'5 TB Cloud · Workspace incluido · Sin invitación',
+    price:'S/. 45 <span style="font-size:13px;opacity:.7">/ US$ 13.00</span>'
+  },
+  {
+    type:'gradient',
+    badge:'🤖 Top Inteligencia Artificial',
+    gradient:'linear-gradient(135deg,#059669 0%,#0891b2 100%)',
+    title:'ChatGPT Plus — Perfil privado,<br>sin límites, todo el día',
+    subtitle:'GPT-4o · DALL-E 3 · Acceso ilimitado 24/7',
+    price:'S/. 40 <span style="font-size:13px;opacity:.7">/ US$ 11.50</span>'
+  },
+  {
+    type:'gradient',
+    badge:'🎬 Combo Streaming LATAM',
+    gradient:'linear-gradient(135deg,#dc2626 0%,#ea580c 100%)',
+    title:'Netflix + Disney+ &amp; Star+<br>desde S/. 12',
+    subtitle:'Perfiles 100% privados · Ultra HD 4K · Para toda LATAM',
+    price:'Desde S/. 12'
+  }
+];
+
+function renderCarousel(slides) {
+  const track = document.getElementById('carousel-track');
+  const dots  = document.getElementById('carousel-dots');
+  const data  = (slides && slides.length) ? slides : DEFAULT_SLIDES;
+  totalSlides = data.length;
+  carouselIdx = 0;
+
+  track.innerHTML = data.map(s => {
+    // Slide tipo imagen/flyer
+    if (s.type === 'image' && s.imageUrl) {
+      return `<div class="carousel-slide" style="background:url('${s.imageUrl}') center/cover no-repeat;padding:0;align-items:stretch;">
+        <div style="width:100%;height:100%;background:rgba(15,27,61,0.45);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px 40px;">
+          ${s.badge ? `<span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.8);margin-bottom:8px;">${s.badge}</span>` : ''}
+          ${s.title ? `<h3 style="font-size:clamp(18px,4vw,28px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">${s.title}</h3>` : ''}
+          ${s.subtitle ? `<p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:16px;">${s.subtitle}</p>` : ''}
+          ${s.price ? `<span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;backdrop-filter:blur(4px);">${s.price}</span>` : ''}
+        </div>
+      </div>`;
+    }
+    // Slide tipo gradiente (texto)
+    return `<div class="carousel-slide" style="background:${s.gradient || 'linear-gradient(135deg,#4f46e5,#7c3aed)'};">
+      ${s.badge ? `<span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">${s.badge}</span>` : ''}
+      ${s.title ? `<h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">${s.title}</h3>` : ''}
+      ${s.subtitle ? `<p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">${s.subtitle}</p>` : ''}
+      ${s.price ? `<span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">${s.price}</span>` : ''}
+    </div>`;
+  }).join('');
+
+  dots.innerHTML = data.map((_,i) =>
+    `<div class="carousel-dot${i===0?' active':''}" onclick="carouselGo(${i})"></div>`
+  ).join('');
+
+  carouselUpdate();
+  clearInterval(carouselTimer);
+  carouselTimer = setInterval(()=>carouselMove(1), 5000);
+}
+
 function carouselUpdate(){
   document.getElementById('carousel-track').style.transform=`translateX(-${carouselIdx*100}%)`;
   document.querySelectorAll('.carousel-dot').forEach((d,i)=>{
@@ -833,7 +873,7 @@ function resetCarouselTimer(){
   clearInterval(carouselTimer);
   carouselTimer=setInterval(()=>carouselMove(1),5000);
 }
-carouselTimer=setInterval(()=>carouselMove(1),5000);
+renderCarousel(null); // render con defaults hasta que cargue data.json
 
 // ── SOCIAL PROOF TOAST ───────────────────────────────────────
 const _FIRST_NAMES = [
@@ -1018,6 +1058,10 @@ async function initApp() {
       // Actualizar referencias desde el servidor
       if (Array.isArray(data.references)) {
         localStorage.setItem('passlink_references', JSON.stringify(data.references));
+      }
+      // Actualizar slides del carrusel desde el servidor
+      if (Array.isArray(data.slides) && data.slides.length) {
+        renderCarousel(data.slides);
       }
       // Actualizar config desde el servidor
       if (data.config && data.config.whatsapp) {

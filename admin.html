@@ -87,6 +87,7 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
     </div>
     <div class="nav-link active" onclick="selectSection('dashboard')" id="nav-dashboard"><i class="fa-solid fa-chart-pie w-4"></i> Dashboard</div>
     <div class="nav-link" onclick="selectSection('products')" id="nav-products"><i class="fa-solid fa-box w-4"></i> Productos</div>
+    <div class="nav-link" onclick="selectSection('slides')" id="nav-slides"><i class="fa-solid fa-images w-4"></i> Carrusel</div>
     <div class="nav-link" onclick="selectSection('referencias')" id="nav-referencias"><i class="fa-solid fa-certificate w-4"></i> Referencias</div>
     <div class="nav-link" onclick="selectSection('config')" id="nav-config"><i class="fa-solid fa-gear w-4"></i> Configuración</div>
     <!-- Publish status badge -->
@@ -164,6 +165,22 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
         <div id="references-table"></div>
       </div>
     </div>
+
+    <!-- CARRUSEL -->
+    <div id="section-slides" style="display:none;">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-2xl font-black text-navy">Carrusel de Ofertas</h2>
+          <p class="text-xs text-gray-400 mt-1">Agrega slides de texto o sube un flyer (imagen). Orden: el primero es el que aparece al inicio.</p>
+        </div>
+        <button class="btn-primary flex items-center justify-center gap-2 self-start sm:self-auto" onclick="openSlideForm()">
+          <i class="fa-solid fa-plus"></i> Nuevo Slide
+        </button>
+      </div>
+      <div class="card overflow-hidden">
+        <div id="slides-table"></div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -185,8 +202,14 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
           <option value="software">Software</option>
         </select>
       </div>
-      <div><label class="form-label">Precio S/. *</label><input class="form-input" id="f-pen" type="number" step="0.01" placeholder="18.00"></div>
-      <div><label class="form-label">Precio US$ *</label><input class="form-input" id="f-usd" type="number" step="0.01" placeholder="5.20"></div>
+      <div>
+        <label class="form-label">Precio S/. * <span id="exrate-badge" class="text-[10px] text-indigo-500 font-bold ml-1"></span></label>
+        <input class="form-input" id="f-pen" type="number" step="0.01" placeholder="18.00" oninput="autoCalcUSD()">
+      </div>
+      <div>
+        <label class="form-label">Precio US$ * <span class="text-[10px] text-gray-400 font-normal">(auto-calculado)</span></label>
+        <input class="form-input" id="f-usd" type="number" step="0.01" placeholder="5.20">
+      </div>
       <div class="col-span-2"><label class="form-label">URL de Imagen</label><input class="form-input" id="f-img" placeholder="https://... o assets/mi-imagen.png"></div>
       <div><label class="form-label">Badge Text</label><input class="form-input" id="f-badge" placeholder="Popular"></div>
       <div>
@@ -281,6 +304,60 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
   </div>
 </div>
 
+<!-- SLIDE FORM MODAL -->
+<div class="modal-overlay" id="slide-form-modal">
+  <div class="modal-box max-w-lg">
+    <h3 class="text-xl font-extrabold text-navy mb-4" id="slide-form-title">Nuevo Slide del Carrusel</h3>
+    <div class="grid grid-cols-1 gap-4">
+      <div>
+        <label class="form-label font-bold text-navy">Tipo de Slide</label>
+        <div class="flex gap-4 mb-3">
+          <label class="flex items-center gap-1.5 cursor-pointer text-sm font-semibold">
+            <input type="radio" name="slide-type" value="gradient" checked onchange="switchSlideType('gradient')">
+            Texto con color
+          </label>
+          <label class="flex items-center gap-1.5 cursor-pointer text-sm font-semibold">
+            <input type="radio" name="slide-type" value="image" onchange="switchSlideType('image')">
+            Flyer / Imagen de fondo
+          </label>
+        </div>
+      </div>
+      <!-- Campos tipo gradiente -->
+      <div id="sl-gradient-wrap">
+        <label class="form-label">Color de fondo</label>
+        <select class="form-input mb-2" id="sl-gradient">
+          <option value="linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%)">Violeta (IA)</option>
+          <option value="linear-gradient(135deg,#059669 0%,#0891b2 100%)">Verde → Azul</option>
+          <option value="linear-gradient(135deg,#dc2626 0%,#ea580c 100%)">Rojo → Naranja</option>
+          <option value="linear-gradient(135deg,#0f172a 0%,#1e3a5f 100%)">Oscuro (Premium)</option>
+          <option value="linear-gradient(135deg,#0891b2 0%,#6366f1 100%)">Cyan → Índigo</option>
+        </select>
+      </div>
+      <!-- Campos tipo imagen -->
+      <div id="sl-image-wrap" style="display:none;">
+        <label class="form-label">Imagen de fondo (Flyer)</label>
+        <div class="flex gap-2 mb-1">
+          <label class="flex items-center gap-1 text-xs font-semibold cursor-pointer"><input type="radio" name="sl-img-src" value="url" checked onchange="switchSlideImgSrc('url')"> URL</label>
+          <label class="flex items-center gap-1 text-xs font-semibold cursor-pointer"><input type="radio" name="sl-img-src" value="file" onchange="switchSlideImgSrc('file')"> Subir archivo</label>
+        </div>
+        <div id="sl-img-url-wrap"><input class="form-input mb-1" id="sl-img-url" placeholder="https://... o assets/mi-flyer.jpg"></div>
+        <div id="sl-img-file-wrap" style="display:none;">
+          <input type="file" id="sl-img-file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+          <p class="text-[10px] text-gray-400 mt-1">Se convierte a Base64 y se guarda automáticamente.</p>
+        </div>
+      </div>
+      <div><label class="form-label">Badge / Etiqueta pequeña</label><input class="form-input" id="sl-badge" placeholder="🔥 Oferta especial LATAM"></div>
+      <div><label class="form-label">Título principal</label><input class="form-input" id="sl-title" placeholder="Mi producto estrella — Descripción breve"></div>
+      <div><label class="form-label">Subtítulo</label><input class="form-input" id="sl-subtitle" placeholder="Características · Beneficio · Cobertura"></div>
+      <div><label class="form-label">Precio / CTA (opcional)</label><input class="form-input" id="sl-price" placeholder="Desde S/. 15 / US$ 4.00"></div>
+    </div>
+    <div class="flex gap-3 mt-6">
+      <button class="btn-primary flex-1" onclick="saveSlide()"><i class="fa-solid fa-floppy-disk mr-1"></i> Guardar Slide</button>
+      <button onclick="closeSlideForm()" style="flex:1;background:#f1f5f9;color:#374151;font-weight:600;padding:10px;border-radius:10px;border:none;cursor:pointer;font-size:14px;">Cancelar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const ADMIN_PW_KEY='passlink_admin_pw';
 const PRODUCTS_KEY='passlink_products';
@@ -355,7 +432,8 @@ async function publishToGitHub() {
       version: 'v3',
       config: getConfig(),
       products: getProducts(),
-      references: getReferences()
+      references: getReferences(),
+      slides: getSlides()
     };
     const jsonStr = JSON.stringify(data, null, 2);
     // Codificar a base64 (UTF-8 seguro)
@@ -534,7 +612,7 @@ function selectSection(name){
 }
 
 function showSection(name){
-  ['dashboard','products','config','referencias'].forEach(s=>{
+  ['dashboard','products','config','referencias','slides'].forEach(s=>{
     const el = document.getElementById('section-'+s);
     if(el) el.style.display=s===name?'block':'none';
     const n=document.getElementById('nav-'+s);
@@ -544,6 +622,7 @@ function showSection(name){
   if(name==='dashboard')renderDashboard();
   if(name==='config')loadConfig();
   if(name==='referencias')renderReferencesTable();
+  if(name==='slides')renderSlidesTable();
 }
 
 function renderDashboard(){
@@ -845,6 +924,163 @@ function saveReference(){
 
 document.getElementById('form-modal').addEventListener('click',e=>{if(e.target===document.getElementById('form-modal'))closeForm();});
 document.getElementById('ref-form-modal').addEventListener('click',e=>{if(e.target===document.getElementById('ref-form-modal'))closeRefForm();});
+document.getElementById('slide-form-modal').addEventListener('click',e=>{if(e.target===document.getElementById('slide-form-modal'))closeSlideForm();});
+
+// ── TIPO DE CAMBIO AUTOMATICO PEN -> USD ──
+let _exRate = null;
+
+(async function fetchExchangeRate() {
+  try {
+    // API gratuita sin clave para PEN->USD
+    const r = await fetch('https://open.er-api.com/v6/latest/USD');
+    const d = await r.json();
+    if (d && d.rates && d.rates.PEN) {
+      _exRate = d.rates.PEN; // cuantos soles vale 1 USD
+      const badge = document.getElementById('exrate-badge');
+      if (badge) badge.textContent = `(1 USD = S/. ${_exRate.toFixed(2)})`;
+    }
+  } catch(e) {
+    console.warn('No se pudo obtener tipo de cambio:', e.message);
+  }
+})();
+
+function autoCalcUSD() {
+  if (!_exRate) return;
+  const pen = parseFloat(document.getElementById('f-pen').value);
+  if (!isNaN(pen) && pen > 0) {
+    const usd = (pen / _exRate).toFixed(2);
+    document.getElementById('f-usd').value = usd;
+  }
+}
+
+// ── GESTION DE SLIDES DEL CARRUSEL ──
+const SLIDES_KEY = 'passlink_slides';
+const DEFAULT_SLIDES_ADMIN = [
+  {id:'sl-1',type:'gradient',gradient:'linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%)',badge:'🔥 Más vendido del mes',title:'Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal',subtitle:'5 TB Cloud · Workspace incluido · Sin invitación',price:'S/. 45 / US$ 13.00'},
+  {id:'sl-2',type:'gradient',gradient:'linear-gradient(135deg,#059669 0%,#0891b2 100%)',badge:'🤖 Top Inteligencia Artificial',title:'ChatGPT Plus — Perfil privado,<br>sin límites, todo el día',subtitle:'GPT-4o · DALL-E 3 · Acceso ilimitado 24/7',price:'S/. 40 / US$ 11.50'},
+  {id:'sl-3',type:'gradient',gradient:'linear-gradient(135deg,#dc2626 0%,#ea580c 100%)',badge:'🎬 Combo Streaming LATAM',title:'Netflix + Disney+ & Star+<br>desde S/. 12',subtitle:'Perfiles privados · Ultra HD 4K · Para toda LATAM',price:'Desde S/. 12'}
+];
+
+function getSlides() {
+  try {
+    const saved = localStorage.getItem(SLIDES_KEY);
+    return saved ? JSON.parse(saved) : DEFAULT_SLIDES_ADMIN;
+  } catch { return DEFAULT_SLIDES_ADMIN; }
+}
+function saveSlides(s) {
+  localStorage.setItem(SLIDES_KEY, JSON.stringify(s));
+  publishToGitHub();
+}
+
+function renderSlidesTable() {
+  const slides = getSlides();
+  document.getElementById('slides-table').innerHTML = slides.length === 0
+    ? '<p class="text-sm text-gray-400 text-center py-8">No hay slides. Agrega uno nuevo.</p>'
+    : `<div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-3 pr-4">Vista</th><th class="pb-3 pr-4">Tipo</th><th class="pb-3 pr-4">Título</th><th class="pb-3 pr-4">Precio</th><th class="pb-3">Acciones</th></tr></thead><tbody>${slides.map(s=>`
+    <tr class="border-b border-gray-50 hover:bg-gray-50 transition-colors">
+      <td class="py-3 pr-4">
+        ${s.type==='image' && s.imageUrl
+          ? `<img src="${esc(s.imageUrl)}" class="w-16 h-10 object-cover rounded-lg">`
+          : `<div style="width:56px;height:40px;border-radius:8px;background:${esc(s.gradient||'#4f46e5')}"></div>`
+        }
+      </td>
+      <td class="py-3 pr-4"><span class="text-xs ${s.type==='image'?'bg-blue-50 text-blue-700':'bg-purple-50 text-purple-700'} px-2 py-0.5 rounded font-bold">${s.type==='image'?'Flyer':'Gradiente'}</span></td>
+      <td class="py-3 pr-4"><div class="font-bold text-navy text-xs max-w-[160px] truncate">${esc(s.title||'-')}</div><div class="text-[10px] text-gray-400">${esc(s.badge||'')}</div></td>
+      <td class="py-3 pr-4"><div class="text-xs font-bold">${esc(s.price||'-')}</div></td>
+      <td class="py-3">
+        <button class="btn-danger" onclick="deleteSlide('${s.id}')"><i class="fa-solid fa-trash"></i></button>
+      </td>
+    </tr>`).join('')}</tbody></table></div>`;
+}
+
+function deleteSlide(id) {
+  if(!confirm('¿Eliminar este slide?')) return;
+  const s = getSlides().filter(x=>x.id!==id);
+  saveSlides(s);
+  renderSlidesTable();
+}
+
+function openSlideForm() {
+  ['sl-badge','sl-title','sl-subtitle','sl-price'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('sl-img-url').value='';
+  document.querySelector('input[name="slide-type"][value="gradient"]').checked=true;
+  switchSlideType('gradient');
+  document.getElementById('slide-form-modal').classList.add('open');
+}
+
+function closeSlideForm() {
+  document.getElementById('slide-form-modal').classList.remove('open');
+}
+
+function switchSlideType(type) {
+  document.getElementById('sl-gradient-wrap').style.display = type==='gradient' ? 'block' : 'none';
+  document.getElementById('sl-image-wrap').style.display   = type==='image'    ? 'block' : 'none';
+}
+
+function switchSlideImgSrc(src) {
+  document.getElementById('sl-img-url-wrap').style.display  = src==='url'  ? 'block' : 'none';
+  document.getElementById('sl-img-file-wrap').style.display = src==='file' ? 'block' : 'none';
+}
+
+function saveSlide() {
+  const type  = document.querySelector('input[name="slide-type"]:checked').value;
+  const badge = document.getElementById('sl-badge').value.trim();
+  const title = document.getElementById('sl-title').value.trim();
+  const sub   = document.getElementById('sl-subtitle').value.trim();
+  const price = document.getElementById('sl-price').value.trim();
+
+  const baseObj = { id:'sl-'+Date.now(), type, badge, title, subtitle:sub, price };
+
+  const persist = (obj) => {
+    const s = getSlides();
+    s.push(obj);
+    saveSlides(s);
+    closeSlideForm();
+    renderSlidesTable();
+  };
+
+  if (type === 'gradient') {
+    persist({...baseObj, gradient: document.getElementById('sl-gradient').value});
+  } else {
+    const imgSrc = document.querySelector('input[name="sl-img-src"]:checked').value;
+    if (imgSrc === 'url') {
+      persist({...baseObj, imageUrl: document.getElementById('sl-img-url').value.trim()});
+    } else {
+      const file = document.getElementById('sl-img-file').files[0];
+      if (!file) { alert('Selecciona una imagen.'); return; }
+      const reader = new FileReader();
+      reader.onload = e => persist({...baseObj, imageUrl: e.target.result});
+      reader.readAsDataURL(file);
+    }
+  }
+}
+
+// ── SINCRONIZAR DATOS DESDE GITHUB (data.json) AL INICIAR ──
+async function initAdminData() {
+  try {
+    const res = await fetch('/data.json?v=' + Date.now(), {cache: 'no-store'});
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data.products) && data.products.length) {
+        localStorage.setItem(PRODUCTS_KEY, JSON.stringify(data.products));
+      }
+      if (Array.isArray(data.references)) {
+        localStorage.setItem(REFERENCES_KEY, JSON.stringify(data.references));
+      }
+      if (Array.isArray(data.slides)) {
+        localStorage.setItem(SLIDES_KEY, JSON.stringify(data.slides));
+      }
+      if (data.config) {
+        localStorage.setItem(CONFIG_KEY, JSON.stringify(data.config));
+      }
+      console.log('[PassLink Admin] Datos sincronizados desde data.json');
+    }
+  } catch(e) {
+    console.warn('[PassLink Admin] No se pudo precargar data.json:', e.message);
+  }
+}
+
+initAdminData();
 </script>
 </body>
 </html>
