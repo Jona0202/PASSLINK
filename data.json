@@ -130,7 +130,8 @@
       "iconClass": "fa-solid fa-wand-magic-sparkles",
       "gradient": "from-blue-600 to-indigo-400",
       "stock": "available",
-      "highlighted": false
+      "highlighted": false,
+      "hidden": true
     },
     {
       "id": "capcut-6m-individual",
