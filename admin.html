@@ -312,7 +312,7 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
         <div id="rf-img-file-wrap" style="display:none;">
           <label class="form-label text-xs">Subir archivo desde tu dispositivo</label>
           <input type="file" id="rf-file" accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
-          <p class="text-[10px] text-gray-400 mt-1">La imagen se convertirá a Base64 y se guardará localmente.</p>
+          <p class="text-[10px] text-gray-400 mt-1">La imagen se subirá automáticamente a tu repositorio GitHub.</p>
         </div>
       </div>
     </div>
@@ -894,6 +894,7 @@ function renderReferencesTable(){
       <td class="py-3 pr-4"><span class="text-xs bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded font-bold">${esc(x.date)}</span></td>
       <td class="py-3 pr-4"><div class="text-xs text-gray-400 line-clamp-2 max-w-xs">${esc(x.description)}</div></td>
       <td class="py-3">
+        <button class="btn-edit mr-2" onclick="openRefForm('${x.id}')"><i class="fa-solid fa-pen"></i> Editar</button>
         <button class="btn-danger" onclick="deleteReference('${x.id}')"><i class="fa-solid fa-trash"></i> Eliminar</button>
       </td>
     </tr>`).join('')}</tbody></table></div>`;
@@ -907,13 +908,28 @@ function deleteReference(id){
   renderDashboard();
 }
 
-function openRefForm(){
-  document.getElementById('rf-title').value='';
-  document.getElementById('rf-date').value='';
-  document.getElementById('rf-desc').value='';
-  document.getElementById('rf-img').value='';
-  document.getElementById('rf-file').value='';
-  switchRefImgType('url');
+let refEditId=null;
+function openRefForm(id){
+  refEditId=id||null;
+  document.getElementById('ref-form-title').textContent=id?'Editar Referencia':'Nueva Referencia';
+  if(id){
+    const r=getReferences().find(x=>x.id===id);
+    if(r){
+      document.getElementById('rf-title').value=r.title||'';
+      document.getElementById('rf-date').value=r.date||'';
+      document.getElementById('rf-desc').value=r.description||'';
+      document.getElementById('rf-img').value=r.imageUrl||'';
+      document.getElementById('rf-file').value='';
+      switchRefImgType('url');
+    }
+  } else {
+    document.getElementById('rf-title').value='';
+    document.getElementById('rf-date').value='';
+    document.getElementById('rf-desc').value='';
+    document.getElementById('rf-img').value='';
+    document.getElementById('rf-file').value='';
+    switchRefImgType('url');
+  }
   document.getElementById('ref-form-modal').classList.add('open');
 }
 
@@ -953,21 +969,33 @@ async function saveReference(){
     } else {
       const fileInput = document.getElementById('rf-file');
       if (fileInput.files.length === 0) {
-        alert('Por favor selecciona una imagen para subir.');
-        btn.disabled = false;
-        btn.innerHTML = origHTML;
-        return;
+        if (refEditId) {
+          const oldRef = getReferences().find(x=>x.id===refEditId);
+          if (oldRef) imgUrl = oldRef.imageUrl;
+        } else {
+          alert('Por favor selecciona una imagen para subir.');
+          btn.disabled = false;
+          btn.innerHTML = origHTML;
+          return;
+        }
+      } else {
+        btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up fa-spin mr-1"></i> Subiendo captura...';
+        imgUrl = await uploadToGitHub(fileInput.files[0], 'uploads');
       }
-      btn.innerHTML = '<i class="fa-solid fa-cloud-arrow-up fa-spin mr-1"></i> Subiendo captura...';
-      imgUrl = await uploadToGitHub(fileInput.files[0], 'uploads');
     }
 
     const obj = {
-      id: 'ref-' + Date.now(),
+      id: refEditId || ('ref-' + Date.now()),
       title, date, description: desc, imageUrl: imgUrl
     };
     const r = getReferences();
-    r.unshift(obj); // Agrega al inicio
+    if (refEditId) {
+      const idx = r.findIndex(x => x.id === refEditId);
+      if (idx >= 0) r[idx] = obj;
+      else r.unshift(obj);
+    } else {
+      r.unshift(obj);
+    }
     saveReferences(r);
     closeRefForm();
     renderReferencesTable();
