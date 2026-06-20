@@ -59,13 +59,15 @@
         "Perfil Personalizado",
         "Catálogo completo sin restricción"
       ],
-      "pricePEN": 18,
-      "priceUSD": 5.2,
+      "pricePEN": 14,
+      "priceUSD": 4.09,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-film",
       "gradient": "from-red-500 to-rose-400",
       "stock": "available",
-      "highlighted": false
+      "highlighted": true,
+      "hidden": false,
+      "isLogoOnly": false
     },
     {
       "id": "disney-star",
@@ -186,12 +188,12 @@
       "name": "SuperGrok 3 Meses",
       "subtitle": "3 Meses · Full Warranty · xAI",
       "description": "SuperGrok es el plan premium de Grok, la IA de xAI creada por Elon Musk. Accede a los modelos más avanzados de razonamiento, análisis de datos en tiempo real con integración a X (Twitter), generación de imágenes y capacidades de pensamiento profundo. 3 meses con garantía completa incluida.",
-      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1781917649621_5kv3n.jpg",
+      "imageUrl": "assets/grok.svg",
       "features": [
         "3 Meses SuperGrok con garantía completa",
         "Acceso a Grok 3 y modelos de razonamiento",
         "Datos en tiempo real de X (Twitter)",
-        "Generación de imágenes Imagine",
+        "Generación de imágenes Aurora",
         "Modo Think para análisis profundo"
       ],
       "pricePEN": 69,
@@ -201,7 +203,6 @@
       "gradient": "from-slate-950 via-slate-900 to-neutral-950",
       "stock": "low",
       "highlighted": false,
-      "hidden": false,
       "isLogoOnly": true
     },
     {
@@ -233,7 +234,7 @@
       "name": "Spotify Premium",
       "subtitle": "3 Meses · Individual · Sin Anuncios",
       "description": "Disfruta de Spotify Premium durante 3 meses en tu cuenta personal: música sin interrupciones, sin anuncios y con la máxima calidad de audio. Descarga tus canciones y podcasts favoritos para escucharlos sin conexión a internet. Funciona en todos tus dispositivos simultáneamente.",
-      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1781917777294_lf71v.jpg",
+      "imageUrl": "assets/spotify.png",
       "features": [
         "3 Meses de Premium Individual",
         "Música sin anuncios en alta calidad",
@@ -241,14 +242,13 @@
         "Reproducción sin restricciones geográficas",
         "Calidad Very High (320kbps)"
       ],
-      "pricePEN": 21,
-      "priceUSD": 6.14,
+      "pricePEN": 40,
+      "priceUSD": 11,
       "badgeText": "Disponible",
       "iconClass": "fa-brands fa-spotify",
       "gradient": "from-slate-950 via-[#0a2d1d] to-slate-950",
       "stock": "low",
       "highlighted": false,
-      "hidden": false,
       "isLogoOnly": true
     }
   ],
