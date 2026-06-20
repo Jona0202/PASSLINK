@@ -43,7 +43,7 @@
       "badgeText": "Top IA",
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
-      "stock": "out",
+      "stock": "available",
       "highlighted": false
     },
     {
@@ -59,14 +59,13 @@
         "Perfil Personalizado",
         "Catálogo completo sin restricción"
       ],
-      "pricePEN": 15,
-      "priceUSD": 4.2,
+      "pricePEN": 18,
+      "priceUSD": 5.2,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-film",
       "gradient": "from-red-500 to-rose-400",
       "stock": "available",
-      "highlighted": true,
-      "hidden": false
+      "highlighted": false
     },
     {
       "id": "disney-star",
@@ -82,13 +81,12 @@
         "Contenido exclusivo Star+"
       ],
       "pricePEN": 15,
-      "priceUSD": 4.2,
+      "priceUSD": 4.3,
       "badgeText": "Combo",
       "iconClass": "fa-solid fa-hat-wizard",
       "gradient": "from-indigo-500 to-blue-400",
       "stock": "low",
-      "highlighted": false,
-      "hidden": false
+      "highlighted": false
     },
     {
       "id": "perplexity-pro-1y",
@@ -104,14 +102,13 @@
         "Sin límite de consultas diarias",
         "Modo Focus para búsquedas especializadas"
       ],
-      "pricePEN": 133,
+      "pricePEN": 143,
       "priceUSD": 39,
       "badgeText": "Nuevo",
       "iconClass": "fa-solid fa-magnifying-glass-chart",
       "gradient": "from-slate-950 via-[#0d2a24] to-slate-950",
       "stock": "low",
-      "highlighted": true,
-      "hidden": false,
+      "highlighted": false,
       "isLogoOnly": true
     },
     {
@@ -151,14 +148,13 @@
         "Subtítulos automáticos por IA",
         "Templates y efectos premium ilimitados"
       ],
-      "pricePEN": 68,
-      "priceUSD": 20,
+      "pricePEN": 75,
+      "priceUSD": 20.5,
       "badgeText": "Limitado",
       "iconClass": "fa-solid fa-scissors",
       "gradient": "from-slate-950 via-[#0a232f] to-slate-950",
       "stock": "low",
       "highlighted": false,
-      "hidden": false,
       "isLogoOnly": true
     },
     {
@@ -175,14 +171,13 @@
         "Acceso a todas las herramientas IA",
         "Activación inmediata en tu cuenta"
       ],
-      "pricePEN": 22,
-      "priceUSD": 6.5,
+      "pricePEN": 35,
+      "priceUSD": 9.5,
       "badgeText": "Garantía",
       "iconClass": "fa-solid fa-scissors",
       "gradient": "from-slate-950 via-[#0a232f] to-slate-950",
       "stock": "low",
       "highlighted": false,
-      "hidden": false,
       "isLogoOnly": true
     },
     {
@@ -199,14 +194,13 @@
         "Generación de imágenes Aurora",
         "Modo Think para análisis profundo"
       ],
-      "pricePEN": 65,
+      "pricePEN": 69,
       "priceUSD": 19,
       "badgeText": "Exclusivo",
       "iconClass": "fa-brands fa-x-twitter",
       "gradient": "from-slate-950 via-slate-900 to-neutral-950",
       "stock": "low",
       "highlighted": false,
-      "hidden": false,
       "isLogoOnly": true
     },
     {
@@ -230,7 +224,6 @@
       "gradient": "from-slate-950 via-[#27143a] to-slate-950",
       "stock": "low",
       "highlighted": false,
-      "hidden": false,
       "isLogoOnly": true
     },
     {
@@ -254,7 +247,6 @@
       "gradient": "from-slate-950 via-[#0a2d1d] to-slate-950",
       "stock": "low",
       "highlighted": false,
-      "hidden": false,
       "isLogoOnly": true
     }
   ],
