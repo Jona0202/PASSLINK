@@ -1229,16 +1229,40 @@ async function uploadToGitHub(file, folder = "uploads") {
 // ── SINCRONIZAR DATOS DESDE GITHUB (data.json) AL INICIAR ──
 async function initAdminData() {
   try {
-    // Intentar ruta relativa primero, luego raw GitHub como fallback
-    let res;
-    try {
-      res = await fetch('data.json?v=' + Date.now(), {cache: 'no-store'});
-      if (!res.ok) throw new Error('relative path failed');
-    } catch(_) {
-      res = await fetch('https://raw.githubusercontent.com/Jona0202/PASSLINK/main/data.json?v=' + Date.now(), {cache: 'no-store'});
+    const token = localStorage.getItem(GH_TOKEN_KEY);
+    let data;
+    if (token) {
+      try {
+        const res = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}?v=` + Date.now(), {
+          headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' },
+          cache: 'no-store'
+        });
+        if (res.ok) {
+          const fileData = await res.json();
+          const bytes = new Uint8Array(atob(fileData.content.replace(/\s/g, '')).split('').map(c => c.charCodeAt(0)));
+          const jsonStr = new TextDecoder().decode(bytes);
+          data = JSON.parse(jsonStr);
+          console.log('[PassLink Admin] Datos cargados en tiempo real desde la API de GitHub');
+        }
+      } catch (err) {
+        console.warn('[PassLink Admin] Falló carga via API de GitHub, intentando fetch estándar:', err.message);
+      }
     }
-    if (res.ok) {
-      const data = await res.json();
+    
+    if (!data) {
+      let res;
+      try {
+        res = await fetch('data.json?v=' + Date.now(), {cache: 'no-store'});
+        if (!res.ok) throw new Error('relative path failed');
+      } catch(_) {
+        res = await fetch('https://raw.githubusercontent.com/Jona0202/PASSLINK/main/data.json?v=' + Date.now(), {cache: 'no-store'});
+      }
+      if (res.ok) {
+        data = await res.json();
+      }
+    }
+
+    if (data) {
       if (Array.isArray(data.products) && data.products.length) {
         localStorage.setItem(PRODUCTS_KEY, JSON.stringify(data.products));
       }
@@ -1251,7 +1275,10 @@ async function initAdminData() {
       if (data.config) {
         localStorage.setItem(CONFIG_KEY, JSON.stringify(data.config));
       }
-      console.log('[PassLink Admin] Datos sincronizados desde data.json');
+      console.log('[PassLink Admin] Datos sincronizados con éxito');
+      // Forzar re-renderizado inmediato de las tablas y dashboard
+      if (typeof renderProductTable === 'function') renderProductTable();
+      if (typeof renderDashboard === 'function') renderDashboard();
     }
   } catch(e) {
     console.warn('[PassLink Admin] No se pudo precargar data.json:', e.message);

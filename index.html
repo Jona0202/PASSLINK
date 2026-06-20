@@ -1127,13 +1127,14 @@ function closeRefModal() {
 // ── INIT: carga data.json global y renderiza ────────────────
 async function initApp() {
   try {
-    // Intentar primero ruta relativa (producción), luego raw GitHub como fallback
+    // Intentar primero raw GitHub directo (actualización casi instantánea en segundos),
+    // y caer en ruta relativa como respaldo
     let res;
     try {
-      res = await fetch('data.json?v=' + Date.now(), {cache: 'no-store'});
-      if (!res.ok) throw new Error('relative path failed');
-    } catch(_) {
       res = await fetch('https://raw.githubusercontent.com/Jona0202/PASSLINK/main/data.json?v=' + Date.now(), {cache: 'no-store'});
+      if (!res.ok) throw new Error('raw path failed');
+    } catch(_) {
+      res = await fetch('data.json?v=' + Date.now(), {cache: 'no-store'});
     }
     if (res.ok) {
       const data = await res.json();
