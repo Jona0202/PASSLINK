@@ -188,7 +188,7 @@
       "name": "SuperGrok 3 Meses",
       "subtitle": "3 Meses · Full Warranty · xAI",
       "description": "SuperGrok es el plan premium de Grok, la IA de xAI creada por Elon Musk. Accede a los modelos más avanzados de razonamiento, análisis de datos en tiempo real con integración a X (Twitter), generación de imágenes y capacidades de pensamiento profundo. 3 meses con garantía completa incluida.",
-      "imageUrl": "assets/grok.svg",
+      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1781919356688_mlmbb.jpg",
       "features": [
         "3 Meses SuperGrok con garantía completa",
         "Acceso a Grok 3 y modelos de razonamiento",
@@ -203,6 +203,7 @@
       "gradient": "from-slate-950 via-slate-900 to-neutral-950",
       "stock": "low",
       "highlighted": false,
+      "hidden": false,
       "isLogoOnly": true
     },
     {
