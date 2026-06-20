@@ -204,7 +204,7 @@
       "stock": "low",
       "highlighted": false,
       "hidden": false,
-      "isLogoOnly": true
+      "isLogoOnly": false
     },
     {
       "id": "gamma-1m-ultra",
@@ -251,7 +251,7 @@
       "stock": "low",
       "highlighted": false,
       "hidden": false,
-      "isLogoOnly": true
+      "isLogoOnly": false
     }
   ],
   "references": [
