@@ -389,8 +389,8 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
 
 <script>
 const ADMIN_PW_KEY='passlink_admin_pw';
-const PRODUCTS_KEY='passlink_products';
-const CONFIG_KEY='passlink_config';
+const PRODUCTS_KEY='passlink_products_v5';
+const CONFIG_KEY='passlink_config_v5';
 
 const DEFAULT_PRODUCTS=[
   {id:"gemini-pro",category:"ai",name:"Gemini Pro 3.5",subtitle:"18 Meses · Cuenta Personal",description:"Obtén acceso completo a Gemini Pro 3.5 directamente en tu cuenta personal de Google. Sin invitaciones, sin cuentas compartidas. Disfruta de la IA más avanzada de Google con 5 TB de almacenamiento en la nube y integración total con Google Workspace durante 18 meses continuos.",imageUrl:"assets/gemini.png",features:["100% Cuenta Personal (No invitación)","18 Meses de acceso continuo","5 TB Cloud Storage incluido","Workspace Integration completa"],pricePEN:45,priceUSD:13.00,badgeText:"Popular",iconClass:"fa-solid fa-wand-magic-sparkles",gradient:"from-blue-500 to-cyan-400",stock:"available",highlighted:true},
@@ -879,7 +879,7 @@ const DEFAULT_REFERENCES = [
   }
 ];
 
-const REFERENCES_KEY='passlink_references';
+const REFERENCES_KEY='passlink_references_v5';
 const REFERENCES_VERSION='v3';
 
 function getReferences(){
@@ -1053,7 +1053,7 @@ function autoCalcUSD() {
 }
 
 // ── GESTION DE SLIDES DEL CARRUSEL ──
-const SLIDES_KEY = 'passlink_slides';
+const SLIDES_KEY = 'passlink_slides_v5';
 const DEFAULT_SLIDES_ADMIN = [
   {id:'sl-1',type:'gradient',gradient:'linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%)',badge:'🔥 Más vendido del mes',title:'Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal',subtitle:'5 TB Cloud · Workspace incluido · Sin invitación',price:'S/. 45 / US$ 13.00'},
   {id:'sl-2',type:'gradient',gradient:'linear-gradient(135deg,#059669 0%,#0891b2 100%)',badge:'🤖 Top Inteligencia Artificial',title:'ChatGPT Plus — Perfil privado,<br>sin límites, todo el día',subtitle:'GPT-4o · DALL-E 3 · Acceso ilimitado 24/7',price:'S/. 40 / US$ 11.50'},
@@ -1252,10 +1252,16 @@ async function initAdminData() {
     if (!data) {
       let res;
       try {
-        res = await fetch('data.json?v=' + Date.now(), {cache: 'no-store'});
+        res = await fetch('data.json?v=' + Date.now(), {
+          headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Expires': '0' },
+          cache: 'no-store'
+        });
         if (!res.ok) throw new Error('relative path failed');
       } catch(_) {
-        res = await fetch('https://raw.githubusercontent.com/Jona0202/PASSLINK/main/data.json?v=' + Date.now(), {cache: 'no-store'});
+        res = await fetch('https://raw.githubusercontent.com/Jona0202/PASSLINK/main/data.json?v=' + Date.now(), {
+          headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Expires': '0' },
+          cache: 'no-store'
+        });
       }
       if (res.ok) {
         data = await res.json();
