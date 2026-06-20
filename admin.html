@@ -1229,7 +1229,14 @@ async function uploadToGitHub(file, folder = "uploads") {
 // ── SINCRONIZAR DATOS DESDE GITHUB (data.json) AL INICIAR ──
 async function initAdminData() {
   try {
-    const res = await fetch('/data.json?v=' + Date.now(), {cache: 'no-store'});
+    // Intentar ruta relativa primero, luego raw GitHub como fallback
+    let res;
+    try {
+      res = await fetch('data.json?v=' + Date.now(), {cache: 'no-store'});
+      if (!res.ok) throw new Error('relative path failed');
+    } catch(_) {
+      res = await fetch('https://raw.githubusercontent.com/Jona0202/PASSLINK/main/data.json?v=' + Date.now(), {cache: 'no-store'});
+    }
     if (res.ok) {
       const data = await res.json();
       if (Array.isArray(data.products) && data.products.length) {
