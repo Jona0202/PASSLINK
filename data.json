@@ -233,7 +233,7 @@
       "name": "Spotify Premium",
       "subtitle": "3 Meses · Individual · Sin Anuncios",
       "description": "Disfruta de Spotify Premium durante 3 meses en tu cuenta personal: música sin interrupciones, sin anuncios y con la máxima calidad de audio. Descarga tus canciones y podcasts favoritos para escucharlos sin conexión a internet. Funciona en todos tus dispositivos simultáneamente.",
-      "imageUrl": "assets/spotify.png",
+      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1781917777294_lf71v.jpg",
       "features": [
         "3 Meses de Premium Individual",
         "Música sin anuncios en alta calidad",
@@ -241,13 +241,14 @@
         "Reproducción sin restricciones geográficas",
         "Calidad Very High (320kbps)"
       ],
-      "pricePEN": 40,
-      "priceUSD": 11,
+      "pricePEN": 21,
+      "priceUSD": 6.14,
       "badgeText": "Disponible",
       "iconClass": "fa-brands fa-spotify",
       "gradient": "from-slate-950 via-[#0a2d1d] to-slate-950",
       "stock": "low",
       "highlighted": false,
+      "hidden": false,
       "isLogoOnly": true
     }
   ],
