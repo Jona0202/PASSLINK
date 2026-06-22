@@ -227,7 +227,8 @@
       "gradient": "from-slate-950 via-[#27143a] to-slate-950",
       "stock": "low",
       "highlighted": false,
-      "isLogoOnly": true
+      "isLogoOnly": true,
+      "hidden": true
     },
     {
       "id": "spotify-3m",
