@@ -253,6 +253,24 @@
       "highlighted": true,
       "hidden": false,
       "isLogoOnly": false
+    },
+    {
+      "id": "cuenta-coursera-12-meses-1782144512008",
+      "category": "software",
+      "name": "Cuenta Coursera 12 meses",
+      "subtitle": "Cuenta completa",
+      "description": "Coursera Premium (oficialmente conocida como Coursera Plus) es una suscripción que otorga acceso ilimitado a más del 90 % del catálogo de la plataforma. Esto incluye miles de cursos, proyectos guiados, especializaciones y certificados profesionales desarrollados por universidades de prestigio y empresas líderes como Google, IBM y Meta.",
+      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1782144510825_6axqi.png",
+      "features": [],
+      "pricePEN": 45,
+      "priceUSD": 13,
+      "badgeText": "Popular",
+      "iconClass": "fa-solid fa-box",
+      "gradient": "from-blue-500 to-cyan-400",
+      "stock": "low",
+      "highlighted": true,
+      "hidden": false,
+      "isLogoOnly": false
     }
   ],
   "references": [
