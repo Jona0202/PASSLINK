@@ -43,8 +43,10 @@
       "badgeText": "Top IA",
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
-      "stock": "available",
-      "highlighted": false
+      "stock": "out",
+      "highlighted": false,
+      "hidden": false,
+      "isLogoOnly": false
     },
     {
       "id": "netflix-premium",
