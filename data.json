@@ -249,7 +249,15 @@
       "isLogoOnly": false
     }
   ],
-  "references": [],
+  "references": [
+    {
+      "id": "ref-1782321288197",
+      "title": "Entrega Gemini Pro 18 meses / GianC. Mor.",
+      "date": "08 de Junio 2026",
+      "description": "Pago por Plin",
+      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1782321286314_ruic1.png"
+    }
+  ],
   "slides": [
     {
       "id": "sl-1",
