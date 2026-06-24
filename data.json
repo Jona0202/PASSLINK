@@ -43,10 +43,8 @@
       "badgeText": "Top IA",
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
-      "stock": "out",
-      "highlighted": false,
-      "hidden": false,
-      "isLogoOnly": false
+      "stock": "available",
+      "highlighted": false
     },
     {
       "id": "netflix-premium",
@@ -61,15 +59,13 @@
         "Perfil Personalizado",
         "Catálogo completo sin restricción"
       ],
-      "pricePEN": 14,
-      "priceUSD": 4.09,
+      "pricePEN": 18,
+      "priceUSD": 5.2,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-film",
       "gradient": "from-red-500 to-rose-400",
       "stock": "available",
-      "highlighted": true,
-      "hidden": false,
-      "isLogoOnly": false
+      "highlighted": false
     },
     {
       "id": "disney-star",
@@ -135,8 +131,7 @@
       "iconClass": "fa-solid fa-wand-magic-sparkles",
       "gradient": "from-blue-600 to-indigo-400",
       "stock": "available",
-      "highlighted": false,
-      "hidden": true
+      "highlighted": false
     },
     {
       "id": "capcut-6m-individual",
@@ -190,12 +185,12 @@
       "name": "SuperGrok 3 Meses",
       "subtitle": "3 Meses · Full Warranty · xAI",
       "description": "SuperGrok es el plan premium de Grok, la IA de xAI creada por Elon Musk. Accede a los modelos más avanzados de razonamiento, análisis de datos en tiempo real con integración a X (Twitter), generación de imágenes y capacidades de pensamiento profundo. 3 meses con garantía completa incluida.",
-      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1782144298414_96apq.jpg",
+      "imageUrl": "assets/grok.svg",
       "features": [
         "3 Meses SuperGrok con garantía completa",
         "Acceso a Grok 3 y modelos de razonamiento",
         "Datos en tiempo real de X (Twitter)",
-        "Generación de imágenes \"Imagine\"",
+        "Generación de imágenes Aurora",
         "Modo Think para análisis profundo"
       ],
       "pricePEN": 69,
@@ -204,8 +199,7 @@
       "iconClass": "fa-brands fa-x-twitter",
       "gradient": "from-slate-950 via-slate-900 to-neutral-950",
       "stock": "low",
-      "highlighted": true,
-      "hidden": false,
+      "highlighted": false,
       "isLogoOnly": false
     },
     {
@@ -229,8 +223,7 @@
       "gradient": "from-slate-950 via-[#27143a] to-slate-950",
       "stock": "low",
       "highlighted": false,
-      "isLogoOnly": true,
-      "hidden": true
+      "isLogoOnly": true
     },
     {
       "id": "spotify-3m",
@@ -238,7 +231,7 @@
       "name": "Spotify Premium",
       "subtitle": "3 Meses · Individual · Sin Anuncios",
       "description": "Disfruta de Spotify Premium durante 3 meses en tu cuenta personal: música sin interrupciones, sin anuncios y con la máxima calidad de audio. Descarga tus canciones y podcasts favoritos para escucharlos sin conexión a internet. Funciona en todos tus dispositivos simultáneamente.",
-      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1782144338357_a84t3.jpg",
+      "imageUrl": "assets/spotify.png",
       "features": [
         "3 Meses de Premium Individual",
         "Música sin anuncios en alta calidad",
@@ -246,49 +239,37 @@
         "Reproducción sin restricciones geográficas",
         "Calidad Very High (320kbps)"
       ],
-      "pricePEN": 24,
-      "priceUSD": 7,
+      "pricePEN": 40,
+      "priceUSD": 11,
       "badgeText": "Disponible",
       "iconClass": "fa-brands fa-spotify",
       "gradient": "from-slate-950 via-[#0a2d1d] to-slate-950",
       "stock": "low",
-      "highlighted": true,
-      "hidden": false,
-      "isLogoOnly": false
-    },
-    {
-      "id": "cuenta-coursera-12-meses-1782144512008",
-      "category": "software",
-      "name": "Cuenta Coursera 12 meses",
-      "subtitle": "Cuenta completa",
-      "description": "Coursera Premium (oficialmente conocida como Coursera Plus) es una suscripción que otorga acceso ilimitado a más del 90 % del catálogo de la plataforma. Esto incluye miles de cursos, proyectos guiados, especializaciones y certificados profesionales desarrollados por universidades de prestigio y empresas líderes como Google, IBM y Meta.",
-      "imageUrl": "https://raw.githubusercontent.com/Jona0202/PASSLINK/main/uploads/img_1782144510825_6axqi.png",
-      "features": [],
-      "pricePEN": 51,
-      "priceUSD": 15,
-      "badgeText": "Popular",
-      "iconClass": "fa-solid fa-box",
-      "gradient": "from-blue-500 to-cyan-400",
-      "stock": "low",
-      "highlighted": true,
-      "hidden": false,
+      "highlighted": false,
       "isLogoOnly": false
     }
   ],
   "references": [
-    {
-      "id": "ref-1",
-      "title": "Entrega Perplexity Pro 1 Año",
-      "date": "Hoy",
-      "description": "Soporte de activación inmediata vía WhatsApp. Cuenta personal del cliente con el plan anual PRO activo y funcionando correctamente.",
-      "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=60"
-    },
     {
       "id": "ref-2",
       "title": "Activación ChatGPT Plus Perfil Privado",
       "date": "Ayer",
       "description": "Captura de chat con cliente de Lima confirmando el correcto acceso a su perfil exclusivo de ChatGPT Plus con GPT-4o habilitado.",
       "imageUrl": "https://images.unsplash.com/photo-1618005198143-e5283b519a7f?w=600&auto=format&fit=crop&q=60"
+    },
+    {
+      "id": "ref-3",
+      "title": "Renovación Mensual Netflix Premium 4K",
+      "date": "15 de Junio",
+      "description": "Captura de pantalla de la transferencia del cliente vía Yape (S/. 18) y confirmación del acceso al perfil Ultra HD sin cortes.",
+      "imageUrl": "https://images.unsplash.com/photo-1627856013091-fed6e4e30025?w=600&auto=format&fit=crop&q=60"
+    },
+    {
+      "id": "ref-4",
+      "title": "Combo Disney+ & Star+ Familiar",
+      "date": "14 de Junio",
+      "description": "Entrega instantánea de credenciales de acceso para combo de entretenimiento. Cliente satisfecho en menos de 4 minutos.",
+      "imageUrl": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=60"
     }
   ],
   "slides": [
