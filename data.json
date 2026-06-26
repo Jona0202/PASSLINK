@@ -44,7 +44,8 @@
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
       "stock": "available",
-      "highlighted": false
+      "highlighted": false,
+      "hidden": true
     },
     {
       "id": "netflix-premium",
