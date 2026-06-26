@@ -406,17 +406,14 @@ const DEFAULT_PRODUCTS=[
   {id:"spotify-3m",category:"streaming",name:"Spotify Premium",subtitle:"3 Meses · Individual · Sin Anuncios",description:"Disfruta de Spotify Premium durante 3 meses en tu cuenta personal: música sin interrupciones, sin anuncios y con la máxima calidad de audio. Descarga tus canciones y podcasts favoritos para escucharlos sin conexión a internet. Funciona en todos tus dispositivos simultáneamente.",imageUrl:"assets/spotify.png",features:["3 Meses de Premium Individual","Música sin anuncios en alta calidad","Descargas offline ilimitadas","Reproducción sin restricciones geográficas","Calidad Very High (320kbps)"],pricePEN:40,priceUSD:11.00,badgeText:"Disponible",iconClass:"fa-brands fa-spotify",gradient:"from-slate-950 via-[#0a2d1d] to-slate-950",stock:"low",highlighted:false,isLogoOnly:false}
 ];
 
-const PRODUCTS_VERSION='v4';
+// dataReady: evita que publishToGitHub() sobrescriba GitHub con DEFAULT_PRODUCTS
+// antes de que initAdminData() haya cargado los datos reales.
+let dataReady = false;
+
 function getProducts(){
   try{
-    const savedVersion=localStorage.getItem('passlink_products_version');
     const saved=localStorage.getItem(PRODUCTS_KEY);
-    if(!saved||savedVersion!==PRODUCTS_VERSION){
-      localStorage.removeItem(PRODUCTS_KEY);
-      localStorage.setItem('passlink_products_version',PRODUCTS_VERSION);
-      return DEFAULT_PRODUCTS;
-    }
-    return JSON.parse(saved);
+    return saved ? JSON.parse(saved) : DEFAULT_PRODUCTS;
   }catch{return DEFAULT_PRODUCTS;}
 }
 // saveProducts is defined below with publishToGitHub()
@@ -453,6 +450,11 @@ async function publishToGitHub() {
   const token = localStorage.getItem(GH_TOKEN_KEY);
   if (!token) {
     showPublishStatus('⚠️ Token no configurado. Los cambios son solo locales.', 'yellow');
+    return;
+  }
+  // Seguridad: no publicar si los datos de GitHub aún no han cargado
+  if (!dataReady) {
+    showPublishStatus('⏳ Cargando datos de GitHub, espera un momento…', 'yellow');
     return;
   }
   showPublishStatus('🔄 Publicando cambios…', 'yellow');
@@ -880,18 +882,11 @@ const DEFAULT_REFERENCES = [
 ];
 
 const REFERENCES_KEY='passlink_references_v5';
-const REFERENCES_VERSION='v3';
 
 function getReferences(){
   try{
-    const savedVersion=localStorage.getItem('passlink_references_version');
     const saved=localStorage.getItem(REFERENCES_KEY);
-    if(!saved||savedVersion!==REFERENCES_VERSION){
-      localStorage.removeItem(REFERENCES_KEY);
-      localStorage.setItem('passlink_references_version',REFERENCES_VERSION);
-      return DEFAULT_REFERENCES;
-    }
-    return JSON.parse(saved);
+    return saved ? JSON.parse(saved) : DEFAULT_REFERENCES;
   }catch{return DEFAULT_REFERENCES;}
 }
 
@@ -1282,12 +1277,18 @@ async function initAdminData() {
         localStorage.setItem(CONFIG_KEY, JSON.stringify(data.config));
       }
       console.log('[PassLink Admin] Datos sincronizados con éxito');
-      // Forzar re-renderizado inmediato de las tablas y dashboard
-      if (typeof renderProductTable === 'function') renderProductTable();
-      if (typeof renderDashboard === 'function') renderDashboard();
+    } else {
+      console.warn('[PassLink Admin] No se obtuvieron datos remotos, usando localStorage o defaults');
     }
+    // Marcar datos como listos (con o sin red — localStorage tiene datos válidos)
+    dataReady = true;
+    // Re-renderizar con datos frescos
+    if (typeof renderProductTable === 'function') renderProductTable();
+    if (typeof renderDashboard === 'function') renderDashboard();
   } catch(e) {
     console.warn('[PassLink Admin] No se pudo precargar data.json:', e.message);
+    // Aun así marcar como ready para no bloquear el admin offline
+    dataReady = true;
   }
 }
 
