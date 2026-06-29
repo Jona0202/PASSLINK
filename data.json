@@ -243,13 +243,14 @@
         "Reproducción sin restricciones geográficas",
         "Calidad Very High (320kbps)"
       ],
-      "pricePEN": 40,
-      "priceUSD": 11,
+      "pricePEN": 8.5,
+      "priceUSD": 2.5,
       "badgeText": "Disponible",
       "iconClass": "fa-brands fa-spotify",
       "gradient": "from-slate-950 via-[#0a2d1d] to-slate-950",
       "stock": "low",
       "highlighted": false,
+      "hidden": false,
       "isLogoOnly": false
     }
   ],
