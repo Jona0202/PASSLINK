@@ -40,12 +40,12 @@
       ],
       "pricePEN": 26,
       "priceUSD": 7.5,
-      "badgeText": "Top IA",
+      "badgeText": "Más vendido",
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
       "stock": "available",
-      "highlighted": false,
-      "hidden": true
+      "highlighted": true,
+      "hidden": false
     },
     {
       "id": "netflix-premium",
@@ -130,12 +130,12 @@
       ],
       "pricePEN": 17,
       "priceUSD": 4.9,
-      "badgeText": "Oferta",
+      "badgeText": "Más vendido",
       "iconClass": "fa-solid fa-wand-magic-sparkles",
       "gradient": "from-blue-600 to-indigo-400",
       "stock": "available",
-      "highlighted": false,
-      "hidden": true
+      "highlighted": true,
+      "hidden": false
     },
     {
       "id": "capcut-6m-individual",
