@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PassLink LATAM — Cuentas Premium de IA y Streaming</title>
-<meta name="description" content="Tu pase directo a las mejores cuentas premium de Inteligencia Artificial y Streaming en América Latina. ChatGPT Plus, Gemini Pro 3.5, Netflix Ultra HD y Disney+. Activación inmediata, soporte 24/7 y garantía total.">
+<meta name="description" content="Tu pase directo a las mejores cuentas premium de Inteligencia Artificial y Streaming en América Latina. ChatGPT Plus, Gemini Pro, Netflix Ultra HD y Disney+. Activación inmediata, soporte 24/7 y garantía total.">
 <meta name="keywords" content="passlink, passlink latam, cuentas premium peru, chatgpt plus peru, gemini pro peru, netflix barato peru, disney combo, cuentas streaming peru, cuentas de inteligencia artificial">
 <meta name="robots" content="index, follow">
 <meta name="google-site-verification" content="oloz1rOh4obgXgdNUOv4t-qdUCUTbaZps2IdJaI5vdo" />
@@ -22,7 +22,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.passlinklatam.app/">
 <meta property="og:title" content="PassLink LATAM — Cuentas Premium de IA y Streaming">
-<meta property="og:description" content="Desbloquea el poder de la Inteligencia Artificial y el Streaming. ChatGPT Plus, Gemini Pro 3.5, Netflix y Disney+ con activación inmediata. 100% Seguro.">
+<meta property="og:description" content="Desbloquea el poder de la Inteligencia Artificial y el Streaming. ChatGPT Plus, Gemini Pro, Netflix y Disney+ con activación inmediata. 100% Seguro.">
 <meta property="og:image" content="https://www.passlinklatam.app/assets/logo.png?v=4">
 <meta property="og:locale" content="es_PE">
 
@@ -53,7 +53,7 @@
     "priceCurrency": "PEN",
     "lowPrice": "13",
     "highPrice": "204",
-    "offerCount": "39"
+    "offerCount": "38"
   }
 }
 </script>
@@ -636,16 +636,6 @@ const FEATURES = { cart: false, yapeQR: false, userBalance: false };
 // ── PRODUCTOS DEFAULT ───────────────────────────────────────
 const DEFAULT_PRODUCTS = [
   {
-    id:"gemini-pro", category:"ai",
-    name:"Gemini Pro 3.5", subtitle:"18 Meses · Cuenta Personal",
-    description:"Obtén acceso completo a Gemini Pro 3.5 directamente en tu cuenta personal de Google. Sin invitaciones, sin cuentas compartidas. Disfruta de la IA más avanzada de Google con 5 TB de almacenamiento en la nube y integración total con Google Workspace durante 18 meses continuos.",
-    imageUrl:"assets/gemini.png",
-    features:["100% Cuenta Personal (No invitación)","18 Meses de acceso continuo","5 TB Cloud Storage incluido","Workspace Integration completa"],
-    pricePEN:45, priceUSD:13.00,
-    badgeText:"Popular", iconClass:"fa-solid fa-wand-magic-sparkles",
-    gradient:"from-blue-500 to-cyan-400", stock:"available", highlighted:true
-  },
-  {
     id:"chatgpt-plus", category:"ai",
     name:"ChatGPT Plus", subtitle:"Perfil Privado · Acceso Total",
     description:"Accede a ChatGPT Plus mediante un perfil privado y exclusivo. Usa el poder de GPT-4o para redacción, análisis y resolución de problemas. Genera imágenes con DALL-E 3 sin límites. Acceso ilimitado las 24 horas, todos los días.",
@@ -691,9 +681,9 @@ const DEFAULT_PRODUCTS = [
     description:"Accede a Gemini Pro durante 18 meses continuos directamente en tu cuenta de Google. Potencia todas tus tareas con el modelo de IA multimodal de Google: genera textos, analiza imágenes, crea código y mucho más. Compatible con Google Workspace, Gmail y Google Docs de forma nativa.",
     imageUrl:"assets/gemini.png",
     features:["18 Meses de acceso ininterrumpido","Cuenta personal directa","IA multimodal (texto, imágenes, código)","Integración nativa con Google Workspace","Prioridad en nuevos modelos Gemini"],
-    pricePEN:17, priceUSD:4.90,
-    badgeText:"Oferta", iconClass:"fa-solid fa-wand-magic-sparkles",
-    gradient:"from-blue-600 to-indigo-400", stock:"available", highlighted:false
+    pricePEN:45, priceUSD:13.00,
+    badgeText:"Más vendido", iconClass:"fa-solid fa-wand-magic-sparkles",
+    gradient:"from-blue-600 to-indigo-400", stock:"available", highlighted:true
   },
   {
     id:"capcut-6m-individual", category:"software",
@@ -1093,7 +1083,7 @@ const DEFAULT_SLIDES = [
     type:'gradient',
     badge:'🔥 Más vendido del mes',
     gradient:'linear-gradient(135deg,#4f46e5 0%,#7c3aed 60%,#9333ea 100%)',
-    title:'Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal',
+    title:'Gemini Pro — 18 meses<br>en tu cuenta personal',
     subtitle:'5 TB Cloud · Workspace incluido · Sin invitación',
     price:'S/. 45 <span style="font-size:13px;opacity:.7">/ US$ 13.00</span>'
   },
@@ -1288,7 +1278,7 @@ const _LAST_NAMES = [
   'Ramos','Benítez','Cabrera','Gutiérrez','Lara','Molina','Núñez','Peña'
 ];
 const _CITIES  = ['Lima','Arequipa','Trujillo','Cusco','Piura','Chiclayo','Huancayo','Ica','Tacna','Cajamarca','Puno','Ayacucho'];
-const _PRODUCTS = ['Gemini Pro 3.5','ChatGPT Plus','Netflix Premium','Disney+ & Star+','Perplexity PRO','Gemini Pro 18 Meses','CapCut Pro 6 Meses','SuperGrok','Gamma Ultra','Spotify Premium 3 Meses'];
+const _PRODUCTS = ['Gemini Pro 18 Meses','ChatGPT Plus','Netflix Premium','Disney+ & Star+','Perplexity PRO','CapCut Pro 6 Meses','SuperGrok','Gamma Ultra','Spotify Premium 3 Meses','Coursera Plus','YouTube Premium'];
 
 function _mask(name) {
   if (name.length <= 2) return name[0] + '*';
