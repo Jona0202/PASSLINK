@@ -146,7 +146,7 @@ html{scroll-behavior:smooth;}
 .modal-img-col.logo-header .logo-header-img-modal{width:auto !important;height:auto !important;max-width:180px !important;max-height:180px !important;object-fit:contain !important;filter:drop-shadow(0 6px 16px rgba(0,0,0,0.6));z-index:2;}
 
 /* ── NAV ───────────────────────────────────────────────────── */
-.nav-menu-link{font-size:14px;font-weight:600;color:rgba(231,234,246,0.7);transition:all 0.25s;}
+.nav-menu-link{font-size:14px;font-weight:600;color:rgba(231,234,246,0.7);transition:all 0.25s;white-space:nowrap;}
 .nav-menu-link:hover{color:#a5b4fc;text-shadow:0 0 14px rgba(129,140,248,0.6);}
 
 /* ── CARRUSEL HERO ─────────────────────────────────────────── */
@@ -208,18 +208,18 @@ html{scroll-behavior:smooth;}
 
 <!-- HEADER -->
 <header class="sticky top-0 z-50 backdrop-blur-xl bg-ink/70 border-b border-white/10 shadow-lg shadow-black/30">
-  <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+  <div class="max-w-6xl mx-auto flex items-center justify-between gap-4 px-4 py-3">
     <!-- Brand Logo -->
-    <a href="#inicio" class="flex items-center gap-3">
+    <a href="#inicio" class="flex items-center gap-3 shrink-0">
       <span class="relative">
         <img src="assets/logo.png?v=4" alt="PassLink LATAM Logo" class="w-10 h-10 rounded-full object-cover shadow-md border border-accent/40 relative z-10">
         <span class="absolute inset-0 rounded-full" style="box-shadow:0 0 18px rgba(99,102,241,0.65);"></span>
       </span>
-      <span class="text-xl font-extrabold tracking-tight text-white font-display">Pass<span class="text-accent-light">Link</span> <span class="text-sm font-bold text-gradient-ai ml-0.5">LATAM</span></span>
+      <span class="text-xl font-extrabold tracking-tight text-white font-display whitespace-nowrap">Pass<span class="text-accent-light">Link</span> <span class="text-sm font-bold text-gradient-ai ml-0.5">LATAM</span></span>
     </a>
 
     <!-- Desktop Navigation Menu -->
-    <nav class="hidden md:flex items-center gap-6">
+    <nav class="hidden md:flex items-center gap-4 lg:gap-6">
       <a href="#inicio" class="nav-menu-link">Inicio</a>
       <a href="#ofertas-flash" class="nav-menu-link">⚡ Flash</a>
       <a href="#productos" class="nav-menu-link">Catálogo</a>
@@ -230,13 +230,13 @@ html{scroll-behavior:smooth;}
 
     <!-- Right Actions Desktop -->
     <div class="hidden md:flex items-center gap-3">
-      <div class="relative w-44 lg:w-52">
+      <div class="relative w-36 lg:w-48">
         <i class="fa-solid fa-magnifying-glass" style="position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#818cf8;font-size:12px;pointer-events:none;"></i>
-        <input type="search" id="header-search" placeholder="Buscar producto..." autocomplete="off" aria-label="Buscar productos"
-          class="w-full text-xs text-white/85 rounded-full py-2 pl-8 pr-3 outline-none transition-all focus:w-full"
+        <input type="search" id="header-search" placeholder="Buscar..." autocomplete="off" aria-label="Buscar productos"
+          class="w-full text-xs text-white/85 rounded-full py-2 pl-8 pr-3 outline-none"
           style="background:rgba(255,255,255,0.07);border:1.5px solid rgba(129,140,248,0.25);">
       </div>
-      <div class="badge-glow hidden lg:flex items-center gap-1.5 bg-green-500/10 border border-green-400/30 text-green-300 text-[11px] font-semibold px-3 py-1.5 rounded-full">
+      <div class="badge-glow hidden xl:flex items-center gap-1.5 bg-green-500/10 border border-green-400/30 text-green-300 text-[11px] font-semibold px-3 py-1.5 rounded-full whitespace-nowrap">
         <span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
         Activación Inmediata
       </div>
@@ -292,6 +292,23 @@ html{scroll-behavior:smooth;}
     </a>
     <a href="#ofertas-flash" class="inline-flex items-center gap-2 glass text-amber-300 font-bold px-6 py-3 rounded-full transition-all hover:scale-105 hover:border-amber-300/40 text-sm">
       <i class="fa-solid fa-bolt flash-bolt"></i> Ofertas Flash
+    </a>
+  </div>
+
+  <!-- Medios de pago destacados -->
+  <div class="flex flex-wrap items-center justify-center gap-2 mt-7" aria-label="Medios de pago aceptados">
+    <span class="text-[10px] uppercase tracking-widest text-white/35 font-bold basis-full sm:basis-auto">Paga con</span>
+    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-purple-200 transition-all hover:scale-105 hover:border-purple-300/40">
+      <span class="w-4 h-4 rounded bg-[#7D2D8A] inline-flex items-center justify-center text-[6px] font-black text-white">YP</span> Yape / Plin
+    </a>
+    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-amber-200 transition-all hover:scale-105 hover:border-amber-300/40">
+      <i class="fa-solid fa-coins text-[#F0B90B]"></i> Binance
+    </a>
+    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-blue-200 transition-all hover:scale-105 hover:border-blue-300/40">
+      <i class="fa-brands fa-paypal text-[#4f95f7]"></i> PayPal
+    </a>
+    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-white/70 transition-all hover:scale-105 hover:border-white/25">
+      <i class="fa-solid fa-building-columns text-white/50"></i> Transferencia
     </a>
   </div>
 </section>
@@ -942,6 +959,12 @@ function openModal(id, offer){
       <a href="${waURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#25D366;color:white;font-weight:800;font-size:14px;padding:14px;border-radius:14px;text-decoration:none;margin-bottom:10px;transition:opacity .2s;box-shadow:0 8px 26px rgba(37,211,102,0.35);" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
         <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> ${hasOffer?'⚡ Comprar Oferta':'Comprar Ahora'} — S/. ${salePEN}
       </a>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+        <span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(231,234,246,0.35);">Paga con</span>
+        <span style="font-size:10px;font-weight:800;color:#d8b4fe;background:rgba(125,45,138,0.28);border:1px solid rgba(216,180,254,0.25);padding:3px 9px;border-radius:999px;">YAPE / PLIN</span>
+        <span style="font-size:10px;font-weight:800;color:#fcd34d;background:rgba(240,185,11,0.13);border:1px solid rgba(252,211,77,0.25);padding:3px 9px;border-radius:999px;"><i class="fa-solid fa-coins"></i> BINANCE</span>
+        <span style="font-size:10px;font-weight:800;color:#93c5fd;background:rgba(0,121,193,0.18);border:1px solid rgba(147,197,253,0.25);padding:3px 9px;border-radius:999px;"><i class="fa-brands fa-paypal"></i> PAYPAL</span>
+      </div>
       <a href="${infoURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:rgba(255,255,255,0.06);color:rgba(231,234,246,0.6);font-weight:600;font-size:13px;padding:11px;border-radius:14px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
         <i class="fa-solid fa-comment-dots"></i> Quiero más información primero
       </a>
