@@ -296,19 +296,19 @@ html{scroll-behavior:smooth;}
   </div>
 
   <!-- Medios de pago destacados -->
-  <div class="flex flex-wrap items-center justify-center gap-2 mt-7" aria-label="Medios de pago aceptados">
+  <div class="flex flex-wrap items-center justify-center gap-2.5 mt-7" aria-label="Medios de pago aceptados">
     <span class="text-[10px] uppercase tracking-widest text-white/35 font-bold basis-full sm:basis-auto">Paga con</span>
-    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-purple-200 transition-all hover:scale-105 hover:border-purple-300/40">
-      <span class="w-4 h-4 rounded bg-[#7D2D8A] inline-flex items-center justify-center text-[6px] font-black text-white">YP</span> Yape / Plin
+    <a href="#contacto" class="glass flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-purple-200 transition-all hover:scale-105 hover:border-purple-300/40">
+      <span class="w-6 h-6 rounded-full bg-[#7D2D8A] inline-flex items-center justify-center shrink-0"><img src="assets/pay-yape.svg" alt="Yape" class="w-3.5 h-3.5"></span> Yape / Plin
     </a>
-    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-amber-200 transition-all hover:scale-105 hover:border-amber-300/40">
-      <i class="fa-solid fa-coins text-[#F0B90B]"></i> Binance
+    <a href="#contacto" class="glass flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-amber-200 transition-all hover:scale-105 hover:border-amber-300/40">
+      <span class="w-6 h-6 rounded-full bg-black inline-flex items-center justify-center shrink-0"><img src="assets/pay-binance.svg" alt="Binance" class="w-4 h-4"></span> Binance
     </a>
-    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-blue-200 transition-all hover:scale-105 hover:border-blue-300/40">
-      <i class="fa-brands fa-paypal text-[#4f95f7]"></i> PayPal
+    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[13px] font-extrabold text-blue-200 transition-all hover:scale-105 hover:border-blue-300/40">
+      <i class="fa-brands fa-paypal text-[#4f95f7]"></i> <span class="text-[11px]">PayPal</span>
     </a>
-    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[11px] font-extrabold text-white/70 transition-all hover:scale-105 hover:border-white/25">
-      <i class="fa-solid fa-building-columns text-white/50"></i> Transferencia
+    <a href="#contacto" class="glass flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-[13px] font-extrabold text-white/70 transition-all hover:scale-105 hover:border-white/25">
+      <i class="fa-solid fa-building-columns text-white/50"></i> <span class="text-[11px]">Transferencia</span>
     </a>
   </div>
 </section>
@@ -505,8 +505,8 @@ html{scroll-behavior:smooth;}
       <div class="space-y-3">
         <!-- Yape -->
         <div class="flex items-center gap-3.5 bg-purple-500/10 border border-purple-400/25 rounded-2xl p-3.5 transition-all hover:bg-purple-500/15">
-          <div class="w-10 h-10 rounded-xl bg-[#7D2D8A] flex items-center justify-center text-white text-[10px] font-black shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(125,45,138,0.6);">
-            YAPE
+          <div class="w-12 h-12 rounded-xl bg-[#7D2D8A] flex items-center justify-center shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(125,45,138,0.6);">
+            <img src="assets/pay-yape.svg" alt="Yape" class="w-6 h-6">
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
@@ -519,8 +519,8 @@ html{scroll-behavior:smooth;}
 
         <!-- Binance -->
         <div class="flex items-center gap-3.5 bg-amber-500/10 border border-amber-400/25 rounded-2xl p-3.5 transition-all hover:bg-amber-500/15">
-          <div class="w-10 h-10 rounded-xl bg-[#F0B90B] flex items-center justify-center text-amber-950 text-base shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(240,185,11,0.5);">
-            <i class="fa-solid fa-coins"></i>
+          <div class="w-12 h-12 rounded-xl bg-black flex items-center justify-center shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(240,185,11,0.4);">
+            <img src="assets/pay-binance.svg" alt="Binance" class="w-7 h-7">
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
@@ -533,7 +533,7 @@ html{scroll-behavior:smooth;}
 
         <!-- PayPal -->
         <div class="flex items-center gap-3.5 bg-blue-500/10 border border-blue-400/25 rounded-2xl p-3.5 transition-all hover:bg-blue-500/15">
-          <div class="w-10 h-10 rounded-xl bg-[#0079C1] flex items-center justify-center text-white text-base shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(0,121,193,0.55);">
+          <div class="w-12 h-12 rounded-xl bg-[#0079C1] flex items-center justify-center text-white text-xl shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(0,121,193,0.55);">
             <i class="fa-brands fa-paypal"></i>
           </div>
           <div class="flex-1">
@@ -951,9 +951,9 @@ function openModal(id, offer){
       </a>
       <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
         <span style="font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:rgba(231,234,246,0.35);">Paga con</span>
-        <span style="font-size:10px;font-weight:800;color:#d8b4fe;background:rgba(125,45,138,0.28);border:1px solid rgba(216,180,254,0.25);padding:3px 9px;border-radius:999px;">YAPE / PLIN</span>
-        <span style="font-size:10px;font-weight:800;color:#fcd34d;background:rgba(240,185,11,0.13);border:1px solid rgba(252,211,77,0.25);padding:3px 9px;border-radius:999px;"><i class="fa-solid fa-coins"></i> BINANCE</span>
-        <span style="font-size:10px;font-weight:800;color:#93c5fd;background:rgba(0,121,193,0.18);border:1px solid rgba(147,197,253,0.25);padding:3px 9px;border-radius:999px;"><i class="fa-brands fa-paypal"></i> PAYPAL</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:#d8b4fe;background:rgba(125,45,138,0.28);border:1px solid rgba(216,180,254,0.25);padding:3px 10px 3px 5px;border-radius:999px;"><img src="assets/pay-yape.svg" alt="" style="width:15px;height:15px;background:#7D2D8A;border-radius:50%;padding:2px;box-sizing:content-box;"> YAPE/PLIN</span>
+        <span style="display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;color:#fcd34d;background:rgba(240,185,11,0.13);border:1px solid rgba(252,211,77,0.25);padding:3px 10px 3px 5px;border-radius:999px;"><img src="assets/pay-binance.svg" alt="" style="width:15px;height:15px;background:#000;border-radius:50%;padding:2px;box-sizing:content-box;"> BINANCE</span>
+        <span style="font-size:11px;font-weight:800;color:#93c5fd;background:rgba(0,121,193,0.18);border:1px solid rgba(147,197,253,0.25);padding:4px 10px;border-radius:999px;"><i class="fa-brands fa-paypal"></i> PAYPAL</span>
       </div>
       <a href="${infoURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:rgba(255,255,255,0.06);color:rgba(231,234,246,0.6);font-weight:600;font-size:13px;padding:11px;border-radius:14px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
         <i class="fa-solid fa-comment-dots"></i> Quiero más información primero
