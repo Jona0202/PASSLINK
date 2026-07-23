@@ -18,7 +18,7 @@
 <!-- Canonical Link -->
 <link rel="canonical" href="https://www.passlinklatam.app/">
 
-<!-- Open Graph / Facebook / WhatsApp Preview (Altamente optimizado para conversiones en chats) -->
+<!-- Open Graph / Facebook / WhatsApp Preview -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.passlinklatam.app/">
 <meta property="og:title" content="PassLink LATAM — Cuentas Premium de IA y Streaming">
@@ -33,7 +33,7 @@
 <meta name="twitter:description" content="Tus cuentas premium favoritas de Inteligencia Artificial y Streaming con activación inmediata. Garantizado.">
 <meta name="twitter:image" content="https://www.passlinklatam.app/assets/logo.png?v=4">
 
-<!-- Google Structured Data (JSON-LD Schema para posicionar en Google Shopper / Búsquedas ricas) -->
+<!-- Google Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -51,37 +51,74 @@
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "PEN",
-    "lowPrice": "15",
-    "highPrice": "45",
-    "offerCount": "4"
+    "lowPrice": "13",
+    "highPrice": "200",
+    "offerCount": "11"
   }
 }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script>
-tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']},colors:{navy:'#0f1b3d','navy-light':'#1e3a6e',accent:'#6366f1','accent-light':'#818cf8',whatsapp:'#25D366'}}}}
+tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif'],display:['Sora','Inter','sans-serif']},colors:{ink:'#060814',navy:'#0f1b3d','navy-light':'#1e3a6e',accent:'#6366f1','accent-light':'#818cf8',neon:'#22d3ee',whatsapp:'#25D366'}}}}
 </script>
 <style>
-body{font-family:'Inter',sans-serif;}
-.bg-hero{background:linear-gradient(135deg,#f0f9ff 0%,#ede9fe 35%,#faf5ff 65%,#ecfeff 100%);}
-.card-shine{background:linear-gradient(135deg,rgba(255,255,255,0.92),rgba(255,255,255,0.75));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.6);}
-.card-shine:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(99,102,241,0.15);border-color:rgba(99,102,241,0.3);}
+body{font-family:'Inter',sans-serif;background:#060814;color:#e7eaf6;overflow-x:hidden;}
+html{scroll-behavior:smooth;}
+
+/* ── FONDO IA: auroras + grid + partículas ─────────────────── */
+.bg-stage{position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse at 50% -10%,#131a3f 0%,#060814 55%,#04050d 100%);}
+.bg-grid{position:fixed;inset:0;z-index:-2;pointer-events:none;background-image:linear-gradient(rgba(129,140,248,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(129,140,248,0.055) 1px,transparent 1px);background-size:46px 46px;-webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 90% 70% at 50% 0%,#000 30%,transparent 100%);}
+.aurora{position:fixed;border-radius:50%;filter:blur(95px);opacity:.32;z-index:-2;pointer-events:none;will-change:transform;}
+.aurora-1{width:520px;height:520px;top:-160px;left:-120px;background:radial-gradient(circle,#6366f1 0%,transparent 70%);animation:drift1 22s ease-in-out infinite alternate;}
+.aurora-2{width:460px;height:460px;top:22%;right:-180px;background:radial-gradient(circle,#22d3ee 0%,transparent 70%);animation:drift2 26s ease-in-out infinite alternate;}
+.aurora-3{width:540px;height:540px;bottom:-220px;left:28%;background:radial-gradient(circle,#a855f7 0%,transparent 70%);animation:drift3 30s ease-in-out infinite alternate;}
+@keyframes drift1{to{transform:translate(120px,90px) scale(1.15);}}
+@keyframes drift2{to{transform:translate(-140px,-70px) scale(1.2);}}
+@keyframes drift3{to{transform:translate(-90px,-120px) scale(1.1);}}
+#particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
+.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:#818cf8;opacity:0;animation:floatUp linear infinite;box-shadow:0 0 8px rgba(129,140,248,0.9);}
+@keyframes floatUp{0%{transform:translateY(20px);opacity:0;}12%{opacity:.75;}88%{opacity:.55;}100%{transform:translateY(-110vh);opacity:0;}}
+
+/* ── UTILIDADES GLASS / NEON ───────────────────────────────── */
+.glass{background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);backdrop-filter:blur(14px);}
+.glass-strong{background:rgba(13,18,48,0.78);border:1px solid rgba(129,140,248,0.22);backdrop-filter:blur(18px);}
+.text-gradient-ai{background:linear-gradient(90deg,#818cf8,#22d3ee,#e879f9,#818cf8);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:gradFlow 6s linear infinite;}
+@keyframes gradFlow{to{background-position:250% 0;}}
+.btn-glow{box-shadow:0 8px 30px rgba(99,102,241,0.45),0 0 0 1px rgba(129,140,248,0.35) inset;}
+.btn-glow:hover{box-shadow:0 10px 40px rgba(99,102,241,0.65),0 0 0 1px rgba(129,140,248,0.5) inset;}
+.icon-orb{width:3rem;height:3rem;border-radius:1rem;display:flex;align-items:center;justify-content:center;font-size:1.25rem;color:#fff;position:relative;}
+.icon-orb::after{content:'';position:absolute;inset:-1px;border-radius:inherit;box-shadow:0 0 22px 2px currentColor;opacity:.28;pointer-events:none;}
+
+/* ── REVEAL ON SCROLL ──────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,.68,0,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ── TYPEWRITER ────────────────────────────────────────────── */
+.type-caret{display:inline-block;width:3px;height:1em;background:#22d3ee;margin-left:3px;vertical-align:-0.12em;animation:caretBlink 0.9s steps(1) infinite;box-shadow:0 0 10px #22d3ee;}
+@keyframes caretBlink{50%{opacity:0;}}
+
+/* ── CARDS DE PRODUCTO (glass oscuro + neon hover) ─────────── */
+.card-shine{background:linear-gradient(160deg,rgba(255,255,255,0.07),rgba(255,255,255,0.025));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.09);position:relative;}
+.card-shine::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(129,140,248,0.55),transparent 35%,transparent 65%,rgba(34,211,238,0.45));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s;pointer-events:none;}
+.card-shine:hover{transform:translateY(-6px);box-shadow:0 22px 50px rgba(99,102,241,0.28);}
+.card-shine:hover::before{opacity:1;}
 .pulse-wa{animation:pulseWA 2s infinite;}
 @keyframes pulseWA{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}70%{box-shadow:0 0 0 18px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
 .fade-in{animation:fadeIn 0.45s ease-out forwards;opacity:0;transform:translateY(18px);}
 @keyframes fadeIn{to{opacity:1;transform:translateY(0);}}
 .badge-glow{animation:badgeGlow 3s ease-in-out infinite;}
 @keyframes badgeGlow{0%,100%{box-shadow:0 0 8px rgba(34,197,94,0.4);}50%{box-shadow:0 0 18px rgba(34,197,94,0.7);}}
-.filter-btn.active{background:linear-gradient(135deg,#6366f1,#818cf8);color:#fff;box-shadow:0 4px 15px rgba(99,102,241,0.35);}
-html{scroll-behavior:smooth;}
-/* Modal */
-#modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(15,27,61,0.65);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:16px;}
+.filter-btn{transition:all .3s;}
+.filter-btn.active{background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;box-shadow:0 4px 20px rgba(99,102,241,0.5);border-color:transparent!important;}
+
+/* ── MODAL (oscuro) ────────────────────────────────────────── */
+#modal-overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(4,5,13,0.78);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:16px;}
 #modal-overlay.open{display:flex;}
-#modal-box{background:#fff;border-radius:1.75rem;max-width:820px;width:100%;max-height:92vh;overflow:hidden;animation:slideUp 0.38s cubic-bezier(.22,.68,0,1.2);display:flex;}
+#modal-box{background:#0d1230;border:1px solid rgba(129,140,248,0.25);border-radius:1.75rem;max-width:820px;width:100%;max-height:92vh;overflow:hidden;animation:slideUp 0.38s cubic-bezier(.22,.68,0,1.2);display:flex;box-shadow:0 30px 80px rgba(0,0,0,0.6),0 0 60px rgba(99,102,241,0.18);}
 #modal-content{display:flex;flex-direction:column;width:100%;max-height:92vh;}
 @media(min-width:700px){#modal-content{flex-direction:row;}}
 .modal-img-col{flex-shrink:0;width:100%;position:relative;}
@@ -91,132 +128,134 @@ html{scroll-behavior:smooth;}
 .modal-detail-col{flex:1;padding:28px;overflow-y:auto;max-height:92vh;}
 @keyframes slideUp{from{opacity:0;transform:translateY(40px) scale(0.97);}to{opacity:1;transform:translateY(0) scale(1);}}
 .stock-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
-.stock-available{background:#dcfce7;color:#16a34a;}
-.stock-low{background:#fef9c3;color:#ca8a04;}
-.stock-out{background:#fee2e2;color:#dc2626;}
-/* Card image overlay — dark enough to fully hide baked-in AI text */
+.stock-available{background:rgba(34,197,94,0.18);color:#4ade80;border:1px solid rgba(74,222,128,0.35);}
+.stock-low{background:rgba(234,179,8,0.16);color:#facc15;border:1px solid rgba(250,204,21,0.35);}
+.stock-out{background:rgba(239,68,68,0.16);color:#f87171;border:1px solid rgba(248,113,113,0.35);}
+
+/* ── IMAGEN DE CARD ────────────────────────────────────────── */
 .card-img-wrap{position:relative;height:160px;overflow:hidden;border-radius:1rem 1rem 0 0;}
-.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
-.card-img-wrap .img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(10,18,50,0.82) 100%);}
+.card-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s cubic-bezier(.4,0,.2,1);}
+.card-img-wrap:hover img{transform:scale(1.08);}
+.card-img-wrap .img-overlay{position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.18) 0%, rgba(6,8,20,0.85) 100%);}
 .card-img-fallback{width:100%;height:160px;display:none;align-items:center;justify-content:center;font-size:2.5rem;color:white;border-radius:1rem 1rem 0 0;}
 
 /* Dynamic Logo-Only Headers */
-.card-img-wrap.logo-header {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-.card-img-wrap.logo-header .logo-header-img {
-  width: auto !important;
-  height: auto !important;
-  max-width: 120px !important;
-  max-height: 80px !important;
-  object-fit: contain !important;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
-  transition: transform 0.4s cubic-bezier(.4,0,.2,1) !important;
-  z-index: 2;
-}
-.card-img-wrap.logo-header:hover .logo-header-img {
-  transform: scale(1.12) !important;
-}
+.card-img-wrap.logo-header{display:flex !important;align-items:center !important;justify-content:center !important;}
+.card-img-wrap.logo-header .logo-header-img{width:auto !important;height:auto !important;max-width:120px !important;max-height:80px !important;object-fit:contain !important;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));transition:transform 0.4s cubic-bezier(.4,0,.2,1) !important;z-index:2;}
+.card-img-wrap.logo-header:hover .logo-header-img{transform:scale(1.12) !important;}
+.modal-img-col.logo-header{display:flex !important;align-items:center !important;justify-content:center !important;height:260px !important;}
+@media(min-width:700px){.modal-img-col.logo-header{height:100% !important;min-height:480px !important;border-radius:1.75rem 0 0 1.75rem;}}
+.modal-img-col.logo-header .logo-header-img-modal{width:auto !important;height:auto !important;max-width:180px !important;max-height:180px !important;object-fit:contain !important;filter:drop-shadow(0 6px 16px rgba(0,0,0,0.6));z-index:2;}
 
-.modal-img-col.logo-header {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  height: 260px !important;
-}
-@media(min-width:700px) {
-  .modal-img-col.logo-header {
-    height: 100% !important;
-    min-height: 480px !important;
-    border-radius: 1.75rem 0 0 1.75rem;
-  }
-}
-.modal-img-col.logo-header .logo-header-img-modal {
-  width: auto !important;
-  height: auto !important;
-  max-width: 180px !important;
-  max-height: 180px !important;
-  object-fit: contain !important;
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.45));
-  z-index: 2;
-}
+/* ── NAV ───────────────────────────────────────────────────── */
+.nav-menu-link{font-size:14px;font-weight:600;color:rgba(231,234,246,0.7);transition:all 0.25s;}
+.nav-menu-link:hover{color:#a5b4fc;text-shadow:0 0 14px rgba(129,140,248,0.6);}
 
-/* Nav styles */
-.nav-menu-link{font-size:14px;font-weight:600;color:#0f1b3d;opacity:0.75;transition:all 0.25s;}
-.nav-menu-link:hover{opacity:1;color:#6366f1;}
-/* Carousel */
-.carousel-wrap{position:relative;overflow:hidden;border-radius:1.5rem;}
+/* ── CARRUSEL HERO ─────────────────────────────────────────── */
+.carousel-wrap{position:relative;overflow:hidden;border-radius:1.5rem;border:1px solid rgba(129,140,248,0.28);box-shadow:0 18px 50px rgba(0,0,0,0.45),0 0 45px rgba(99,102,241,0.16);}
 .carousel-track{display:flex;transition:transform 0.55s cubic-bezier(.4,0,.2,1);}
 .carousel-slide{min-width:100%;position:relative;height:200px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px 40px;}
 @media(min-width:640px){.carousel-slide{height:230px;}}
-.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.25);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.4);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:background .2s;font-size:14px;}
-.carousel-btn:hover{background:rgba(255,255,255,0.45);}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:background .2s;font-size:14px;}
+.carousel-btn:hover{background:rgba(255,255,255,0.35);}
 .carousel-btn-prev{left:12px;}
 .carousel-btn-next{right:12px;}
 .carousel-dots{display:flex;gap:6px;justify-content:center;margin-top:10px;}
-.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(99,102,241,0.25);cursor:pointer;transition:all .3s;}
-.carousel-dot.active{background:#6366f1;width:20px;border-radius:4px;}
-/* Search */
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:rgba(129,140,248,0.3);cursor:pointer;transition:all .3s;}
+.carousel-dot.active{background:#818cf8;width:20px;border-radius:4px;box-shadow:0 0 10px rgba(129,140,248,0.8);}
+
+/* ── OFERTAS FLASH ─────────────────────────────────────────── */
+.flash-panel{position:relative;border-radius:1.75rem;overflow:hidden;background:linear-gradient(135deg,#1e1b4b 0%,#312e81 45%,#4c1d95 100%);border:1px solid rgba(167,139,250,0.35);box-shadow:0 24px 60px rgba(76,29,149,0.45),0 0 55px rgba(139,92,246,0.22);}
+.flash-panel::before{content:'';position:absolute;inset:0;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,0.09) 50%,transparent 60%);transform:translateX(-100%);animation:flashSheen 5s linear infinite;pointer-events:none;z-index:1;}
+@keyframes flashSheen{to{transform:translateX(100%);}}
+.flash-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:24px 26px 4px;position:relative;z-index:2;}
+.flash-bolt{animation:flashBolt 1.6s ease-in-out infinite;display:inline-block;}
+@keyframes flashBolt{0%,100%{transform:scale(1);filter:drop-shadow(0 0 6px rgba(250,204,21,0.55));}50%{transform:scale(1.2);filter:drop-shadow(0 0 16px rgba(250,204,21,0.95));}}
+.countdown-box{min-width:54px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(6px);border-radius:12px;padding:7px 8px;text-align:center;}
+.countdown-num{font-size:20px;font-weight:900;color:#fff;line-height:1.1;font-variant-numeric:tabular-nums;font-family:'Sora','Inter',sans-serif;}
+.countdown-lbl{font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:rgba(255,255,255,0.6);margin-top:2px;}
+.flash-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:18px 26px 26px;scrollbar-width:none;-webkit-overflow-scrolling:touch;position:relative;z-index:2;}
+.flash-track::-webkit-scrollbar{display:none;}
+.flash-card{scroll-snap-align:start;flex:0 0 235px;background:rgba(9,12,32,0.85);border:1px solid rgba(255,255,255,0.12);backdrop-filter:blur(10px);border-radius:1.25rem;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s;cursor:pointer;}
+@media(min-width:640px){.flash-card{flex-basis:255px;}}
+.flash-card:hover{transform:translateY(-5px);box-shadow:0 16px 38px rgba(0,0,0,0.5),0 0 30px rgba(245,158,11,0.25);}
+.flash-off-badge{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-size:11px;font-weight:900;padding:4px 10px;border-radius:999px;box-shadow:0 4px 14px rgba(239,68,68,0.55);animation:flashPulse 2s infinite;z-index:3;}
+@keyframes flashPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}
+.flash-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:5;background:rgba(255,255,255,0.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:background .2s;}
+.flash-nav:hover{background:rgba(255,255,255,0.32);}
+
+/* ── BUSCADOR ──────────────────────────────────────────────── */
 .search-wrap{position:relative;max-width:460px;margin:0 auto 20px;}
-.search-wrap input{width:100%;padding:12px 16px 12px 44px;background:rgba(255,255,255,0.85);backdrop-filter:blur(12px);border:1.5px solid rgba(99,102,241,0.15);border-radius:999px;font-size:14px;font-family:'Inter',sans-serif;color:#0f1b3d;outline:none;box-sizing:border-box;transition:border .2s,box-shadow .2s;}
-.search-wrap input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,0.12);}
-.search-wrap .search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#6366f1;font-size:14px;pointer-events:none;}
-#toast-proof{position:fixed;bottom:24px;left:20px;z-index:200;max-width:290px;background:#fff;border-radius:14px;padding:12px 16px;box-shadow:0 8px 32px rgba(15,27,61,0.18);border:1px solid rgba(99,102,241,0.12);display:flex;align-items:flex-start;gap:10px;transform:translateY(120%);opacity:0;transition:transform 0.45s cubic-bezier(.4,0,.2,1),opacity 0.45s;pointer-events:auto;cursor:pointer;}
+.search-wrap input{width:100%;padding:12px 16px 12px 44px;background:rgba(255,255,255,0.06);backdrop-filter:blur(12px);border:1.5px solid rgba(129,140,248,0.25);border-radius:999px;font-size:14px;font-family:'Inter',sans-serif;color:#e7eaf6;outline:none;box-sizing:border-box;transition:border .2s,box-shadow .2s;}
+.search-wrap input::placeholder{color:rgba(231,234,246,0.35);}
+.search-wrap input:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,0.22),0 0 25px rgba(99,102,241,0.25);}
+.search-wrap .search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#818cf8;font-size:14px;pointer-events:none;}
+
+/* ── TOAST ─────────────────────────────────────────────────── */
+#toast-proof{position:fixed;bottom:24px;left:20px;z-index:200;max-width:290px;background:rgba(13,18,48,0.92);backdrop-filter:blur(14px);border-radius:14px;padding:12px 16px;box-shadow:0 8px 32px rgba(0,0,0,0.5),0 0 25px rgba(99,102,241,0.2);border:1px solid rgba(129,140,248,0.3);display:flex;align-items:flex-start;gap:10px;transform:translateY(120%);opacity:0;transition:transform 0.45s cubic-bezier(.4,0,.2,1),opacity 0.45s;pointer-events:auto;cursor:pointer;}
 #toast-proof.show{transform:translateY(0);opacity:1;}
-/* Card image hover zoom */
-.card-img-wrap img{transition:transform 0.4s cubic-bezier(.4,0,.2,1);}
-.card-img-wrap:hover img{transform:scale(1.08);}
 </style>
 </head>
-<body class="bg-hero min-h-screen text-navy antialiased">
+<body class="min-h-screen antialiased">
+
+<!-- FONDO ANIMADO IA -->
+<div class="bg-stage"></div>
+<div class="bg-grid"></div>
+<div class="aurora aurora-1"></div>
+<div class="aurora aurora-2"></div>
+<div class="aurora aurora-3"></div>
+<div id="particles"></div>
 
 <!-- HEADER -->
-<header class="sticky top-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/40 shadow-sm">
+<header class="sticky top-0 z-50 backdrop-blur-xl bg-ink/70 border-b border-white/10 shadow-lg shadow-black/30">
   <div class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
     <!-- Brand Logo -->
     <a href="#inicio" class="flex items-center gap-3">
-      <img src="assets/logo.png?v=4" alt="PassLink LATAM Logo" class="w-10 h-10 rounded-full object-cover shadow-md border border-accent/25">
-      <span class="text-xl font-extrabold tracking-tight text-navy">Pass<span class="text-accent">Link</span> <span class="text-sm font-bold bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent ml-0.5">LATAM</span></span>
+      <span class="relative">
+        <img src="assets/logo.png?v=4" alt="PassLink LATAM Logo" class="w-10 h-10 rounded-full object-cover shadow-md border border-accent/40 relative z-10">
+        <span class="absolute inset-0 rounded-full" style="box-shadow:0 0 18px rgba(99,102,241,0.65);"></span>
+      </span>
+      <span class="text-xl font-extrabold tracking-tight text-white font-display">Pass<span class="text-accent-light">Link</span> <span class="text-sm font-bold text-gradient-ai ml-0.5">LATAM</span></span>
     </a>
-    
+
     <!-- Desktop Navigation Menu -->
     <nav class="hidden md:flex items-center gap-6">
       <a href="#inicio" class="nav-menu-link">Inicio</a>
+      <a href="#ofertas-flash" class="nav-menu-link">⚡ Flash</a>
       <a href="#productos" class="nav-menu-link">Catálogo</a>
       <a href="#beneficios" class="nav-menu-link">Beneficios</a>
       <a href="#referencias" class="nav-menu-link">Referencias</a>
       <a href="#contacto" class="nav-menu-link">Contacto</a>
     </nav>
-    
+
     <!-- Right Actions Desktop -->
     <div class="hidden md:flex items-center gap-3">
-      <div class="badge-glow flex items-center gap-1.5 bg-green-50 border border-green-200 text-green-700 text-[11px] font-semibold px-3 py-1.5 rounded-full">
-        <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+      <div class="badge-glow flex items-center gap-1.5 bg-green-500/10 border border-green-400/30 text-green-300 text-[11px] font-semibold px-3 py-1.5 rounded-full">
+        <span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
         Activación Inmediata
       </div>
-      <a href="#contacto" class="bg-navy text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-accent transition-colors shadow">Soporte</a>
+      <a href="#contacto" class="bg-gradient-to-r from-accent to-purple-500 text-white text-xs font-bold px-4 py-2 rounded-full btn-glow transition-all hover:scale-105">Soporte</a>
     </div>
 
     <!-- Mobile Navigation Toggle Button -->
-    <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 flex items-center justify-center rounded-lg bg-navy/5 text-navy hover:bg-navy/10 transition-colors">
+    <button onclick="toggleMobileNav()" class="md:hidden w-9 h-9 flex items-center justify-center rounded-lg bg-white/5 text-white border border-white/10 hover:bg-white/10 transition-colors">
       <i class="fa-solid fa-bars text-lg" id="mobile-nav-icon"></i>
     </button>
   </div>
 
   <!-- Mobile Dropdown Nav Menu -->
-  <div id="mobile-nav-dropdown" class="hidden md:hidden border-t border-white/40 bg-white/95 backdrop-blur-xl absolute top-full left-0 w-full shadow-lg z-40 transition-all duration-300">
+  <div id="mobile-nav-dropdown" class="hidden md:hidden border-t border-white/10 bg-ink/95 backdrop-blur-xl absolute top-full left-0 w-full shadow-2xl z-40 transition-all duration-300">
     <div class="flex flex-col p-4 gap-3">
-      <a href="#inicio" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">Inicio</a>
-      <a href="#productos" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">Catálogo de Productos</a>
-      <a href="#beneficios" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">¿Por qué PassLink?</a>
-      <a href="#referencias" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">Referencias</a>
-      <a href="#contacto" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-navy/5 font-semibold text-sm text-navy">Canales de Contacto</a>
-      
-      <div class="border-t border-navy/5 pt-3 flex flex-col gap-2">
-        <div class="flex items-center gap-1.5 px-4 text-green-700 text-xs font-semibold">
-          <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
+      <a href="#inicio" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-white/5 font-semibold text-sm text-white">Inicio</a>
+      <a href="#ofertas-flash" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-white/5 font-semibold text-sm text-amber-300">⚡ Ofertas Flash</a>
+      <a href="#productos" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-white/5 font-semibold text-sm text-white">Catálogo de Productos</a>
+      <a href="#beneficios" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-white/5 font-semibold text-sm text-white">¿Por qué PassLink?</a>
+      <a href="#referencias" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-white/5 font-semibold text-sm text-white">Referencias</a>
+      <a href="#contacto" onclick="toggleMobileNav()" class="py-2.5 px-4 rounded-xl hover:bg-white/5 font-semibold text-sm text-white">Canales de Contacto</a>
+
+      <div class="border-t border-white/10 pt-3 flex flex-col gap-2">
+        <div class="flex items-center gap-1.5 px-4 text-green-300 text-xs font-semibold">
+          <span class="w-2 h-2 rounded-full bg-green-400 inline-block"></span>
           Activación garantizada en minutos
         </div>
         <a id="wa-mobile-btn" href="#" target="_blank" class="flex items-center justify-center gap-2 bg-whatsapp text-white font-bold text-xs py-3 rounded-xl shadow mt-1">
@@ -228,24 +267,32 @@ html{scroll-behavior:smooth;}
 </header>
 
 <!-- HERO -->
-<section id="inicio" class="pt-16 pb-10 px-4 text-center max-w-3xl mx-auto">
-  <div class="inline-flex items-center gap-2 bg-accent/10 text-accent text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
-    <i class="fa-solid fa-bolt"></i> Ofertas Junio 2026 &middot; Todo LATAM 🌎
+<section id="inicio" class="pt-16 pb-10 px-4 text-center max-w-3xl mx-auto relative">
+  <div class="inline-flex items-center gap-2 glass text-accent-light text-xs font-semibold px-4 py-1.5 rounded-full mb-5">
+    <i class="fa-solid fa-bolt text-amber-300"></i> Ofertas Julio 2026 &middot; Todo LATAM 🌎
   </div>
-  <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight text-navy mb-4">
-    Tus cuentas premium de <span class="bg-gradient-to-r from-accent to-purple-500 bg-clip-text text-transparent">IA</span> y <span class="bg-gradient-to-r from-cyan-500 to-blue-500 bg-clip-text text-transparent">Streaming</span>, listas en minutos
+  <h1 class="text-3xl sm:text-5xl font-black leading-tight tracking-tight text-white mb-3 font-display">
+    Tus cuentas premium de <span class="text-gradient-ai">IA</span> y <span class="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Streaming</span>, listas en minutos
   </h1>
-  <p class="text-sm sm:text-base text-navy/60 max-w-xl mx-auto leading-relaxed mb-7">
-    Sin complicaciones. Te activamos tu cuenta directamente, con soporte real y garant&iacute;a total. <strong class="text-navy/80">Pagás con Yape, Binance, PayPal y más &mdash; desde cualquier pa&iacute;s de LATAM.</strong>
+  <p class="text-base sm:text-lg font-bold text-white/85 mb-4 h-7" aria-hidden="true">
+    <span id="type-target" class="text-gradient-ai"></span><span class="type-caret"></span>
   </p>
-  <a href="#productos" class="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-purple-500 text-white font-bold px-7 py-3 rounded-full shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all hover:scale-105 text-sm">
-    <i class="fa-solid fa-arrow-down"></i> Ver Productos
-  </a>
+  <p class="text-sm sm:text-base text-white/55 max-w-xl mx-auto leading-relaxed mb-7">
+    Sin complicaciones. Te activamos tu cuenta directamente, con soporte real y garant&iacute;a total. <strong class="text-white/80">Pagás con Yape, Binance, PayPal y más &mdash; desde cualquier pa&iacute;s de LATAM.</strong>
+  </p>
+  <div class="flex flex-wrap items-center justify-center gap-3">
+    <a href="#productos" class="inline-flex items-center gap-2 bg-gradient-to-r from-accent to-purple-500 text-white font-bold px-7 py-3 rounded-full btn-glow transition-all hover:scale-105 text-sm">
+      <i class="fa-solid fa-arrow-down"></i> Ver Productos
+    </a>
+    <a href="#ofertas-flash" class="inline-flex items-center gap-2 glass text-amber-300 font-bold px-6 py-3 rounded-full transition-all hover:scale-105 hover:border-amber-300/40 text-sm">
+      <i class="fa-solid fa-bolt flash-bolt"></i> Ofertas Flash
+    </a>
+  </div>
 </section>
 
 <!-- CARRUSEL DE OFERTAS -->
-<section class="max-w-5xl mx-auto px-4 pb-10">
-  <div class="carousel-wrap shadow-xl">
+<section class="max-w-5xl mx-auto px-4 pb-10 reveal">
+  <div class="carousel-wrap">
     <div class="carousel-track" id="carousel-track"></div>
     <button class="carousel-btn carousel-btn-prev" onclick="carouselMove(-1)" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
     <button class="carousel-btn carousel-btn-next" onclick="carouselMove(1)" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
@@ -254,31 +301,56 @@ html{scroll-behavior:smooth;}
 </section>
 
 <!-- TRUST BADGES -->
-<section class="max-w-3xl mx-auto px-4 pb-12">
+<section class="max-w-3xl mx-auto px-4 pb-12 reveal">
   <div class="grid grid-cols-3 gap-3 text-center">
-    <div class="bg-white/60 backdrop-blur rounded-2xl p-4 border border-white/50 shadow-sm">
-      <div class="text-accent text-xl mb-1"><i class="fa-solid fa-shield-halved"></i></div>
-      <p class="text-[11px] font-bold text-navy">100% Seguro</p>
-      <p class="text-[9px] text-navy/50 mt-0.5 hidden sm:block">Transacciones protegidas</p>
+    <div class="glass rounded-2xl p-4 transition-all hover:border-accent/40">
+      <div class="text-accent-light text-xl mb-1" style="filter:drop-shadow(0 0 10px rgba(129,140,248,0.7));"><i class="fa-solid fa-shield-halved"></i></div>
+      <p class="text-[11px] font-bold text-white">100% Seguro</p>
+      <p class="text-[9px] text-white/40 mt-0.5 hidden sm:block">Transacciones protegidas</p>
     </div>
-    <div class="bg-white/60 backdrop-blur rounded-2xl p-4 border border-white/50 shadow-sm">
-      <div class="text-accent text-xl mb-1"><i class="fa-solid fa-bolt"></i></div>
-      <p class="text-[11px] font-bold text-navy">Entrega Veloz</p>
-      <p class="text-[9px] text-navy/50 mt-0.5 hidden sm:block">Activación en minutos</p>
+    <div class="glass rounded-2xl p-4 transition-all hover:border-accent/40">
+      <div class="text-amber-300 text-xl mb-1" style="filter:drop-shadow(0 0 10px rgba(252,211,77,0.7));"><i class="fa-solid fa-bolt"></i></div>
+      <p class="text-[11px] font-bold text-white">Entrega Veloz</p>
+      <p class="text-[9px] text-white/40 mt-0.5 hidden sm:block">Activación en minutos</p>
     </div>
-    <div class="bg-white/60 backdrop-blur rounded-2xl p-4 border border-white/50 shadow-sm">
-      <div class="text-accent text-xl mb-1"><i class="fa-solid fa-headset"></i></div>
-      <p class="text-[11px] font-bold text-navy">Soporte 24/7</p>
-      <p class="text-[9px] text-navy/50 mt-0.5 hidden sm:block">Atención preferencial</p>
+    <div class="glass rounded-2xl p-4 transition-all hover:border-accent/40">
+      <div class="text-cyan-300 text-xl mb-1" style="filter:drop-shadow(0 0 10px rgba(103,232,249,0.7));"><i class="fa-solid fa-headset"></i></div>
+      <p class="text-[11px] font-bold text-white">Soporte 24/7</p>
+      <p class="text-[9px] text-white/40 mt-0.5 hidden sm:block">Atención preferencial</p>
+    </div>
+  </div>
+</section>
+
+<!-- OFERTAS FLASH -->
+<section id="ofertas-flash" class="max-w-6xl mx-auto px-4 pb-14 scroll-mt-20" style="display:none;">
+  <div class="flash-panel">
+    <div class="flash-head">
+      <div>
+        <span class="inline-flex items-center gap-2 text-[11px] font-extrabold uppercase tracking-widest text-amber-300"><i class="fa-solid fa-bolt flash-bolt"></i> Por tiempo limitado</span>
+        <h2 class="text-xl sm:text-2xl font-black text-white mt-1 font-display">Ofertas Flash <span class="flash-bolt">⚡</span></h2>
+      </div>
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-bold uppercase tracking-wider text-white/60 mr-1 hidden sm:inline">Termina en</span>
+        <div class="countdown-box"><div class="countdown-num" id="fc-d">00</div><div class="countdown-lbl">días</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="fc-h">00</div><div class="countdown-lbl">horas</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="fc-m">00</div><div class="countdown-lbl">min</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="fc-s">00</div><div class="countdown-lbl">seg</div></div>
+      </div>
+    </div>
+    <div class="relative">
+      <div class="flash-track" id="flash-track"></div>
+      <button class="flash-nav" style="left:10px;" onclick="flashMove(-1)" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="flash-nav" style="right:10px;" onclick="flashMove(1)" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
   </div>
 </section>
 
 <!-- PRODUCTS (CATALOGUE) -->
 <section id="productos" class="max-w-6xl mx-auto px-4 pb-20 scroll-mt-20">
-  <div class="text-center mb-6">
-    <h2 class="text-2xl sm:text-3xl font-extrabold text-navy">Catálogo de Suscripciones</h2>
-    <p class="text-xs sm:text-sm text-navy/50 mt-1.5">Elige tu plan favorito y empieza a disfrutar hoy mismo.</p>
+  <div class="text-center mb-6 reveal">
+    <span class="text-[11px] font-bold uppercase tracking-widest text-accent-light glass px-3.5 py-1.5 rounded-full inline-block mb-3">🤖 Impulsado por IA</span>
+    <h2 class="text-2xl sm:text-3xl font-extrabold text-white font-display">Catálogo de Suscripciones</h2>
+    <p class="text-xs sm:text-sm text-white/45 mt-1.5">Elige tu plan favorito y empieza a disfrutar hoy mismo.</p>
   </div>
 
   <!-- Search Bar -->
@@ -286,167 +358,167 @@ html{scroll-behavior:smooth;}
     <i class="fa-solid fa-magnifying-glass search-icon"></i>
     <input type="search" id="search-input" placeholder="Buscar producto, servicio o plan..." autocomplete="off" aria-label="Buscar productos">
   </div>
-  
+
   <div class="flex justify-center gap-2 mb-8 flex-wrap" id="filters">
-    <button class="filter-btn active px-5 py-2.5 rounded-full text-sm font-semibold border border-transparent transition-all duration-300 cursor-pointer" data-cat="all"><i class="fa-solid fa-grid-2 mr-1"></i> Todos</button>
-    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="ai"><i class="fa-solid fa-microchip mr-1"></i> Inteligencia Artificial</button>
-    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="streaming"><i class="fa-solid fa-tv mr-1"></i> Streaming</button>
-    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold bg-white/70 text-navy/70 border border-navy/10 hover:border-accent/30 transition-all duration-300 cursor-pointer" data-cat="software"><i class="fa-solid fa-scissors mr-1"></i> Software Creativo</button>
+    <button class="filter-btn active px-5 py-2.5 rounded-full text-sm font-semibold border border-transparent cursor-pointer" data-cat="all"><i class="fa-solid fa-grid-2 mr-1"></i> Todos</button>
+    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="ai"><i class="fa-solid fa-microchip mr-1"></i> Inteligencia Artificial</button>
+    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="streaming"><i class="fa-solid fa-tv mr-1"></i> Streaming</button>
+    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="software"><i class="fa-solid fa-scissors mr-1"></i> Software Creativo</button>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="product-grid"></div>
 </section>
 
 <!-- BENEFITS (BENEFICIOS) -->
-<section id="beneficios" class="bg-navy text-white py-16 px-4 scroll-mt-20">
+<section id="beneficios" class="py-16 px-4 scroll-mt-20 relative">
   <div class="max-w-5xl mx-auto">
-    <div class="text-center mb-12">
-      <span class="text-xs font-bold uppercase tracking-wider text-accent-light bg-accent/20 px-3.5 py-1.5 rounded-full">¿Por qué elegir PassLink?</span>
-      <h2 class="text-2xl sm:text-4xl font-black mt-4">La diferencia de adquirir con un Partner de confianza</h2>
+    <div class="text-center mb-12 reveal">
+      <span class="text-xs font-bold uppercase tracking-wider text-accent-light glass px-3.5 py-1.5 rounded-full">¿Por qué elegir PassLink?</span>
+      <h2 class="text-2xl sm:text-4xl font-black mt-4 text-white font-display">La diferencia de adquirir con un <span class="text-gradient-ai">Partner de confianza</span></h2>
     </div>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-        <div class="w-12 h-12 rounded-xl bg-accent flex items-center justify-center text-white text-xl mb-4"><i class="fa-solid fa-user-shield"></i></div>
-        <h3 class="text-lg font-bold mb-2">Cuentas Propias</h3>
-        <p class="text-sm text-white/70 leading-relaxed">No vendemos métodos fraudulentos ni caídas semanales. El acceso se activa de forma directa, permitiendo configurar perfiles a tu nombre.</p>
+      <div class="glass rounded-2xl p-6 transition-all hover:border-accent/40 hover:-translate-y-1 reveal">
+        <div class="icon-orb bg-gradient-to-br from-accent to-indigo-600 mb-4" style="color:#818cf8;"><i class="fa-solid fa-user-shield"></i></div>
+        <h3 class="text-lg font-bold mb-2 text-white">Cuentas Propias</h3>
+        <p class="text-sm text-white/60 leading-relaxed">No vendemos métodos fraudulentos ni caídas semanales. El acceso se activa de forma directa, permitiendo configurar perfiles a tu nombre.</p>
       </div>
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-        <div class="w-12 h-12 rounded-xl bg-purple-500 flex items-center justify-center text-white text-xl mb-4"><i class="fa-solid fa-arrows-spin"></i></div>
-        <h3 class="text-lg font-bold mb-2">Garantía Ininterrumpida</h3>
-        <p class="text-sm text-white/70 leading-relaxed">Cada día contratado está respaldado por garantía del 100%. Si surge un detalle técnico, nuestro soporte responde y soluciona de inmediato.</p>
+      <div class="glass rounded-2xl p-6 transition-all hover:border-purple-400/40 hover:-translate-y-1 reveal">
+        <div class="icon-orb bg-gradient-to-br from-purple-500 to-fuchsia-600 mb-4" style="color:#c084fc;"><i class="fa-solid fa-arrows-spin"></i></div>
+        <h3 class="text-lg font-bold mb-2 text-white">Garantía Ininterrumpida</h3>
+        <p class="text-sm text-white/60 leading-relaxed">Cada día contratado está respaldado por garantía del 100%. Si surge un detalle técnico, nuestro soporte responde y soluciona de inmediato.</p>
       </div>
-      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-        <div class="w-12 h-12 rounded-xl bg-cyan-500 flex items-center justify-center text-white text-xl mb-4"><i class="fa-solid fa-wallet"></i></div>
-        <h3 class="text-lg font-bold mb-2">Ahorro Inteligente</h3>
-        <p class="text-sm text-white/70 leading-relaxed">Accede a las tarifas más competitivas de toda la región LATAM, optimizadas con planes combinados y acuerdos corporativos.</p>
+      <div class="glass rounded-2xl p-6 transition-all hover:border-cyan-400/40 hover:-translate-y-1 reveal">
+        <div class="icon-orb bg-gradient-to-br from-cyan-500 to-sky-600 mb-4" style="color:#67e8f9;"><i class="fa-solid fa-wallet"></i></div>
+        <h3 class="text-lg font-bold mb-2 text-white">Ahorro Inteligente</h3>
+        <p class="text-sm text-white/60 leading-relaxed">Accede a las tarifas más competitivas de toda la región LATAM, optimizadas con planes combinados y acuerdos corporativos.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- REFERENCIAS (CLIENTES SATISFECHOS Y PRUEBAS) -->
+<!-- REFERENCIAS -->
 <section id="referencias" class="max-w-6xl mx-auto px-4 py-16 scroll-mt-20">
-  <div class="text-center max-w-xl mx-auto mb-10">
-    <span class="text-xs font-bold text-accent uppercase tracking-wide">Clientes 100% Satisfechos</span>
-    <h2 class="text-2xl font-black text-navy mt-1.5 mb-3">Nuestras Referencias de Entrega</h2>
-    <p class="text-xs text-navy/60 leading-relaxed">
+  <div class="text-center max-w-xl mx-auto mb-10 reveal">
+    <span class="text-xs font-bold text-accent-light uppercase tracking-wide">Clientes 100% Satisfechos</span>
+    <h2 class="text-2xl font-black text-white mt-1.5 mb-3 font-display">Nuestras Referencias de Entrega</h2>
+    <p class="text-xs text-white/50 leading-relaxed">
       Creemos en la transparencia total. Aquí puedes ver comprobantes de entrega, capturas de activación y opiniones reales de nuestros clientes en LATAM.
     </p>
   </div>
-  
+
   <!-- Grid of references -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="ref-grid"></div>
 </section>
 
-<!-- CONTACT & PAYMENTS (CONTACTO & METODOS DE PAGO) -->
+<!-- CONTACT & PAYMENTS -->
 <section id="contacto" class="max-w-5xl mx-auto px-4 py-16 scroll-mt-20">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-    
+
     <!-- Info & WhatsApp Contact -->
-    <div class="space-y-6">
+    <div class="space-y-6 reveal">
       <div>
-        <span class="text-xs font-bold text-accent uppercase tracking-wide">Ponte en contacto</span>
-        <h2 class="text-2xl sm:text-4xl font-black text-navy mt-2">¿Tienes dudas? Platica con un Asesor en Vivo</h2>
-        <p class="text-sm text-navy/60 leading-relaxed mt-3">Estamos listos para atenderte, brindarte información detallada de cada servicio o guiarte a realizar tu recarga y pago.</p>
+        <span class="text-xs font-bold text-accent-light uppercase tracking-wide">Ponte en contacto</span>
+        <h2 class="text-2xl sm:text-4xl font-black text-white mt-2 font-display">¿Tienes dudas? Platica con un <span class="text-gradient-ai">Asesor en Vivo</span></h2>
+        <p class="text-sm text-white/55 leading-relaxed mt-3">Estamos listos para atenderte, brindarte información detallada de cada servicio o guiarte a realizar tu recarga y pago.</p>
       </div>
-      
+
       <div class="space-y-3">
-        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
-          <div class="text-whatsapp text-2xl"><i class="fa-brands fa-whatsapp"></i></div>
+        <div class="flex items-center gap-3 glass p-4 rounded-2xl transition-all hover:border-whatsapp/40">
+          <div class="text-whatsapp text-2xl" style="filter:drop-shadow(0 0 10px rgba(37,211,102,0.5));"><i class="fa-brands fa-whatsapp"></i></div>
           <div>
-            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Atención de Ventas</p>
-            <a id="contacto-wa-link" href="#" target="_blank" class="text-sm font-bold text-navy hover:text-accent transition-colors">+51 900 000 000</a>
+            <p class="text-xs text-white/35 font-bold uppercase tracking-wider">Atención de Ventas</p>
+            <a id="contacto-wa-link" href="#" target="_blank" class="text-sm font-bold text-white hover:text-accent-light transition-colors">+51 900 000 000</a>
           </div>
         </div>
-        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
-          <div class="text-accent text-2xl"><i class="fa-solid fa-envelope"></i></div>
+        <div class="flex items-center gap-3 glass p-4 rounded-2xl transition-all hover:border-accent/40">
+          <div class="text-accent-light text-2xl" style="filter:drop-shadow(0 0 10px rgba(129,140,248,0.5));"><i class="fa-solid fa-envelope"></i></div>
           <div>
-            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Correo Electrónico</p>
-            <p class="text-sm font-bold text-navy">soporte@passlinklatam.app</p>
+            <p class="text-xs text-white/35 font-bold uppercase tracking-wider">Correo Electrónico</p>
+            <p class="text-sm font-bold text-white">soporte@passlinklatam.app</p>
           </div>
         </div>
-        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
-          <div class="text-[#1877F2] text-2xl"><i class="fa-brands fa-facebook"></i></div>
+        <div class="flex items-center gap-3 glass p-4 rounded-2xl transition-all hover:border-[#1877F2]/50">
+          <div class="text-[#4f95f7] text-2xl" style="filter:drop-shadow(0 0 10px rgba(24,119,242,0.5));"><i class="fa-brands fa-facebook"></i></div>
           <div>
-            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Síguenos en Facebook</p>
-            <a href="https://www.facebook.com/profile.php?id=61590628588518" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-navy hover:text-accent transition-colors">PassLink LATAM</a>
+            <p class="text-xs text-white/35 font-bold uppercase tracking-wider">Síguenos en Facebook</p>
+            <a href="https://www.facebook.com/profile.php?id=61590628588518" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-white hover:text-accent-light transition-colors">PassLink LATAM</a>
           </div>
         </div>
-        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
-          <div class="text-[#0084FF] text-2xl"><i class="fa-brands fa-facebook-messenger"></i></div>
+        <div class="flex items-center gap-3 glass p-4 rounded-2xl transition-all hover:border-[#0084FF]/50">
+          <div class="text-[#3d9bff] text-2xl" style="filter:drop-shadow(0 0 10px rgba(0,132,255,0.5));"><i class="fa-brands fa-facebook-messenger"></i></div>
           <div>
-            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Facebook Messenger</p>
-            <a href="https://m.me/1192694733921157" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-navy hover:text-accent transition-colors">Escríbenos por Messenger</a>
+            <p class="text-xs text-white/35 font-bold uppercase tracking-wider">Facebook Messenger</p>
+            <a href="https://m.me/1192694733921157" target="_blank" rel="noopener noreferrer" class="text-sm font-bold text-white hover:text-accent-light transition-colors">Escríbenos por Messenger</a>
           </div>
         </div>
-        <div class="flex items-center gap-3 bg-white p-4 rounded-2xl border border-navy/5 shadow-sm">
-          <div class="text-purple-500 text-2xl"><i class="fa-solid fa-clock"></i></div>
+        <div class="flex items-center gap-3 glass p-4 rounded-2xl transition-all hover:border-purple-400/40">
+          <div class="text-purple-400 text-2xl" style="filter:drop-shadow(0 0 10px rgba(192,132,252,0.5));"><i class="fa-solid fa-clock"></i></div>
           <div>
-            <p class="text-xs text-navy/40 font-bold uppercase tracking-wider">Horario de Operaciones</p>
-            <p class="text-sm font-semibold text-navy/80">Lunes a Domingo — 8:00 AM a 11:00 PM</p>
+            <p class="text-xs text-white/35 font-bold uppercase tracking-wider">Horario de Operaciones</p>
+            <p class="text-sm font-semibold text-white/80">Lunes a Domingo — 8:00 AM a 11:00 PM</p>
           </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Payment Methods card -->
-    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-navy/5 shadow-md space-y-6">
-      <h3 class="text-lg font-extrabold text-navy">💳 Medios de Pago Destacados</h3>
-      <p class="text-xs text-navy/60 leading-relaxed">Aceptamos activaciones rápidas e inmediatas a través de los canales de pago más seguros y preferidos:</p>
-      
+    <div class="glass-strong rounded-3xl p-6 sm:p-8 space-y-6 reveal">
+      <h3 class="text-lg font-extrabold text-white font-display">💳 Medios de Pago Destacados</h3>
+      <p class="text-xs text-white/55 leading-relaxed">Aceptamos activaciones rápidas e inmediatas a través de los canales de pago más seguros y preferidos:</p>
+
       <div class="space-y-3">
         <!-- Yape -->
-        <div class="flex items-center gap-3.5 bg-purple-50/50 border border-purple-100/70 rounded-2xl p-3.5 transition-all hover:bg-purple-50">
-          <div class="w-10 h-10 rounded-xl bg-[#7D2D8A] flex items-center justify-center text-white text-[10px] font-black shadow-sm shrink-0">
+        <div class="flex items-center gap-3.5 bg-purple-500/10 border border-purple-400/25 rounded-2xl p-3.5 transition-all hover:bg-purple-500/15">
+          <div class="w-10 h-10 rounded-xl bg-[#7D2D8A] flex items-center justify-center text-white text-[10px] font-black shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(125,45,138,0.6);">
             YAPE
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-extrabold text-purple-950">Yape / Plin</span>
-              <span class="text-[9px] font-bold bg-purple-200/50 text-[#7D2D8A] px-2 py-0.5 rounded-full">Soles 🇵🇪</span>
+              <span class="text-xs font-extrabold text-purple-200">Yape / Plin</span>
+              <span class="text-[9px] font-bold bg-purple-400/20 text-purple-200 px-2 py-0.5 rounded-full">Soles 🇵🇪</span>
             </div>
-            <p class="text-[10px] text-purple-900/60 mt-0.5">Transferencia rápida a celular o código QR.</p>
+            <p class="text-[10px] text-purple-200/50 mt-0.5">Transferencia rápida a celular o código QR.</p>
           </div>
         </div>
 
         <!-- Binance -->
-        <div class="flex items-center gap-3.5 bg-amber-50/50 border border-amber-100/70 rounded-2xl p-3.5 transition-all hover:bg-amber-50">
-          <div class="w-10 h-10 rounded-xl bg-[#F0B90B] flex items-center justify-center text-amber-950 text-base shadow-sm shrink-0">
+        <div class="flex items-center gap-3.5 bg-amber-500/10 border border-amber-400/25 rounded-2xl p-3.5 transition-all hover:bg-amber-500/15">
+          <div class="w-10 h-10 rounded-xl bg-[#F0B90B] flex items-center justify-center text-amber-950 text-base shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(240,185,11,0.5);">
             <i class="fa-solid fa-coins"></i>
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-extrabold text-amber-950">Binance Pay</span>
-              <span class="text-[9px] font-bold bg-amber-200/50 text-amber-800 px-2 py-0.5 rounded-full">Cripto ⚡</span>
+              <span class="text-xs font-extrabold text-amber-200">Binance Pay</span>
+              <span class="text-[9px] font-bold bg-amber-400/20 text-amber-200 px-2 py-0.5 rounded-full">Cripto ⚡</span>
             </div>
-            <p class="text-[10px] text-amber-900/60 mt-0.5">Sin comisión. Aceptamos USDT y criptomonedas.</p>
+            <p class="text-[10px] text-amber-200/50 mt-0.5">Sin comisión. Aceptamos USDT y criptomonedas.</p>
           </div>
         </div>
 
         <!-- PayPal -->
-        <div class="flex items-center gap-3.5 bg-blue-50/50 border border-blue-100/70 rounded-2xl p-3.5 transition-all hover:bg-blue-50">
-          <div class="w-10 h-10 rounded-xl bg-[#0079C1] flex items-center justify-center text-white text-base shadow-sm shrink-0">
+        <div class="flex items-center gap-3.5 bg-blue-500/10 border border-blue-400/25 rounded-2xl p-3.5 transition-all hover:bg-blue-500/15">
+          <div class="w-10 h-10 rounded-xl bg-[#0079C1] flex items-center justify-center text-white text-base shadow-sm shrink-0" style="box-shadow:0 0 16px rgba(0,121,193,0.55);">
             <i class="fa-brands fa-paypal"></i>
           </div>
           <div class="flex-1">
             <div class="flex items-center justify-between">
-              <span class="text-xs font-extrabold text-blue-950">PayPal</span>
-              <span class="text-[9px] font-bold bg-blue-200/50 text-blue-800 px-2 py-0.5 rounded-full">Tarjetas 💳</span>
+              <span class="text-xs font-extrabold text-blue-200">PayPal</span>
+              <span class="text-[9px] font-bold bg-blue-400/20 text-blue-200 px-2 py-0.5 rounded-full">Tarjetas 💳</span>
             </div>
-            <p class="text-[10px] text-blue-900/60 mt-0.5">Tarjetas de crédito o débito internacionales.</p>
+            <p class="text-[10px] text-blue-200/50 mt-0.5">Tarjetas de crédito o débito internacionales.</p>
           </div>
         </div>
       </div>
 
-      <p class="text-[10px] text-navy/40 text-center italic mt-2">* También aceptamos transferencias interbancarias tradicionales.</p>
+      <p class="text-[10px] text-white/30 text-center italic mt-2">* También aceptamos transferencias interbancarias tradicionales.</p>
 
-      <div class="border-t border-navy/5 pt-5 space-y-3">
-        <h4 class="text-xs font-bold text-navy/70 uppercase tracking-wider">🔒 Activación 100% Protegida</h4>
-        <p class="text-[11px] text-navy/50 leading-relaxed">Tus pagos están seguros. Tras realizar la transferencia, yapeo o envío de cripto/PayPal, nos envías el comprobante e inmediatamente validamos y habilitamos el servicio.</p>
+      <div class="border-t border-white/10 pt-5 space-y-3">
+        <h4 class="text-xs font-bold text-white/60 uppercase tracking-wider">🔒 Activación 100% Protegida</h4>
+        <p class="text-[11px] text-white/45 leading-relaxed">Tus pagos están seguros. Tras realizar la transferencia, yapeo o envío de cripto/PayPal, nos envías el comprobante e inmediatamente validamos y habilitamos el servicio.</p>
       </div>
 
       <!-- Quick action inside payment card -->
-      <a id="wa-contacto-checkout" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full bg-whatsapp text-white font-bold text-sm py-3.5 rounded-2xl shadow-md hover:scale-[1.01] transition-transform">
+      <a id="wa-contacto-checkout" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full bg-whatsapp text-white font-bold text-sm py-3.5 rounded-2xl shadow-md hover:scale-[1.01] transition-transform" style="box-shadow:0 8px 26px rgba(37,211,102,0.35);">
         <i class="fa-brands fa-whatsapp text-lg"></i> Iniciar Pedido Directo
       </a>
     </div>
@@ -461,8 +533,8 @@ html{scroll-behavior:smooth;}
     <img id="toast-icon-img" src="" style="width:100%;height:100%;object-fit:cover;display:none;">
   </div>
   <div>
-    <p id="toast-name" style="font-size:13px;font-weight:700;color:#0f1b3d;margin:0 0 2px;"></p>
-    <p id="toast-detail" style="font-size:12px;color:rgba(15,27,61,0.6);margin:0;"></p>
+    <p id="toast-name" style="font-size:13px;font-weight:700;color:#fff;margin:0 0 2px;"></p>
+    <p id="toast-detail" style="font-size:12px;color:rgba(231,234,246,0.6);margin:0;"></p>
   </div>
 </div>
 
@@ -472,37 +544,37 @@ html{scroll-behavior:smooth;}
 </a>
 
 <!-- REFERENCE LIGHTBOX MODAL -->
-<div id="ref-modal-overlay" style="position:fixed;inset:0;background:rgba(15,27,61,0.65);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:999;padding:16px;" onclick="closeRefModal()">
-  <div style="background:white;border-radius:24px;max-width:540px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 25px -5px rgba(0,0,0,0.15);display:flex;flex-direction:column;" onclick="event.stopPropagation()">
+<div id="ref-modal-overlay" style="position:fixed;inset:0;background:rgba(4,5,13,0.8);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:999;padding:16px;" onclick="closeRefModal()">
+  <div style="background:#0d1230;border:1px solid rgba(129,140,248,0.25);border-radius:24px;max-width:540px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 40px rgba(99,102,241,0.15);display:flex;flex-direction:column;" onclick="event.stopPropagation()">
     <div style="position:relative;">
-      <img id="ref-modal-img" src="" alt="Comprobante" style="width:100%;max-height:360px;object-fit:contain;background:#f8fafc;border-top-left-radius:24px;border-top-right-radius:24px;">
-      <button onclick="closeRefModal()" style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(0,0,0,0.45);color:white;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;"><i class="fa-solid fa-xmark"></i></button>
+      <img id="ref-modal-img" src="" alt="Comprobante" style="width:100%;max-height:360px;object-fit:contain;background:#090c20;border-top-left-radius:24px;border-top-right-radius:24px;">
+      <button onclick="closeRefModal()" style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(0,0,0,0.55);color:white;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="p-5">
       <div class="flex items-center justify-between gap-2 mb-2">
-        <h3 id="ref-modal-title" class="font-black text-navy text-base"></h3>
-        <span id="ref-modal-date" class="text-[10px] bg-accent/10 text-accent font-bold px-2.5 py-0.5 rounded-full"></span>
+        <h3 id="ref-modal-title" class="font-black text-white text-base"></h3>
+        <span id="ref-modal-date" class="text-[10px] bg-accent/20 text-accent-light font-bold px-2.5 py-0.5 rounded-full"></span>
       </div>
-      <p id="ref-modal-desc" class="text-xs text-navy/70 leading-relaxed"></p>
+      <p id="ref-modal-desc" class="text-xs text-white/60 leading-relaxed"></p>
     </div>
   </div>
 </div>
 
 <!-- MODAL -->
 <div id="modal-overlay" role="dialog" aria-modal="true">
-  <div id="modal-box" class="shadow-2xl">
+  <div id="modal-box">
     <div id="modal-content"></div>
   </div>
 </div>
 
 <!-- FOOTER -->
-<footer class="bg-navy text-white/50 text-[11px] leading-relaxed py-10 px-4">
+<footer class="border-t border-white/10 text-white/45 text-[11px] leading-relaxed py-10 px-4" style="background:rgba(4,5,13,0.6);backdrop-filter:blur(10px);">
   <div class="max-w-3xl mx-auto text-center space-y-4">
     <div class="flex items-center justify-center gap-2 mb-2">
       <img src="assets/logo.png?v=4" alt="PassLink LATAM Logo" class="w-7 h-7 rounded-full object-cover shadow border border-white/10">
       <span class="text-sm font-bold text-white/80">PassLink <span class="text-accent-light">LATAM</span></span>
     </div>
-    <div class="flex justify-center gap-4 text-lg text-white/60 mb-3">
+    <div class="flex justify-center gap-4 text-lg text-white/50 mb-3">
       <a href="https://www.facebook.com/profile.php?id=61590628588518" target="_blank" rel="noopener noreferrer" class="hover:text-[#1877F2] transition-colors" aria-label="Facebook">
         <i class="fa-brands fa-facebook"></i>
       </a>
@@ -514,7 +586,7 @@ html{scroll-behavior:smooth;}
       </a>
     </div>
     <p>PassLink LATAM es un revendedor independiente de servicios digitales. No estamos afiliados, asociados ni respaldados por Google LLC, OpenAI Inc., Netflix Inc., The Walt Disney Company ni ninguna de sus subsidiarias. Todas las marcas registradas, logotipos y nombres de productos mencionados pertenecen a sus respectivos propietarios.</p>
-    <p class="text-white/30">&copy; 2026 PassLink LATAM. Todos los derechos reservados.</p>
+    <p class="text-white/25">&copy; 2026 PassLink LATAM. Todos los derechos reservados.</p>
   </div>
 </footer>
 
@@ -533,7 +605,7 @@ const DEFAULT_PRODUCTS = [
     description:"Obtén acceso completo a Gemini Pro 3.5 directamente en tu cuenta personal de Google. Sin invitaciones, sin cuentas compartidas. Disfruta de la IA más avanzada de Google con 5 TB de almacenamiento en la nube y integración total con Google Workspace durante 18 meses continuos.",
     imageUrl:"assets/gemini.png",
     features:["100% Cuenta Personal (No invitación)","18 Meses de acceso continuo","5 TB Cloud Storage incluido","Workspace Integration completa"],
-    pricePEN:45, priceUSD:13.00,
+    pricePEN:17, priceUSD:4.90,
     badgeText:"Popular", iconClass:"fa-solid fa-wand-magic-sparkles",
     gradient:"from-blue-500 to-cyan-400", stock:"available", highlighted:true
   },
@@ -543,7 +615,7 @@ const DEFAULT_PRODUCTS = [
     description:"Accede a ChatGPT Plus mediante un perfil privado y exclusivo. Usa el poder de GPT-4o para redacción, análisis y resolución de problemas. Genera imágenes con DALL-E 3 sin límites. Acceso ilimitado las 24 horas, todos los días.",
     imageUrl:"assets/chatgpt.png",
     features:["Perfil Privado exclusivo","GPT-4o completo sin límites","DALL-E 3 integrado","Acceso ilimitado 24/7"],
-    pricePEN:40, priceUSD:11.50,
+    pricePEN:22, priceUSD:6.50,
     badgeText:"Top IA", iconClass:"fa-solid fa-robot",
     gradient:"from-emerald-500 to-teal-400", stock:"available", highlighted:false
   },
@@ -553,9 +625,9 @@ const DEFAULT_PRODUCTS = [
     description:"Disfruta de Netflix con calidad Ultra HD 4K en un perfil 100% privado y personalizado a tu nombre. Acceso al catálogo completo sin restricciones geográficas. Transmisión estable y de alta calidad en todos tus dispositivos.",
     imageUrl:"assets/netflix.png",
     features:["1 Perfil 4K UHD privado","Calidad Ultra HD garantizada","Perfil Personalizado","Catálogo completo sin restricción"],
-    pricePEN:18, priceUSD:5.20,
+    pricePEN:19, priceUSD:5.50,
     badgeText:"Oferta", iconClass:"fa-solid fa-film",
-    gradient:"from-red-500 to-rose-400", stock:"available", highlighted:false
+    gradient:"from-red-500 to-rose-400", stock:"low", highlighted:false
   },
   {
     id:"disney-star", category:"streaming",
@@ -563,9 +635,9 @@ const DEFAULT_PRODUCTS = [
     description:"El combo perfecto: Disney+ y Star+ en un solo perfil privado. Accede a todo el contenido de Disney, Marvel, Star Wars, Pixar y el catálogo deportivo y de series de Star+. Transmisión en vivo de deportes incluida.",
     imageUrl:"assets/disney.png",
     features:["1 Perfil Combo completo","Acceso ilimitado al catálogo","Series y Deportes en vivo","Contenido exclusivo Star+"],
-    pricePEN:15, priceUSD:4.30,
+    pricePEN:40, priceUSD:11.50,
     badgeText:"Combo", iconClass:"fa-solid fa-hat-wizard",
-    gradient:"from-indigo-500 to-blue-400", stock:"low", highlighted:false
+    gradient:"from-indigo-500 to-blue-400", stock:"available", highlighted:false
   },
   {
     id:"perplexity-pro-1y", category:"ai",
@@ -573,7 +645,7 @@ const DEFAULT_PRODUCTS = [
     description:"Perplexity PRO es el buscador con inteligencia artificial más preciso del mundo. Accede a respuestas con fuentes verificadas en tiempo real, sin alucinaciones. Ideal para investigadores, estudiantes y profesionales que necesitan información confiable al instante. Plan anual completo en tu cuenta personal.",
     imageUrl:"assets/perplexity.svg",
     features:["1 Año de acceso PRO completo","Búsqueda IA con fuentes verificadas","Modelos GPT-4o, Claude y Sonar Pro","Sin límite de consultas diarias","Modo Focus para búsquedas especializadas"],
-    pricePEN:143, priceUSD:39.00,
+    pricePEN:200, priceUSD:58.00,
     badgeText:"Nuevo", iconClass:"fa-solid fa-magnifying-glass-chart",
     gradient:"from-slate-950 via-[#0d2a24] to-slate-950", stock:"low", highlighted:false, isLogoOnly:true
   },
@@ -583,7 +655,7 @@ const DEFAULT_PRODUCTS = [
     description:"Accede a Gemini Pro durante 18 meses continuos directamente en tu cuenta de Google. Potencia todas tus tareas con el modelo de IA multimodal de Google: genera textos, analiza imágenes, crea código y mucho más. Compatible con Google Workspace, Gmail y Google Docs de forma nativa.",
     imageUrl:"assets/gemini.png",
     features:["18 Meses de acceso ininterrumpido","Cuenta personal directa","IA multimodal (texto, imágenes, código)","Integración nativa con Google Workspace","Prioridad en nuevos modelos Gemini"],
-    pricePEN:29, priceUSD:7.80,
+    pricePEN:13, priceUSD:3.90,
     badgeText:"Oferta", iconClass:"fa-solid fa-wand-magic-sparkles",
     gradient:"from-blue-600 to-indigo-400", stock:"available", highlighted:false
   },
@@ -603,9 +675,9 @@ const DEFAULT_PRODUCTS = [
     description:"CapCut Pro Individual por 1 mes con garantía completa (Full Warranty). Disfruta de todas las herramientas de edición con IA a un precio accesible. Si ocurre cualquier inconveniente durante el período de vigencia, lo reponemos sin costo adicional. Ideal para proyectos puntuales o para probar el plan Pro.",
     imageUrl:"assets/capcut.png",
     features:["1 Mes Pro Individual con garantía total","Reposición gratuita ante cualquier falla","Exportación 4K sin marca de agua","Acceso a todas las herramientas IA","Activación inmediata en tu cuenta"],
-    pricePEN:35, priceUSD:9.50,
+    pricePEN:16, priceUSD:4.70,
     badgeText:"Garantía", iconClass:"fa-solid fa-scissors",
-    gradient:"from-slate-950 via-[#0a232f] to-slate-950", stock:"low", highlighted:false, isLogoOnly:true
+    gradient:"from-slate-950 via-[#0a232f] to-slate-950", stock:"available", highlighted:false, isLogoOnly:true
   },
   {
     id:"supergrok-3m", category:"ai",
@@ -633,7 +705,7 @@ const DEFAULT_PRODUCTS = [
     description:"Disfruta de Spotify Premium durante 3 meses en tu cuenta personal: música sin interrupciones, sin anuncios y con la máxima calidad de audio. Descarga tus canciones y podcasts favoritos para escucharlos sin conexión a internet. Funciona en todos tus dispositivos simultáneamente.",
     imageUrl:"assets/spotify.png",
     features:["3 Meses de Premium Individual","Música sin anuncios en alta calidad","Descargas offline ilimitadas","Reproducción sin restricciones geográficas","Calidad Very High (320kbps)"],
-    pricePEN:40, priceUSD:11.00,
+    pricePEN:17, priceUSD:4.90,
     badgeText:"Disponible", iconClass:"fa-brands fa-spotify",
     gradient:"from-slate-950 via-[#0a2d1d] to-slate-950", stock:"low", highlighted:false, isLogoOnly:false
   }
@@ -664,12 +736,58 @@ let PRODUCTS=getProducts();
 const CONFIG=getConfig();
 const WA=CONFIG.whatsapp||WHATSAPP_NUMBER;
 
+// ── PARTÍCULAS DE FONDO ─────────────────────────────────────
+(function(){
+  const wrap=document.getElementById('particles');
+  if(!wrap) return;
+  const colors=['#818cf8','#22d3ee','#c084fc'];
+  for(let i=0;i<26;i++){
+    const s=document.createElement('span');
+    s.className='particle';
+    s.style.left=(Math.random()*100)+'%';
+    s.style.top=(55+Math.random()*45)+'%';
+    s.style.background=colors[i%colors.length];
+    s.style.boxShadow=`0 0 8px ${colors[i%colors.length]}`;
+    s.style.animationDuration=(14+Math.random()*22)+'s';
+    s.style.animationDelay=(-Math.random()*30)+'s';
+    wrap.appendChild(s);
+  }
+})();
+
+// ── TYPEWRITER "IA" DEL HERO ────────────────────────────────
+(function(){
+  const el=document.getElementById('type-target');
+  if(!el) return;
+  const words=['ChatGPT Plus','Gemini Pro','Netflix 4K UHD','Perplexity PRO','Disney+ & Star+','CapCut Pro','Spotify Premium'];
+  let wi=0,ci=0,deleting=false;
+  function tick(){
+    const w=words[wi];
+    el.textContent=w.slice(0,ci);
+    if(!deleting){
+      if(ci<w.length){ci++;setTimeout(tick,65);}
+      else{deleting=true;setTimeout(tick,1600);}
+    }else{
+      if(ci>0){ci--;setTimeout(tick,32);}
+      else{deleting=false;wi=(wi+1)%words.length;setTimeout(tick,350);}
+    }
+  }
+  tick();
+})();
+
+// ── REVEAL ON SCROLL ────────────────────────────────────────
+(function(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
 // ── MOBILE NAVIGATION ───────────────────────────────────────
 function toggleMobileNav() {
   const dropdown = document.getElementById('mobile-nav-dropdown');
   const icon = document.getElementById('mobile-nav-icon');
   const isHidden = dropdown.classList.contains('hidden');
-  
+
   if(isHidden) {
     dropdown.classList.remove('hidden');
     icon.classList.remove('fa-bars');
@@ -681,19 +799,25 @@ function toggleMobileNav() {
   }
 }
 
-// ── MODAL ───────────────────────────────────────────────────
+// ── MODAL (acepta oferta flash opcional) ────────────────────
 const overlay=document.getElementById('modal-overlay');
 const modalContent=document.getElementById('modal-content');
 
-function openModal(id){
+function openModal(id, offer){
   const p=PRODUCTS.find(x=>x.id===id); if(!p)return;
+  const hasOffer=!!(offer && +offer.pen>0 && +offer.pen<p.pricePEN);
+  const salePEN=hasOffer?+offer.pen:p.pricePEN;
+  const saleUSD=hasOffer?+offer.usd:p.priceUSD;
+  const offPct=hasOffer?Math.round((1-salePEN/p.pricePEN)*100):0;
   const stockMap={
     available:['stock-available','<i class="fa-solid fa-circle-dot"></i> Disponible'],
     low:['stock-low','<i class="fa-solid fa-triangle-exclamation"></i> Últimas unidades'],
     out:['stock-out','<i class="fa-solid fa-ban"></i> Agotado']
   };
   const [sc,sl]=stockMap[p.stock]||stockMap['available'];
-  const waText=encodeURIComponent(`¡Hola PassLink LATAM! 👋 Quiero adquirir *${p.name}* por S/. ${p.pricePEN.toFixed(2)} (US$ ${p.priceUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
+  const waText=encodeURIComponent(hasOffer
+    ?`¡Hola PassLink LATAM! ⚡ Quiero aprovechar la OFERTA FLASH de *${p.name}* a S/. ${salePEN.toFixed(2)} (US$ ${saleUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`
+    :`¡Hola PassLink LATAM! 👋 Quiero adquirir *${p.name}* por S/. ${salePEN.toFixed(2)} (US$ ${saleUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
   const waURL=`https://wa.me/${WA}?text=${waText}`;
   const infoURL=`https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Quiero más información sobre *${p.name}* antes de comprarlo.`)}`;
   const catLabel={ai:'Inteligencia Artificial',streaming:'Streaming',software:'Software Creativo'}[p.category]||p.category;
@@ -707,47 +831,49 @@ function openModal(id){
       `}
       <div style="display:none;width:100%;height:260px;align-items:center;justify-content:center;font-size:3rem;color:white;" class="bg-gradient-to-br ${p.gradient}"><i class="${p.iconClass}"></i></div>
       <!-- Overlay gradient so the image looks clean -->
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(15,27,61,0.7) 100%);border-radius:1.75rem 1.75rem 0 0;pointer-events:none;"></div>
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(6,8,20,0.8) 100%);border-radius:1.75rem 1.75rem 0 0;pointer-events:none;"></div>
       <!-- Badges over image -->
-      <div style="position:absolute;top:14px;left:14px;display:flex;flex-direction:column;gap:6px;">
+      <div style="position:absolute;top:14px;left:14px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;">
         <span class="stock-badge ${sc}" style="font-size:11px;font-weight:700;">${sl}</span>
         ${p.highlighted?'<span style="background:linear-gradient(135deg,#6366f1,#a855f7);color:white;font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;">⭐ Destacado</span>':''}
+        ${hasOffer?`<span style="background:linear-gradient(135deg,#f59e0b,#ef4444);color:white;font-size:10px;font-weight:900;padding:3px 10px;border-radius:999px;box-shadow:0 4px 14px rgba(239,68,68,0.5);">⚡ FLASH -${offPct}%</span>`:''}
       </div>
       <!-- Category tag -->
-      <span style="position:absolute;top:14px;right:14px;background:rgba(255,255,255,0.92);color:#6366f1;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:999px;">${catLabel}</span>
+      <span style="position:absolute;top:14px;right:14px;background:rgba(13,18,48,0.85);border:1px solid rgba(129,140,248,0.4);color:#a5b4fc;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:3px 10px;border-radius:999px;">${catLabel}</span>
       <!-- Price watermark over image bottom -->
       <div style="position:absolute;bottom:14px;left:14px;">
-        <span style="font-size:28px;font-weight:900;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.5);">S/. ${p.pricePEN}</span>
-        <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);margin-left:6px;">/ US$ ${p.priceUSD.toFixed(2)}</span>
+        <span style="font-size:28px;font-weight:900;color:white;text-shadow:0 2px 8px rgba(0,0,0,0.6);">S/. ${salePEN}</span>
+        <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,0.7);margin-left:6px;">/ US$ ${saleUSD.toFixed(2)}</span>
+        ${hasOffer?`<div style="font-size:12px;font-weight:700;color:rgba(255,255,255,0.65);text-decoration:line-through;">Antes S/. ${p.pricePEN} / US$ ${p.priceUSD.toFixed(2)}</div>`:''}
       </div>
       <!-- Close button -->
-      <button onclick="closeModal()" style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(0,0,0,0.45);color:white;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:32px;"><i class="fa-solid fa-xmark"></i></button>
+      <button onclick="closeModal()" style="position:absolute;top:14px;right:14px;width:32px;height:32px;background:rgba(0,0,0,0.55);color:white;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:32px;"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <!-- Detail column -->
     <div class="modal-detail-col">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px;">
-        <h2 style="font-size:22px;font-weight:900;color:#0f1b3d;line-height:1.2;">${p.name}</h2>
-        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:#ede9fe;color:#6366f1;padding:4px 10px;border-radius:999px;margin-left:8px;white-space:nowrap;">${p.badgeText}</span>
+        <h2 style="font-size:22px;font-weight:900;color:#fff;line-height:1.2;font-family:'Sora','Inter',sans-serif;">${p.name}</h2>
+        <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;background:rgba(99,102,241,0.2);border:1px solid rgba(129,140,248,0.35);color:#a5b4fc;padding:4px 10px;border-radius:999px;margin-left:8px;white-space:nowrap;">${p.badgeText}</span>
       </div>
-      <p style="font-size:12px;color:rgba(15,27,61,0.5);font-weight:600;margin-bottom:14px;">${p.subtitle}</p>
-      <p style="font-size:13px;color:rgba(15,27,61,0.72);line-height:1.7;margin-bottom:18px;">${p.description}</p>
-      <div style="background:#f8faff;border-radius:14px;padding:16px;margin-bottom:18px;">
-        <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(15,27,61,0.4);margin-bottom:10px;">✅ Lo que incluye</p>
+      <p style="font-size:12px;color:rgba(231,234,246,0.45);font-weight:600;margin-bottom:14px;">${p.subtitle}</p>
+      <p style="font-size:13px;color:rgba(231,234,246,0.7);line-height:1.7;margin-bottom:18px;">${p.description}</p>
+      <div style="background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);border-radius:14px;padding:16px;margin-bottom:18px;">
+        <p style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:rgba(231,234,246,0.4);margin-bottom:10px;">✅ Lo que incluye</p>
         <ul style="display:flex;flex-direction:column;gap:8px;">
           ${p.features.map(f=>`
-          <li style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(15,27,61,0.78);">
-            <i class="fa-solid fa-circle-check" style="color:#6366f1;font-size:11px;flex-shrink:0;"></i>${f}
+          <li style="display:flex;align-items:center;gap:8px;font-size:13px;color:rgba(231,234,246,0.75);">
+            <i class="fa-solid fa-circle-check" style="color:#818cf8;font-size:11px;flex-shrink:0;"></i>${f}
           </li>`).join('')}
         </ul>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;padding:12px;background:#f0fdf4;border-radius:12px;border:1px solid #bbf7d0;margin-bottom:18px;">
-        <i class="fa-solid fa-shield-halved" style="color:#16a34a;"></i>
-        <span style="font-size:12px;color:#15803d;font-weight:600;">Garantía de activación inmediata. Si hay algún problema, lo resolvemos en minutos.</span>
+      <div style="display:flex;align-items:center;gap:8px;padding:12px;background:rgba(34,197,94,0.1);border-radius:12px;border:1px solid rgba(74,222,128,0.3);margin-bottom:18px;">
+        <i class="fa-solid fa-shield-halved" style="color:#4ade80;"></i>
+        <span style="font-size:12px;color:#86efac;font-weight:600;">Garantía de activación inmediata. Si hay algún problema, lo resolvemos en minutos.</span>
       </div>
-      <a href="${waURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#25D366;color:white;font-weight:800;font-size:14px;padding:14px;border-radius:14px;text-decoration:none;margin-bottom:10px;transition:opacity .2s;" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
-        <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> Comprar Ahora — S/. ${p.pricePEN}
+      <a href="${waURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:#25D366;color:white;font-weight:800;font-size:14px;padding:14px;border-radius:14px;text-decoration:none;margin-bottom:10px;transition:opacity .2s;box-shadow:0 8px 26px rgba(37,211,102,0.35);" onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+        <i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> ${hasOffer?'⚡ Comprar Oferta':'Comprar Ahora'} — S/. ${salePEN}
       </a>
-      <a href="${infoURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:rgba(15,27,61,0.06);color:rgba(15,27,61,0.65);font-weight:600;font-size:13px;padding:11px;border-radius:14px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(15,27,61,0.1)'" onmouseout="this.style.background='rgba(15,27,61,0.06)'">
+      <a href="${infoURL}" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:rgba(255,255,255,0.06);color:rgba(231,234,246,0.6);font-weight:600;font-size:13px;padding:11px;border-radius:14px;text-decoration:none;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.12)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">
         <i class="fa-solid fa-comment-dots"></i> Quiero más información primero
       </a>
     </div>`;
@@ -775,13 +901,13 @@ function renderProducts(filter, search){
   if(q) list=list.filter(p=>(p.name+p.subtitle+(p.features||[]).join(' ')).toLowerCase().includes(q));
   grid.innerHTML='';
   if(!list.length){
-    grid.innerHTML='<p class="col-span-4 text-center text-navy/40 py-12 text-sm">No se encontraron productos para tu búsqueda.</p>';
+    grid.innerHTML='<p class="col-span-4 text-center text-white/35 py-12 text-sm">No se encontraron productos para tu búsqueda.</p>';
     return;
   }
   list.forEach((p,i)=>{
     const waText=encodeURIComponent(`¡Hola PassLink LATAM! 👋 Me interesa adquirir *${p.name}* por S/. ${p.pricePEN.toFixed(2)} (US$ ${p.priceUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
     const waURL=`https://wa.me/${WA}?text=${waText}`;
-    const stockColors={available:'text-green-600',low:'text-yellow-600',out:'text-red-500'};
+    const stockColors={available:'text-green-400',low:'text-yellow-400',out:'text-red-400'};
     const stockLabels={available:'Disponible',low:'Últimas unidades',out:'Agotado'};
     const card=document.createElement('div');
     card.className='card-shine rounded-2xl flex flex-col transition-all duration-300 fade-in cursor-pointer overflow-hidden';
@@ -796,23 +922,23 @@ function renderProducts(filter, search){
         `}
         <div class="card-img-fallback bg-gradient-to-br ${p.gradient}"><i class="${p.iconClass}"></i></div>
         <div class="img-overlay"></div>
-        <span style="position:absolute;top:8px;right:8px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;background:rgba(255,255,255,0.92);color:#6366f1;padding:2px 8px;border-radius:999px;">${p.badgeText}</span>
-        ${p.highlighted?'<span style="position:absolute;top:8px;left:8px;font-size:9px;font-weight:800;background:linear-gradient(135deg,#6366f1,#a855f7);color:white;padding:2px 8px;border-radius:999px;">⭐ Destacado</span>':''}
+        <span style="position:absolute;top:8px;right:8px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;background:rgba(13,18,48,0.85);border:1px solid rgba(129,140,248,0.4);color:#a5b4fc;padding:2px 8px;border-radius:999px;">${p.badgeText}</span>
+        ${p.highlighted?'<span style="position:absolute;top:8px;left:8px;font-size:9px;font-weight:800;background:linear-gradient(135deg,#6366f1,#a855f7);color:white;padding:2px 8px;border-radius:999px;box-shadow:0 0 14px rgba(99,102,241,0.6);">⭐ Destacado</span>':''}
         <div style="position:absolute;bottom:8px;left:10px;">
-          <span style="font-size:17px;font-weight:900;color:white;text-shadow:0 1px 6px rgba(0,0,0,0.5);">S/. ${p.pricePEN}</span>
+          <span style="font-size:17px;font-weight:900;color:white;text-shadow:0 1px 6px rgba(0,0,0,0.6);">S/. ${p.pricePEN}</span>
           <span style="font-size:10px;color:rgba(255,255,255,0.75);margin-left:4px;">/ US$${p.priceUSD.toFixed(2)}</span>
         </div>
         <span style="position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:700;" class="${stockColors[p.stock]||'text-green-400'}">${stockLabels[p.stock]}</span>
       </div>
       <div class="p-4 flex flex-col flex-1">
-        <h3 class="text-sm font-extrabold text-navy leading-snug">${p.name}</h3>
-        <p class="text-[11px] text-navy/50 font-medium mb-2">${p.subtitle}</p>
+        <h3 class="text-sm font-extrabold text-white leading-snug">${p.name}</h3>
+        <p class="text-[11px] text-white/40 font-medium mb-2">${p.subtitle}</p>
         <ul class="space-y-1 mb-4 flex-1">
-          ${p.features.slice(0,3).map(f=>`<li class="flex items-start gap-1.5 text-[11px] text-navy/65"><i class="fa-solid fa-circle-check text-accent mt-0.5 text-[9px]"></i><span>${f}</span></li>`).join('')}
-          ${p.features.length>3?`<li class="text-[11px] text-accent font-semibold">+${p.features.length-3} beneficios más...</li>`:''}
+          ${p.features.slice(0,3).map(f=>`<li class="flex items-start gap-1.5 text-[11px] text-white/60"><i class="fa-solid fa-circle-check text-accent-light mt-0.5 text-[9px]"></i><span>${f}</span></li>`).join('')}
+          ${p.features.length>3?`<li class="text-[11px] text-accent-light font-semibold">+${p.features.length-3} beneficios más...</li>`:''}
         </ul>
         <button onclick="openModal('${p.id}')"
-          class="flex items-center justify-center gap-1.5 w-full bg-gradient-to-r ${p.gradient} text-white font-bold text-xs py-2.5 rounded-xl shadow hover:shadow-md hover:scale-[1.02] transition-all duration-200">
+          class="flex items-center justify-center gap-1.5 w-full bg-gradient-to-r ${p.gradient} text-white font-bold text-xs py-2.5 rounded-xl shadow hover:shadow-lg hover:scale-[1.02] transition-all duration-200">
           <i class="fa-solid fa-eye"></i> Ver detalles y Comprar
         </button>
       </div>`;
@@ -823,9 +949,9 @@ function renderProducts(filter, search){
 // ── FILTERS ─────────────────────────────────────────────────
 document.getElementById('filters').addEventListener('click',e=>{
   const btn=e.target.closest('.filter-btn'); if(!btn)return;
-  document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.classList.add('bg-white/70','text-navy/70','border-navy/10');});
+  document.querySelectorAll('.filter-btn').forEach(b=>{b.classList.remove('active');b.classList.add('glass','text-white/70');});
   btn.classList.add('active');
-  btn.classList.remove('bg-white/70','text-navy/70','border-navy/10');
+  btn.classList.remove('glass','text-white/70');
   renderProducts(btn.dataset.cat);
 });
 
@@ -847,7 +973,7 @@ const DEFAULT_SLIDES = [
     gradient:'linear-gradient(135deg,#4f46e5 0%,#7c3aed 60%,#9333ea 100%)',
     title:'Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal',
     subtitle:'5 TB Cloud · Workspace incluido · Sin invitación',
-    price:'S/. 45 <span style="font-size:13px;opacity:.7">/ US$ 13.00</span>'
+    price:'S/. 17 <span style="font-size:13px;opacity:.7">/ US$ 4.90</span>'
   },
   {
     type:'gradient',
@@ -855,15 +981,15 @@ const DEFAULT_SLIDES = [
     gradient:'linear-gradient(135deg,#059669 0%,#0891b2 100%)',
     title:'ChatGPT Plus — Perfil privado,<br>sin límites, todo el día',
     subtitle:'GPT-4o · DALL-E 3 · Acceso ilimitado 24/7',
-    price:'S/. 40 <span style="font-size:13px;opacity:.7">/ US$ 11.50</span>'
+    price:'S/. 22 <span style="font-size:13px;opacity:.7">/ US$ 6.50</span>'
   },
   {
     type:'gradient',
     badge:'🎬 Combo Streaming LATAM',
     gradient:'linear-gradient(135deg,#dc2626 0%,#ea580c 100%)',
-    title:'Netflix + Disney+ &amp; Star+<br>desde S/. 12',
+    title:'Netflix + Disney+ &amp; Star+<br>desde S/. 15',
     subtitle:'Perfiles 100% privados · Ultra HD 4K · Para toda LATAM',
-    price:'Desde S/. 12'
+    price:'Desde S/. 15'
   }
 ];
 
@@ -878,9 +1004,9 @@ function renderCarousel(slides) {
     // Slide tipo imagen/flyer
     if (s.type === 'image' && s.imageUrl) {
       return `<div class="carousel-slide" style="background:url('${s.imageUrl}') center/cover no-repeat;padding:0;align-items:stretch;">
-        <div style="width:100%;height:100%;background:rgba(15,27,61,0.45);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px 40px;">
+        <div style="width:100%;height:100%;background:rgba(6,8,20,0.5);display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px 40px;">
           ${s.badge ? `<span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.8);margin-bottom:8px;">${s.badge}</span>` : ''}
-          ${s.title ? `<h3 style="font-size:clamp(18px,4vw,28px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">${s.title}</h3>` : ''}
+          ${s.title ? `<h3 style="font-size:clamp(18px,4vw,28px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;font-family:'Sora','Inter',sans-serif;">${s.title}</h3>` : ''}
           ${s.subtitle ? `<p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:16px;">${s.subtitle}</p>` : ''}
           ${s.price ? `<span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;backdrop-filter:blur(4px);">${s.price}</span>` : ''}
         </div>
@@ -889,7 +1015,7 @@ function renderCarousel(slides) {
     // Slide tipo gradiente (texto)
     return `<div class="carousel-slide" style="background:${s.gradient || 'linear-gradient(135deg,#4f46e5,#7c3aed)'};">
       ${s.badge ? `<span style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.6);margin-bottom:8px;">${s.badge}</span>` : ''}
-      ${s.title ? `<h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;">${s.title}</h3>` : ''}
+      ${s.title ? `<h3 style="font-size:clamp(18px,4vw,26px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:8px;font-family:'Sora','Inter',sans-serif;">${s.title}</h3>` : ''}
       ${s.subtitle ? `<p style="font-size:13px;color:rgba(255,255,255,0.75);margin-bottom:16px;">${s.subtitle}</p>` : ''}
       ${s.price ? `<span style="background:rgba(255,255,255,0.2);color:#fff;font-size:22px;font-weight:900;padding:6px 18px;border-radius:999px;">${s.price}</span>` : ''}
     </div>`;
@@ -926,6 +1052,105 @@ function resetCarouselTimer(){
 }
 renderCarousel(null); // render con defaults hasta que cargue data.json
 
+// ── OFERTAS FLASH ───────────────────────────────────────────
+let FLASH_SALE=null;
+let flashRendered=false;
+let flashTimerInt=null;
+let flashAutoInt=null;
+let flashPaused=false;
+
+function renderFlashSale(fs){
+  const section=document.getElementById('ofertas-flash');
+  if(!section) return;
+  flashRendered=true;
+  FLASH_SALE=fs;
+  clearInterval(flashTimerInt); clearInterval(flashAutoInt);
+  if(!fs || !fs.enabled || !Array.isArray(fs.items) || !fs.items.length){ section.style.display='none'; return; }
+  const endsAt=new Date(fs.endsAt).getTime();
+  if(!endsAt || isNaN(endsAt) || endsAt<=Date.now()){ section.style.display='none'; return; }
+
+  const items=fs.items.map(it=>{
+    const p=PRODUCTS.find(x=>x.id===it.productId);
+    if(!p || p.hidden || p.stock==='out') return null;
+    const offPEN=+it.offerPEN, offUSD=+it.offerUSD;
+    if(!(offPEN>0) || !(offUSD>0)) return null;
+    const pct=Math.round((1-offPEN/p.pricePEN)*100);
+    if(pct<=0) return null;
+    return {p,offPEN,offUSD,pct};
+  }).filter(Boolean);
+  if(!items.length){ section.style.display='none'; return; }
+
+  const track=document.getElementById('flash-track');
+  track.innerHTML=items.map(({p,offPEN,offUSD,pct})=>{
+    const waText=encodeURIComponent(`¡Hola PassLink LATAM! ⚡ Quiero aprovechar la OFERTA FLASH de *${p.name}* a S/. ${offPEN.toFixed(2)} (US$ ${offUSD.toFixed(2)}) antes de que termine. ¿Me brindan los métodos de pago?`);
+    return `<div class="flash-card" onclick="openFlashModal('${p.id}')">
+      <div class="relative h-32 overflow-hidden ${p.isLogoOnly?'bg-gradient-to-br '+p.gradient+' flex items-center justify-center':''}">
+        ${p.isLogoOnly
+          ?`<img src="${p.imageUrl}" alt="${p.name}" style="max-width:100px;max-height:68px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,0.45));" loading="lazy">`
+          :`<img src="${p.imageUrl}" alt="${p.name}" class="w-full h-full object-cover" loading="lazy">
+             <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.05) 0%,rgba(6,8,20,0.6) 100%);"></div>`}
+        <span class="flash-off-badge">-${pct}%</span>
+        <span style="position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:800;background:rgba(13,18,48,0.85);border:1px solid rgba(255,255,255,0.2);color:${p.stock==='low'?'#facc15':'#4ade80'};padding:2px 8px;border-radius:999px;">${p.stock==='low'?'¡Últimas unidades!':'Disponible'}</span>
+      </div>
+      <div class="p-3.5 flex flex-col flex-1">
+        <h3 class="text-sm font-extrabold text-white leading-snug">${p.name}</h3>
+        <p class="text-[10px] text-white/40 font-medium mb-2">${p.subtitle}</p>
+        <div class="flex items-end gap-2 mb-3 flex-wrap">
+          <span class="text-xl font-black text-amber-300" style="text-shadow:0 0 16px rgba(252,211,77,0.4);">S/. ${offPEN}</span>
+          <span class="text-[11px] font-bold text-white/35 line-through mb-0.5">S/. ${p.pricePEN}</span>
+          <span class="text-[10px] text-white/40 mb-0.5">US$ ${offUSD.toFixed(2)}</span>
+        </div>
+        <a href="https://wa.me/${WA}?text=${waText}" target="_blank" rel="noopener" onclick="event.stopPropagation()"
+          class="mt-auto flex items-center justify-center gap-1.5 w-full bg-gradient-to-r from-amber-500 to-rose-500 text-white font-extrabold text-xs py-2.5 rounded-xl shadow hover:scale-[1.03] transition-transform" style="box-shadow:0 6px 20px rgba(245,158,11,0.35);">
+          <i class="fa-solid fa-bolt"></i> ¡Lo quiero ahora!
+        </a>
+      </div>
+    </div>`;
+  }).join('');
+
+  section.style.display='block';
+
+  // Contador regresivo
+  const pad=n=>String(n).padStart(2,'0');
+  const elD=document.getElementById('fc-d'),elH=document.getElementById('fc-h'),elM=document.getElementById('fc-m'),elS=document.getElementById('fc-s');
+  const tick=()=>{
+    const ms=endsAt-Date.now();
+    if(ms<=0){clearInterval(flashTimerInt);clearInterval(flashAutoInt);section.style.display='none';return;}
+    elD.textContent=pad(Math.floor(ms/86400000));
+    elH.textContent=pad(Math.floor(ms%86400000/3600000));
+    elM.textContent=pad(Math.floor(ms%3600000/60000));
+    elS.textContent=pad(Math.floor(ms%60000/1000));
+  };
+  tick();
+  flashTimerInt=setInterval(tick,1000);
+
+  // Auto-avance del carrusel flash (pausa al pasar el mouse o tocar)
+  flashAutoInt=setInterval(()=>{ if(!flashPaused) flashMove(1); },4500);
+}
+
+function flashMove(dir){
+  const track=document.getElementById('flash-track');
+  const card=track.querySelector('.flash-card'); if(!card)return;
+  const step=card.offsetWidth+16;
+  const maxScroll=track.scrollWidth-track.clientWidth;
+  let next=track.scrollLeft+dir*step;
+  if(dir>0 && track.scrollLeft>=maxScroll-8) next=0;
+  if(dir<0 && track.scrollLeft<=8) next=maxScroll;
+  track.scrollTo({left:next,behavior:'smooth'});
+}
+
+function openFlashModal(id){
+  const it=((FLASH_SALE&&FLASH_SALE.items)||[]).find(x=>x.productId===id);
+  openModal(id, it?{pen:+it.offerPEN,usd:+it.offerUSD}:undefined);
+}
+
+(function(){
+  const tr=document.getElementById('flash-track');
+  if(!tr) return;
+  ['mouseenter','touchstart'].forEach(ev=>tr.addEventListener(ev,()=>{flashPaused=true;},{passive:true}));
+  ['mouseleave','touchend'].forEach(ev=>tr.addEventListener(ev,()=>{flashPaused=false;},{passive:true}));
+})();
+
 // ── SOCIAL PROOF TOAST ───────────────────────────────────────
 const _FIRST_NAMES = [
   'Carlos','María','Juan','Laura','Rafael','Andrea','Diego','Sara','Felipe',
@@ -944,11 +1169,9 @@ const _CITIES  = ['Lima','Arequipa','Trujillo','Cusco','Piura','Chiclayo','Huanc
 const _PRODUCTS = ['Gemini Pro 3.5','ChatGPT Plus','Netflix Premium','Disney+ & Star+','Perplexity PRO','Gemini Pro 18 Meses','CapCut Pro 6 Meses','SuperGrok','Gamma Ultra','Spotify Premium 3 Meses'];
 
 function _mask(name) {
-  // Keep first letter + number of asterisks based on name length, then last initial
   if (name.length <= 2) return name[0] + '*';
   const visible = name[0];
   const stars = '*'.repeat(Math.max(2, name.length - 2));
-  // 50% chance: show last letter too
   return Math.random() > 0.5
     ? visible + stars + name[name.length - 1] + '.'
     : visible + stars + '.';
@@ -956,7 +1179,6 @@ function _mask(name) {
 
 function _buildName() {
   const first = _FIRST_NAMES[Math.floor(Math.random() * _FIRST_NAMES.length)];
-  // ~55% chance of showing a surname
   if (Math.random() < 0.55) {
     const last = _LAST_NAMES[Math.floor(Math.random() * _LAST_NAMES.length)];
     return _mask(first) + ' ' + _mask(last);
@@ -973,13 +1195,13 @@ function showToast(){
   if (refs && refs.length > 0) {
     const ref = refs[Math.floor(Math.random() * refs.length)];
     document.getElementById('toast-name').textContent = ref.title;
-    
+
     let shortDesc = ref.description || 'Entrega exitosa';
     if (shortDesc.length > 55) {
       shortDesc = shortDesc.slice(0, 52) + '...';
     }
     document.getElementById('toast-detail').textContent = `${shortDesc} · ${ref.date}`;
-    
+
     if (ref.imageUrl) {
       imgThumb.src = ref.imageUrl;
       imgThumb.style.display = 'block';
@@ -988,7 +1210,7 @@ function showToast(){
       imgThumb.style.display = 'none';
       checkIcon.style.display = 'block';
     }
-    
+
     t.onclick = () => openRefModal(ref.id);
   } else {
     const city    = _CITIES[Math.floor(Math.random() * _CITIES.length)];
@@ -1000,7 +1222,7 @@ function showToast(){
     checkIcon.style.display = 'block';
     t.onclick = null;
   }
-  
+
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 6500);
 }
@@ -1072,31 +1294,31 @@ function renderReferences() {
   const refGrid = document.getElementById('ref-grid');
   if(!refGrid) return;
   refGrid.innerHTML = '';
-  
+
   if(!refs.length) {
-    refGrid.innerHTML = '<p class="col-span-4 text-center text-navy/40 py-8 text-xs">No hay referencias registradas por el momento.</p>';
+    refGrid.innerHTML = '<p class="col-span-4 text-center text-white/35 py-8 text-xs">No hay referencias registradas por el momento.</p>';
     return;
   }
-  
+
   refs.forEach(r => {
     const card = document.createElement('div');
-    card.className = 'bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer flex flex-col';
+    card.className = 'glass rounded-2xl overflow-hidden hover:border-accent/40 transition-all cursor-pointer flex flex-col hover:-translate-y-1';
     card.onclick = () => openRefModal(r.id);
     card.innerHTML = `
-      <div style="position:relative;height:180px;background:#f8fafc;display:flex;align-items:center;justify-content:center;overflow:hidden;">
+      <div style="position:relative;height:180px;background:#090c20;display:flex;align-items:center;justify-content:center;overflow:hidden;">
         <img src="${r.imageUrl}" alt="${r.title}" style="width:100%;height:100%;object-fit:cover;" class="hover:scale-105 transition-transform duration-300" onerror="this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600'">
-        <div style="position:absolute;inset:0;background:rgba(15,27,61,0.02);pointer-events:none;"></div>
+        <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,rgba(6,8,20,0.55) 100%);pointer-events:none;"></div>
       </div>
       <div class="p-4 flex flex-col flex-1 justify-between">
         <div>
           <div class="flex items-center justify-between gap-2 mb-2">
-            <span class="text-[9px] text-accent font-extrabold uppercase tracking-wider">${r.date}</span>
-            <span class="text-[9px] bg-green-50 text-green-700 px-2 py-0.5 rounded-full font-bold">Verificado</span>
+            <span class="text-[9px] text-accent-light font-extrabold uppercase tracking-wider">${r.date}</span>
+            <span class="text-[9px] bg-green-500/15 text-green-300 border border-green-400/25 px-2 py-0.5 rounded-full font-bold">Verificado</span>
           </div>
-          <h3 class="font-extrabold text-navy text-xs leading-snug mb-1 line-clamp-1">${r.title}</h3>
-          <p class="text-[11px] text-navy/60 line-clamp-2 leading-relaxed">${r.description}</p>
+          <h3 class="font-extrabold text-white text-xs leading-snug mb-1 line-clamp-1">${r.title}</h3>
+          <p class="text-[11px] text-white/50 line-clamp-2 leading-relaxed">${r.description}</p>
         </div>
-        <div class="mt-3 pt-3 border-t border-gray-50 flex items-center justify-between text-[11px] text-accent font-bold">
+        <div class="mt-3 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-accent-light font-bold">
           <span>Ver Comprobante</span>
           <i class="fa-solid fa-arrow-right"></i>
         </div>
@@ -1128,9 +1350,11 @@ function closeRefModal() {
 async function initApp() {
   try {
     // Intentar primero raw GitHub directo (actualización casi instantánea en segundos),
-    // y caer en ruta relativa como respaldo
+    // y caer en ruta relativa como respaldo. En localhost siempre usar el data.json local.
+    const isLocal = ['localhost','127.0.0.1'].includes(location.hostname) || location.protocol === 'file:';
     let res;
     try {
+      if (isLocal) throw new Error('preview local');
       res = await fetch('https://raw.githubusercontent.com/Jona0202/PASSLINK/main/data.json?v=' + Date.now(), {
         headers: { 'Cache-Control': 'no-cache, no-store, must-revalidate', 'Pragma': 'no-cache', 'Expires': '0' },
         cache: 'no-store'
@@ -1157,6 +1381,11 @@ async function initApp() {
       if (Array.isArray(data.slides) && data.slides.length) {
         renderCarousel(data.slides);
       }
+      // Ofertas flash desde el servidor
+      if (data.flashSale) {
+        localStorage.setItem('passlink_flashsale_v5', JSON.stringify(data.flashSale));
+      }
+      renderFlashSale(data.flashSale || null);
       // Actualizar config desde el servidor
       if (data.config && data.config.whatsapp) {
         localStorage.setItem('passlink_config_v5', JSON.stringify(data.config));
@@ -1171,6 +1400,13 @@ async function initApp() {
     }
   } catch(e) {
     console.warn('[PassLink] No se pudo cargar data.json, usando datos en caché:', e.message);
+  }
+  // Fallback: si data.json no cargó, intentar ofertas flash desde caché local
+  if (!flashRendered) {
+    try {
+      const cached = localStorage.getItem('passlink_flashsale_v5');
+      if (cached) renderFlashSale(JSON.parse(cached));
+    } catch(_) {}
   }
   // Renderizar con los datos más frescos disponibles
   renderProducts('all', '');

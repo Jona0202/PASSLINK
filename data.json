@@ -17,8 +17,8 @@
         "5 TB Cloud Storage incluido",
         "Workspace Integration completa"
       ],
-      "pricePEN": 45,
-      "priceUSD": 13,
+      "pricePEN": 17,
+      "priceUSD": 4.9,
       "badgeText": "Popular",
       "iconClass": "fa-solid fa-wand-magic-sparkles",
       "gradient": "from-blue-500 to-cyan-400",
@@ -38,8 +38,8 @@
         "DALL-E 3 integrado",
         "Acceso ilimitado 24/7"
       ],
-      "pricePEN": 40,
-      "priceUSD": 11.5,
+      "pricePEN": 22,
+      "priceUSD": 6.5,
       "badgeText": "Top IA",
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
@@ -60,12 +60,12 @@
         "Perfil Personalizado",
         "Catálogo completo sin restricción"
       ],
-      "pricePEN": 15,
-      "priceUSD": 4.39,
+      "pricePEN": 19,
+      "priceUSD": 5.5,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-film",
       "gradient": "from-red-500 to-rose-400",
-      "stock": "available",
+      "stock": "low",
       "highlighted": false,
       "hidden": false,
       "isLogoOnly": false
@@ -83,12 +83,12 @@
         "Series y Deportes en vivo",
         "Contenido exclusivo Star+"
       ],
-      "pricePEN": 15,
-      "priceUSD": 4.3,
+      "pricePEN": 40,
+      "priceUSD": 11.5,
       "badgeText": "Combo",
       "iconClass": "fa-solid fa-hat-wizard",
       "gradient": "from-indigo-500 to-blue-400",
-      "stock": "low",
+      "stock": "available",
       "highlighted": false
     },
     {
@@ -105,8 +105,8 @@
         "Sin límite de consultas diarias",
         "Modo Focus para búsquedas especializadas"
       ],
-      "pricePEN": 143,
-      "priceUSD": 39,
+      "pricePEN": 200,
+      "priceUSD": 58.0,
       "badgeText": "Nuevo",
       "iconClass": "fa-solid fa-magnifying-glass-chart",
       "gradient": "from-slate-950 via-[#0d2a24] to-slate-950",
@@ -128,8 +128,8 @@
         "Integración nativa con Google Workspace",
         "Prioridad en nuevos modelos Gemini"
       ],
-      "pricePEN": 29,
-      "priceUSD": 7.8,
+      "pricePEN": 13,
+      "priceUSD": 3.9,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-wand-magic-sparkles",
       "gradient": "from-blue-600 to-indigo-400",
@@ -174,12 +174,12 @@
         "Acceso a todas las herramientas IA",
         "Activación inmediata en tu cuenta"
       ],
-      "pricePEN": 35,
-      "priceUSD": 9.5,
+      "pricePEN": 16,
+      "priceUSD": 4.7,
       "badgeText": "Garantía",
       "iconClass": "fa-solid fa-scissors",
       "gradient": "from-slate-950 via-[#0a232f] to-slate-950",
-      "stock": "low",
+      "stock": "available",
       "highlighted": false,
       "isLogoOnly": true
     },
@@ -243,8 +243,8 @@
         "Reproducción sin restricciones geográficas",
         "Calidad Very High (320kbps)"
       ],
-      "pricePEN": 8.5,
-      "priceUSD": 2.5,
+      "pricePEN": 17,
+      "priceUSD": 4.9,
       "badgeText": "Disponible",
       "iconClass": "fa-brands fa-spotify",
       "gradient": "from-slate-950 via-[#0a2d1d] to-slate-950",
@@ -271,7 +271,7 @@
       "badge": "🔥 Más vendido del mes",
       "title": "Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal",
       "subtitle": "5 TB Cloud · Workspace incluido · Sin invitación",
-      "price": "S/. 45 / US$ 13.00"
+      "price": "S/. 17 / US$ 4.90"
     },
     {
       "id": "sl-2",
@@ -280,16 +280,42 @@
       "badge": "🤖 Top Inteligencia Artificial",
       "title": "ChatGPT Plus — Perfil privado,<br>sin límites, todo el día",
       "subtitle": "GPT-4o · DALL-E 3 · Acceso ilimitado 24/7",
-      "price": "S/. 40 / US$ 11.50"
+      "price": "S/. 22 / US$ 6.50"
     },
     {
       "id": "sl-3",
       "type": "gradient",
       "gradient": "linear-gradient(135deg,#dc2626 0%,#ea580c 100%)",
       "badge": "🎬 Combo Streaming LATAM",
-      "title": "Netflix + Disney+ & Star+<br>desde S/. 12",
+      "title": "Netflix + Disney+ & Star+<br>desde S/. 15",
       "subtitle": "Perfiles privados · Ultra HD 4K · Para toda LATAM",
-      "price": "Desde S/. 12"
+      "price": "Desde S/. 15"
     }
-  ]
+  ],
+  "flashSale": {
+    "enabled": true,
+    "endsAt": "2026-07-27T23:59:59-05:00",
+    "items": [
+      {
+        "productId": "gemini-pro-18m",
+        "offerPEN": 10,
+        "offerUSD": 2.99
+      },
+      {
+        "productId": "chatgpt-plus",
+        "offerPEN": 17,
+        "offerUSD": 5.0
+      },
+      {
+        "productId": "netflix-premium",
+        "offerPEN": 15,
+        "offerUSD": 4.5
+      },
+      {
+        "productId": "spotify-3m",
+        "offerPEN": 14,
+        "offerUSD": 4.0
+      }
+    ]
+  }
 }

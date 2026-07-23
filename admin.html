@@ -88,6 +88,7 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
     <div class="nav-link active" onclick="selectSection('dashboard')" id="nav-dashboard"><i class="fa-solid fa-chart-pie w-4"></i> Dashboard</div>
     <div class="nav-link" onclick="selectSection('products')" id="nav-products"><i class="fa-solid fa-box w-4"></i> Productos</div>
     <div class="nav-link" onclick="selectSection('slides')" id="nav-slides"><i class="fa-solid fa-images w-4"></i> Carrusel</div>
+    <div class="nav-link" onclick="selectSection('flash')" id="nav-flash"><i class="fa-solid fa-bolt w-4"></i> Ofertas Flash</div>
     <div class="nav-link" onclick="selectSection('referencias')" id="nav-referencias"><i class="fa-solid fa-certificate w-4"></i> Referencias</div>
     <div class="nav-link" onclick="selectSection('config')" id="nav-config"><i class="fa-solid fa-gear w-4"></i> Configuración</div>
     <!-- Publish status badge -->
@@ -180,6 +181,24 @@ body{font-family:'Inter',sans-serif;background:#f1f5f9;}
       <div class="card overflow-hidden">
         <div id="slides-table"></div>
       </div>
+    </div>
+
+    <!-- OFERTAS FLASH -->
+    <div id="section-flash" style="display:none;">
+      <div class="mb-6">
+        <h2 class="text-2xl font-black text-navy">Ofertas Flash ⚡</h2>
+        <p class="text-xs text-gray-400 mt-1">Elige productos, precio de oferta y fecha de fin. La sección aparece en la tienda con contador regresivo y se oculta sola al expirar.</p>
+      </div>
+      <div class="card max-w-lg mb-4">
+        <label class="flex items-center gap-2 font-bold text-navy text-sm mb-4"><input type="checkbox" id="flash-enabled" class="w-4 h-4"> Activar sección de Ofertas Flash</label>
+        <label class="form-label">Termina el (fecha y hora de Lima)</label>
+        <input type="datetime-local" class="form-input" id="flash-ends">
+      </div>
+      <div class="card overflow-hidden mb-4">
+        <div id="flash-table"></div>
+      </div>
+      <button class="btn-primary" onclick="saveFlashSale()"><i class="fa-solid fa-floppy-disk mr-1"></i> Guardar y Publicar</button>
+      <p id="flash-msg" class="text-sm font-semibold mt-3" style="display:none;"></p>
     </div>
   </main>
 </div>
@@ -431,6 +450,64 @@ function saveReferences(r){
   publishToGitHub();
 }
 
+// ── OFERTAS FLASH ───────────────────────────────────────────
+const FLASH_KEY='passlink_flashsale_v5';
+function getFlashSale(){
+  try{
+    const f=localStorage.getItem(FLASH_KEY);
+    return f?JSON.parse(f):{enabled:false,endsAt:'',items:[]};
+  }catch{return {enabled:false,endsAt:'',items:[]};}
+}
+
+function renderFlashSection(){
+  const fs=getFlashSale();
+  document.getElementById('flash-enabled').checked=!!fs.enabled;
+  if(fs.endsAt){
+    const m=String(fs.endsAt).match(/^(\d{4}-\d{2}-\d{2}T\d{2}:\d{2})/);
+    if(m) document.getElementById('flash-ends').value=m[1];
+  }
+  const byId={};
+  (fs.items||[]).forEach(i=>{byId[i.productId]=i;});
+  const rows=getProducts().map(p=>{
+    const it=byId[p.id];
+    return `<tr class="border-b border-gray-50">
+      <td class="py-2 pr-2"><input type="checkbox" class="flash-on w-4 h-4" data-id="${esc(p.id)}" ${it?'checked':''}></td>
+      <td class="py-2 font-semibold text-navy">${esc(p.name)}<div class="text-[10px] text-gray-400">Normal: S/. ${esc(p.pricePEN)} · $${esc(p.priceUSD)}</div></td>
+      <td class="py-2 pr-2"><input class="form-input flash-pen" style="width:90px" type="number" step="0.1" min="0" placeholder="S/." data-id="${esc(p.id)}" value="${it?esc(it.offerPEN):''}"></td>
+      <td class="py-2"><input class="form-input flash-usd" style="width:90px" type="number" step="0.1" min="0" placeholder="US$" data-id="${esc(p.id)}" value="${it?esc(it.offerUSD):''}"></td>
+    </tr>`;
+  }).join('');
+  document.getElementById('flash-table').innerHTML=`<div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-400 text-xs border-b"><th class="pb-2">Oferta</th><th class="pb-2">Producto</th><th class="pb-2">Oferta S/.</th><th class="pb-2">Oferta US$</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function saveFlashSale(){
+  const enabled=document.getElementById('flash-enabled').checked;
+  const endsLocal=document.getElementById('flash-ends').value;
+  const msg=document.getElementById('flash-msg');
+  const items=[];
+  document.querySelectorAll('#flash-table .flash-on:checked').forEach(cb=>{
+    const id=cb.dataset.id;
+    const penEl=document.querySelector(`#flash-table .flash-pen[data-id="${id}"]`);
+    const usdEl=document.querySelector(`#flash-table .flash-usd[data-id="${id}"]`);
+    const pen=parseFloat(penEl&&penEl.value);
+    const usd=parseFloat(usdEl&&usdEl.value);
+    if(pen>0&&usd>0) items.push({productId:id,offerPEN:pen,offerUSD:usd});
+  });
+  if(enabled&&(!endsLocal||!items.length)){
+    msg.textContent='❌ Para activar necesitas una fecha de fin y al menos un producto marcado con ambos precios de oferta.';
+    msg.style.color='#dc2626';
+    msg.style.display='block';
+    return;
+  }
+  const fs={enabled,endsAt:endsLocal?endsLocal+':00-05:00':'',items};
+  localStorage.setItem(FLASH_KEY,JSON.stringify(fs));
+  publishToGitHub();
+  msg.textContent='✅ Ofertas flash guardadas.';
+  msg.style.color='#16a34a';
+  msg.style.display='block';
+  setTimeout(()=>msg.style.display='none',4000);
+}
+
 // ── GITHUB API: publica data.json para todos los dispositivos ──
 const GH_TOKEN_KEY = 'passlink_gh_token';
 const GH_REPO = 'Jona0202/PASSLINK';
@@ -464,7 +541,8 @@ async function publishToGitHub() {
       config: getConfig(),
       products: getProducts(),
       references: getReferences(),
-      slides: getSlides()
+      slides: getSlides(),
+      flashSale: getFlashSale()
     };
     const jsonStr = JSON.stringify(data, null, 2);
     // Codificar a base64 (UTF-8 seguro)
@@ -643,7 +721,7 @@ function selectSection(name){
 }
 
 function showSection(name){
-  ['dashboard','products','config','referencias','slides'].forEach(s=>{
+  ['dashboard','products','config','referencias','slides','flash'].forEach(s=>{
     const el = document.getElementById('section-'+s);
     if(el) el.style.display=s===name?'block':'none';
     const n=document.getElementById('nav-'+s);
@@ -654,6 +732,7 @@ function showSection(name){
   if(name==='config')loadConfig();
   if(name==='referencias')renderReferencesTable();
   if(name==='slides')renderSlidesTable();
+  if(name==='flash')renderFlashSection();
 }
 
 function renderDashboard(){
@@ -1275,6 +1354,9 @@ async function initAdminData() {
       }
       if (data.config) {
         localStorage.setItem(CONFIG_KEY, JSON.stringify(data.config));
+      }
+      if (data.flashSale) {
+        localStorage.setItem(FLASH_KEY, JSON.stringify(data.flashSale));
       }
       console.log('[PassLink Admin] Datos sincronizados con éxito');
     } else {
