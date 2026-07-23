@@ -51,9 +51,9 @@
   "offers": {
     "@type": "AggregateOffer",
     "priceCurrency": "PEN",
-    "lowPrice": "13",
+    "lowPrice": "9",
     "highPrice": "200",
-    "offerCount": "11"
+    "offerCount": "15"
   }
 }
 </script>
@@ -79,9 +79,7 @@ html{scroll-behavior:smooth;}
 @keyframes drift1{to{transform:translate(120px,90px) scale(1.15);}}
 @keyframes drift2{to{transform:translate(-140px,-70px) scale(1.2);}}
 @keyframes drift3{to{transform:translate(-90px,-120px) scale(1.1);}}
-#particles{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;}
-.particle{position:absolute;width:3px;height:3px;border-radius:50%;background:#818cf8;opacity:0;animation:floatUp linear infinite;box-shadow:0 0 8px rgba(129,140,248,0.9);}
-@keyframes floatUp{0%{transform:translateY(20px);opacity:0;}12%{opacity:.75;}88%{opacity:.55;}100%{transform:translateY(-110vh);opacity:0;}}
+#matrix-canvas{position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.34;}
 
 /* ── UTILIDADES GLASS / NEON ───────────────────────────────── */
 .glass{background:rgba(255,255,255,0.045);border:1px solid rgba(255,255,255,0.09);backdrop-filter:blur(14px);}
@@ -201,10 +199,10 @@ html{scroll-behavior:smooth;}
 <!-- FONDO ANIMADO IA -->
 <div class="bg-stage"></div>
 <div class="bg-grid"></div>
+<canvas id="matrix-canvas"></canvas>
 <div class="aurora aurora-1"></div>
 <div class="aurora aurora-2"></div>
 <div class="aurora aurora-3"></div>
-<div id="particles"></div>
 
 <!-- HEADER -->
 <header class="sticky top-0 z-50 backdrop-blur-xl bg-ink/70 border-b border-white/10 shadow-lg shadow-black/30">
@@ -364,6 +362,7 @@ html{scroll-behavior:smooth;}
     <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="ai"><i class="fa-solid fa-microchip mr-1"></i> Inteligencia Artificial</button>
     <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="streaming"><i class="fa-solid fa-tv mr-1"></i> Streaming</button>
     <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="software"><i class="fa-solid fa-scissors mr-1"></i> Software Creativo</button>
+    <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="edu"><i class="fa-solid fa-graduation-cap mr-1"></i> Educación</button>
   </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="product-grid"></div>
 </section>
@@ -736,22 +735,72 @@ let PRODUCTS=getProducts();
 const CONFIG=getConfig();
 const WA=CONFIG.whatsapp||WHATSAPP_NUMBER;
 
-// ── PARTÍCULAS DE FONDO ─────────────────────────────────────
+// ── FONDO MATRIX (lluvia de código en colores de marca) ─────
 (function(){
-  const wrap=document.getElementById('particles');
-  if(!wrap) return;
-  const colors=['#818cf8','#22d3ee','#c084fc'];
-  for(let i=0;i<26;i++){
-    const s=document.createElement('span');
-    s.className='particle';
-    s.style.left=(Math.random()*100)+'%';
-    s.style.top=(55+Math.random()*45)+'%';
-    s.style.background=colors[i%colors.length];
-    s.style.boxShadow=`0 0 8px ${colors[i%colors.length]}`;
-    s.style.animationDuration=(14+Math.random()*22)+'s';
-    s.style.animationDelay=(-Math.random()*30)+'s';
-    wrap.appendChild(s);
+  const canvas=document.getElementById('matrix-canvas');
+  if(!canvas) return;
+  // Respetar accesibilidad: sin animación si el sistema pide movimiento reducido
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ canvas.remove(); return; }
+  const ctx=canvas.getContext('2d');
+  const CHARS='アイウエオカキクケコサシスセソタチツテト01<>/#$%&*+=ABCDEFXYZ';
+  const COLORS=['#6366f1','#22d3ee','#a855f7'];
+  const isMobile=window.innerWidth<640;
+  const fontSize=isMobile?13:15;
+  const COLW=fontSize*(isMobile?2.1:1.6); // columnas espaciadas para no saturar
+  const TRAIL=16; // largo de la estela de cada columna
+  let cols=0,drops=[],speeds=[],seeds=[];
+  function resize(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+    cols=Math.ceil(canvas.width/COLW);
+    drops=[];speeds=[];seeds=[];
+    for(let i=0;i<cols;i++){
+      drops[i]=Math.random()*-(canvas.height/fontSize); // entran escalonadas desde arriba
+      speeds[i]=0.45+Math.random()*0.75;
+      seeds[i]=Math.floor(Math.random()*997);
+    }
   }
+  resize();
+  window.addEventListener('resize',resize);
+  // Carácter estable por celda (no parpadea): depende de columna, fila y semilla
+  function glyph(i,row){
+    const L=CHARS.length;
+    return CHARS[(((i*31+row*7+seeds[i])%L)+L)%L];
+  }
+  let last=0;
+  function frame(ts){
+    requestAnimationFrame(frame);
+    if(ts-last<50) return; // ~20 fps: fluido y ligero en móviles
+    last=ts;
+    // Canvas siempre transparente: la estela se dibuja con alfa decreciente
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.font=fontSize+'px monospace';
+    for(let i=0;i<cols;i++){
+      const x=i*COLW;
+      const head=Math.floor(drops[i]);
+      const color=COLORS[i%COLORS.length];
+      for(let t=0;t<TRAIL;t++){
+        const row=head-t;
+        const y=row*fontSize;
+        if(y<-fontSize||y>canvas.height+fontSize) continue;
+        if(t===0){
+          ctx.fillStyle='rgba(240,244,255,0.9)'; // cabeza brillante
+        }else{
+          ctx.fillStyle=color;
+          ctx.globalAlpha=(1-t/TRAIL)*0.7;
+        }
+        ctx.fillText(glyph(i,row),x,y);
+        ctx.globalAlpha=1;
+      }
+      drops[i]+=speeds[i];
+      if((head-TRAIL)*fontSize>canvas.height){
+        drops[i]=Math.random()*-30;
+        speeds[i]=0.45+Math.random()*0.75;
+        seeds[i]=Math.floor(Math.random()*997);
+      }
+    }
+  }
+  requestAnimationFrame(frame);
 })();
 
 // ── TYPEWRITER "IA" DEL HERO ────────────────────────────────
@@ -820,7 +869,7 @@ function openModal(id, offer){
     :`¡Hola PassLink LATAM! 👋 Quiero adquirir *${p.name}* por S/. ${salePEN.toFixed(2)} (US$ ${saleUSD.toFixed(2)}). ¿Me brindan los métodos de pago?`);
   const waURL=`https://wa.me/${WA}?text=${waText}`;
   const infoURL=`https://wa.me/${WA}?text=${encodeURIComponent(`Hola! Quiero más información sobre *${p.name}* antes de comprarlo.`)}`;
-  const catLabel={ai:'Inteligencia Artificial',streaming:'Streaming',software:'Software Creativo'}[p.category]||p.category;
+  const catLabel={ai:'Inteligencia Artificial',streaming:'Streaming',software:'Software Creativo',edu:'Educación'}[p.category]||p.category;
   modalContent.innerHTML=`
     <!-- Image column -->
     <div class="modal-img-col relative ${p.isLogoOnly ? 'logo-header bg-gradient-to-br ' + p.gradient : ''}">
@@ -911,7 +960,7 @@ function renderProducts(filter, search){
     const stockLabels={available:'Disponible',low:'Últimas unidades',out:'Agotado'};
     const card=document.createElement('div');
     card.className='card-shine rounded-2xl flex flex-col transition-all duration-300 fade-in cursor-pointer overflow-hidden';
-    card.style.animationDelay=`${i*0.08}s`;
+    card.style.animationDelay=`${(i%8)*0.07}s`;
     card.onclick=()=>openModal(p.id);
     card.innerHTML=`
       <div class="card-img-wrap ${p.isLogoOnly ? 'logo-header bg-gradient-to-br ' + p.gradient : ''}">

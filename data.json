@@ -252,6 +252,93 @@
       "highlighted": false,
       "hidden": false,
       "isLogoOnly": false
+    },
+    {
+      "id": "youtube-premium-3m",
+      "category": "streaming",
+      "name": "YouTube Premium",
+      "subtitle": "3 Meses · Sin Anuncios · Link",
+      "description": "Disfruta YouTube y YouTube Music Premium durante 3 meses: videos sin anuncios, reproducción en segundo plano y descargas para ver sin conexión. Activación mediante link directo en tu propia cuenta de Google, sin compartir credenciales.",
+      "imageUrl": "assets/youtube.png",
+      "features": [
+        "3 Meses de Premium completo",
+        "Sin anuncios en videos ni música",
+        "Reproducción en segundo plano",
+        "Descargas para ver offline",
+        "En tu propia cuenta de Google"
+      ],
+      "pricePEN": 16,
+      "priceUSD": 4.5,
+      "badgeText": "Nuevo",
+      "iconClass": "fa-brands fa-youtube",
+      "gradient": "from-red-600 to-rose-500",
+      "stock": "available",
+      "highlighted": false
+    },
+    {
+      "id": "prime-video-1m",
+      "category": "streaming",
+      "name": "Prime Video",
+      "subtitle": "1 Mes · Perfil Privado",
+      "description": "Accede a todo el catálogo de Amazon Prime Video durante 30 días: series exclusivas, estrenos de cine y deportes en vivo. Perfil privado y personalizable, con calidad HD/4K según el título. Activación inmediata.",
+      "imageUrl": "assets/primevideo.png",
+      "features": [
+        "30 días de acceso completo",
+        "Series y películas exclusivas Amazon",
+        "Perfil privado personalizable",
+        "Calidad HD/4K disponible"
+      ],
+      "pricePEN": 12,
+      "priceUSD": 3.5,
+      "badgeText": "Nuevo",
+      "iconClass": "fa-brands fa-amazon",
+      "gradient": "from-sky-600 to-blue-500",
+      "stock": "available",
+      "highlighted": false
+    },
+    {
+      "id": "coursera-plus-12m",
+      "category": "edu",
+      "name": "Coursera Plus",
+      "subtitle": "12 Meses · Certificados Ilimitados",
+      "description": "Un año completo de Coursera Plus: acceso ilimitado a más de 7,000 cursos de universidades como Yale, Stanford y Google. Obtén certificados oficiales ilimitados para tu CV y LinkedIn. Ideal para estudiantes y profesionales que quieren crecer.",
+      "imageUrl": "assets/coursera.png",
+      "features": [
+        "12 Meses de acceso ilimitado",
+        "+7,000 cursos de universidades top",
+        "Certificados oficiales ilimitados",
+        "Ideal para CV y LinkedIn",
+        "Garantía de 1 mes incluida"
+      ],
+      "pricePEN": 13,
+      "priceUSD": 3.9,
+      "badgeText": "Estudiantes",
+      "iconClass": "fa-solid fa-graduation-cap",
+      "gradient": "from-blue-600 to-indigo-500",
+      "stock": "available",
+      "highlighted": false
+    },
+    {
+      "id": "duolingo-super-1m",
+      "category": "edu",
+      "name": "Super Duolingo",
+      "subtitle": "1 Mes · Vidas Ilimitadas",
+      "description": "Aprende idiomas sin límites con Super Duolingo: vidas ilimitadas para practicar sin esperas, cero anuncios y práctica personalizada de tus errores. Se activa directamente en tu cuenta y conservas todo tu progreso y rachas.",
+      "imageUrl": "assets/duolingo.png",
+      "features": [
+        "1 Mes de Super Duolingo",
+        "Vidas ilimitadas sin esperas",
+        "Sin anuncios entre lecciones",
+        "Práctica personalizada de errores",
+        "Conservas tu racha y progreso"
+      ],
+      "pricePEN": 9,
+      "priceUSD": 2.7,
+      "badgeText": "Nuevo",
+      "iconClass": "fa-solid fa-language",
+      "gradient": "from-green-500 to-emerald-400",
+      "stock": "available",
+      "highlighted": false
     }
   ],
   "references": [
