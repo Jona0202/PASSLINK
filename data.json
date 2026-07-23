@@ -17,8 +17,8 @@
         "5 TB Cloud Storage incluido",
         "Workspace Integration completa"
       ],
-      "pricePEN": 17,
-      "priceUSD": 4.9,
+      "pricePEN": 45,
+      "priceUSD": 13.0,
       "badgeText": "Popular",
       "iconClass": "fa-solid fa-wand-magic-sparkles",
       "gradient": "from-blue-500 to-cyan-400",
@@ -38,8 +38,8 @@
         "DALL-E 3 integrado",
         "Acceso ilimitado 24/7"
       ],
-      "pricePEN": 22,
-      "priceUSD": 6.5,
+      "pricePEN": 26,
+      "priceUSD": 7.5,
       "badgeText": "Top IA",
       "iconClass": "fa-solid fa-robot",
       "gradient": "from-emerald-500 to-teal-400",
@@ -60,8 +60,8 @@
         "Perfil Personalizado",
         "Catálogo completo sin restricción"
       ],
-      "pricePEN": 19,
-      "priceUSD": 5.5,
+      "pricePEN": 22,
+      "priceUSD": 6.5,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-film",
       "gradient": "from-red-500 to-rose-400",
@@ -83,8 +83,8 @@
         "Series y Deportes en vivo",
         "Contenido exclusivo Star+"
       ],
-      "pricePEN": 40,
-      "priceUSD": 11.5,
+      "pricePEN": 43,
+      "priceUSD": 12.5,
       "badgeText": "Combo",
       "iconClass": "fa-solid fa-hat-wizard",
       "gradient": "from-indigo-500 to-blue-400",
@@ -105,8 +105,8 @@
         "Sin límite de consultas diarias",
         "Modo Focus para búsquedas especializadas"
       ],
-      "pricePEN": 200,
-      "priceUSD": 58.0,
+      "pricePEN": 204,
+      "priceUSD": 59.0,
       "badgeText": "Nuevo",
       "iconClass": "fa-solid fa-magnifying-glass-chart",
       "gradient": "from-slate-950 via-[#0d2a24] to-slate-950",
@@ -128,8 +128,8 @@
         "Integración nativa con Google Workspace",
         "Prioridad en nuevos modelos Gemini"
       ],
-      "pricePEN": 13,
-      "priceUSD": 3.9,
+      "pricePEN": 17,
+      "priceUSD": 4.9,
       "badgeText": "Oferta",
       "iconClass": "fa-solid fa-wand-magic-sparkles",
       "gradient": "from-blue-600 to-indigo-400",
@@ -151,8 +151,8 @@
         "Subtítulos automáticos por IA",
         "Templates y efectos premium ilimitados"
       ],
-      "pricePEN": 75,
-      "priceUSD": 20.5,
+      "pricePEN": 78,
+      "priceUSD": 21.5,
       "badgeText": "Limitado",
       "iconClass": "fa-solid fa-scissors",
       "gradient": "from-slate-950 via-[#0a232f] to-slate-950",
@@ -174,8 +174,8 @@
         "Acceso a todas las herramientas IA",
         "Activación inmediata en tu cuenta"
       ],
-      "pricePEN": 16,
-      "priceUSD": 4.7,
+      "pricePEN": 20,
+      "priceUSD": 5.7,
       "badgeText": "Garantía",
       "iconClass": "fa-solid fa-scissors",
       "gradient": "from-slate-950 via-[#0a232f] to-slate-950",
@@ -197,8 +197,8 @@
         "Generación de imágenes Aurora",
         "Modo Think para análisis profundo"
       ],
-      "pricePEN": 69,
-      "priceUSD": 19,
+      "pricePEN": 72,
+      "priceUSD": 20,
       "badgeText": "Exclusivo",
       "iconClass": "fa-brands fa-x-twitter",
       "gradient": "from-slate-950 via-slate-900 to-neutral-950",
@@ -220,8 +220,8 @@
         "Sin marca de agua en todas las creaciones",
         "Diseños personalizables e ilimitados"
       ],
-      "pricePEN": 57,
-      "priceUSD": 15.5,
+      "pricePEN": 60,
+      "priceUSD": 16.5,
       "badgeText": "Agotándose",
       "iconClass": "fa-solid fa-person-chalkboard",
       "gradient": "from-slate-950 via-[#27143a] to-slate-950",
@@ -243,8 +243,8 @@
         "Reproducción sin restricciones geográficas",
         "Calidad Very High (320kbps)"
       ],
-      "pricePEN": 17,
-      "priceUSD": 4.9,
+      "pricePEN": 20,
+      "priceUSD": 5.9,
       "badgeText": "Disponible",
       "iconClass": "fa-brands fa-spotify",
       "gradient": "from-slate-950 via-[#0a2d1d] to-slate-950",
@@ -267,8 +267,8 @@
         "Descargas para ver sin conexión",
         "YouTube Music Premium incluido"
       ],
-      "pricePEN": 16,
-      "priceUSD": 4.5,
+      "pricePEN": 19,
+      "priceUSD": 5.5,
       "badgeText": "Nuevo",
       "iconClass": "fa-brands fa-youtube",
       "gradient": "from-red-600 to-rose-500",
@@ -290,8 +290,8 @@
         "Hasta 3 pantallas simultáneas",
         "Perfil privado personalizable"
       ],
-      "pricePEN": 12,
-      "priceUSD": 3.5,
+      "pricePEN": 16,
+      "priceUSD": 4.5,
       "badgeText": "Nuevo",
       "iconClass": "fa-brands fa-amazon",
       "gradient": "from-sky-600 to-blue-500",
@@ -313,8 +313,8 @@
         "Universidades y empresas top (Google, IBM, Yale)",
         "Garantía de 1 mes incluida"
       ],
-      "pricePEN": 13,
-      "priceUSD": 3.9,
+      "pricePEN": 17,
+      "priceUSD": 4.9,
       "badgeText": "Estudiantes",
       "iconClass": "fa-solid fa-graduation-cap",
       "gradient": "from-blue-600 to-indigo-500",
@@ -336,8 +336,8 @@
         "Práctica personalizada de errores",
         "Intentos Legendarios ilimitados y restaurador de racha"
       ],
-      "pricePEN": 9,
-      "priceUSD": 2.7,
+      "pricePEN": 13,
+      "priceUSD": 3.7,
       "badgeText": "Nuevo",
       "iconClass": "fa-solid fa-language",
       "gradient": "from-green-500 to-emerald-400",
@@ -363,7 +363,7 @@
       "badge": "🔥 Más vendido del mes",
       "title": "Gemini Pro 3.5 — 18 meses<br>en tu cuenta personal",
       "subtitle": "5 TB Cloud · Workspace incluido · Sin invitación",
-      "price": "S/. 17 / US$ 4.90"
+      "price": "S/. 45 / US$ 13.00"
     },
     {
       "id": "sl-2",
@@ -372,7 +372,7 @@
       "badge": "🤖 Top Inteligencia Artificial",
       "title": "ChatGPT Plus — Perfil privado,<br>sin límites, todo el día",
       "subtitle": "GPT-4o · DALL-E 3 · Acceso ilimitado 24/7",
-      "price": "S/. 22 / US$ 6.50"
+      "price": "S/. 26 / US$ 7.50"
     },
     {
       "id": "sl-3",
