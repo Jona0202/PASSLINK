@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 230">
+  <text x="160" y="72" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="800" fill="#ffffff">prime</text>
+  <text x="160" y="128" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="46" font-weight="400" fill="#ffffff" opacity="0.95">video</text>
+  <path d="M70 152 Q160 196 244 150" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round"/>
+  <path d="M244 150 L252 176 L226 168 Z" fill="#ffffff"/>
+</svg>

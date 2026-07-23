@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 230">
+  <polygon points="160,18 262,56 160,94 58,56" fill="#ffffff"/>
+  <path d="M112 76 v30 a48 20 0 0 0 96 0 v-30 l-48 18 Z" fill="#ffffff" opacity="0.92"/>
+  <line x1="252" y1="60" x2="252" y2="106" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="252" cy="114" r="8" fill="#ffffff"/>
+  <text x="160" y="172" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="800" fill="#ffffff">Coursera</text>
+  <text x="160" y="208" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#ffffff" opacity="0.9" letter-spacing="8">PLUS</text>
+</svg>
