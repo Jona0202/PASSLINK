@@ -364,6 +364,16 @@ html{scroll-behavior:smooth;}
     <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="software"><i class="fa-solid fa-scissors mr-1"></i> Software Creativo</button>
     <button class="filter-btn px-5 py-2.5 rounded-full text-sm font-semibold glass text-white/70 hover:border-accent/40 cursor-pointer" data-cat="edu"><i class="fa-solid fa-graduation-cap mr-1"></i> Educación</button>
   </div>
+  <div class="flex items-center justify-center flex-wrap gap-2 mb-6">
+    <label class="text-[11px] text-white/40 font-semibold" for="sort-select"><i class="fa-solid fa-arrow-down-wide-short mr-1"></i>Ordenar:</label>
+    <select id="sort-select" class="glass text-white/80 text-xs font-semibold rounded-full px-4 py-2 outline-none cursor-pointer" style="color-scheme:dark;background-color:rgba(255,255,255,0.06);">
+      <option value="destacados">Destacados</option>
+      <option value="nuevos">🆕 Recién agregados</option>
+      <option value="precio-asc">Precio: menor a mayor</option>
+      <option value="precio-desc">Precio: mayor a menor</option>
+    </select>
+    <span id="results-count" class="text-[11px] text-white/35 font-semibold ml-1"></span>
+  </div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="product-grid"></div>
 </section>
 
@@ -940,6 +950,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 const grid=document.getElementById('product-grid');
 let activeFilter='all';
 let activeSearch='';
+let activeSort='destacados';
 
 function renderProducts(filter, search){
   activeFilter=filter!==undefined?filter:activeFilter;
@@ -947,7 +958,15 @@ function renderProducts(filter, search){
   const q=activeSearch.toLowerCase().trim();
   let list=PRODUCTS.filter(p=>!p.hidden);
   if(activeFilter!=='all') list=list.filter(p=>p.category===activeFilter);
-  if(q) list=list.filter(p=>(p.name+p.subtitle+(p.features||[]).join(' ')).toLowerCase().includes(q));
+  if(q) list=list.filter(p=>(p.name+' '+p.subtitle+' '+(p.description||'')+' '+(p.features||[]).join(' ')+' '+(p.badgeText||'')).toLowerCase().includes(q));
+  // Orden: el admin agrega productos al final del arreglo, por eso
+  // "recién agregados" = orden inverso de inserción
+  if(activeSort==='nuevos') list=list.slice().reverse();
+  else if(activeSort==='precio-asc') list=list.slice().sort((a,b)=>a.pricePEN-b.pricePEN);
+  else if(activeSort==='precio-desc') list=list.slice().sort((a,b)=>b.pricePEN-a.pricePEN);
+  else list=list.slice().sort((a,b)=>(b.highlighted?1:0)-(a.highlighted?1:0));
+  const rc=document.getElementById('results-count');
+  if(rc) rc.textContent=list.length+' producto'+(list.length===1?'':'s');
   grid.innerHTML='';
   if(!list.length){
     grid.innerHTML='<p class="col-span-4 text-center text-white/35 py-12 text-sm">No se encontraron productos para tu búsqueda.</p>';
@@ -1007,6 +1026,12 @@ document.getElementById('filters').addEventListener('click',e=>{
 // ── SEARCH ──────────────────────────────────────────────────
 document.getElementById('search-input').addEventListener('input',e=>{
   renderProducts(undefined, e.target.value);
+});
+
+// ── SORT ────────────────────────────────────────────────────
+document.getElementById('sort-select').addEventListener('change',e=>{
+  activeSort=e.target.value;
+  renderProducts();
 });
 
 // ── CAROUSEL ────────────────────────────────────────────────

@@ -521,8 +521,13 @@ function showPublishStatus(msg, color) {
   el.style.display = 'block';
   el.style.background = color === 'green' ? '#dcfce7' : color === 'red' ? '#fee2e2' : '#fef9c3';
   el.style.color = color === 'green' ? '#16a34a' : color === 'red' ? '#dc2626' : '#92400e';
-  if (color !== 'yellow') setTimeout(() => { el.style.display = 'none'; }, 4000);
+  // Los errores (rojo) quedan visibles hasta la siguiente acción; solo el éxito se auto-oculta
+  if (color === 'green') setTimeout(() => { el.style.display = 'none'; }, 4000);
 }
+
+// Cola de publicación: si guardas varios cambios seguidos, se publican en
+// orden en vez de chocar entre sí (dos PUT simultáneos → error de SHA).
+let _publishing = false, _publishQueued = false;
 
 async function publishToGitHub() {
   const token = localStorage.getItem(GH_TOKEN_KEY);
@@ -532,9 +537,11 @@ async function publishToGitHub() {
   }
   // Seguridad: no publicar si los datos de GitHub aún no han cargado
   if (!dataReady) {
-    showPublishStatus('⏳ Cargando datos de GitHub, espera un momento…', 'yellow');
+    showPublishStatus('⏳ Aún no cargan los datos actuales de GitHub. Publicación bloqueada: recarga la página y repite tu cambio.', 'yellow');
     return;
   }
+  if (_publishing) { _publishQueued = true; return; }
+  _publishing = true;
   showPublishStatus('🔄 Publicando cambios…', 'yellow');
   try {
     const data = {
@@ -577,7 +584,10 @@ async function publishToGitHub() {
     }
   } catch(e) {
     console.error('[PassLink] Error al publicar:', e);
-    showPublishStatus('❌ Error: ' + e.message, 'red');
+    showPublishStatus('❌ Error al publicar: ' + e.message + ' — Reintenta guardando de nuevo.', 'red');
+  } finally {
+    _publishing = false;
+    if (_publishQueued) { _publishQueued = false; publishToGitHub(); }
   }
 }
 
@@ -1360,18 +1370,20 @@ async function initAdminData() {
         localStorage.setItem(FLASH_KEY, JSON.stringify(data.flashSale));
       }
       console.log('[PassLink Admin] Datos sincronizados con éxito');
+      // Solo permitir publicar cuando tenemos los datos REALES de GitHub.
+      // Publicar con datos viejos de este dispositivo sobrescribiría los
+      // cambios hechos desde otros dispositivos.
+      dataReady = true;
     } else {
-      console.warn('[PassLink Admin] No se obtuvieron datos remotos, usando localStorage o defaults');
+      console.warn('[PassLink Admin] No se obtuvieron datos remotos; publicación bloqueada por seguridad');
+      showPublishStatus('⚠️ No se pudieron cargar los datos actuales de GitHub. Publicación bloqueada: recarga la página y repite tu cambio.', 'red');
     }
-    // Marcar datos como listos (con o sin red — localStorage tiene datos válidos)
-    dataReady = true;
     // Re-renderizar con datos frescos
     if (typeof renderProductTable === 'function') renderProductTable();
     if (typeof renderDashboard === 'function') renderDashboard();
   } catch(e) {
     console.warn('[PassLink Admin] No se pudo precargar data.json:', e.message);
-    // Aun así marcar como ready para no bloquear el admin offline
-    dataReady = true;
+    showPublishStatus('⚠️ Sin conexión con GitHub. Publicación bloqueada: recarga la página y repite tu cambio.', 'red');
   }
 }
 
